@@ -1,4 +1,4 @@
-package com.restaurant.app.controller.RestaurantEndpoint;
+package com.restaurant.app.controller.restaurant;
 
 import com.restaurant.app.domain.dto.RestaurantDto;
 import org.springframework.http.ResponseEntity;
