@@ -28,6 +28,12 @@ mvn spring-boot:run
 http://localhost:8080/h2-console
 ```
 
+## SonarCloud
+
+```azure
+https://sonarcloud.io/summary/overall?id=Anima-ui_restaurant&branch=main
+```
+
 
 ## Future work
 
