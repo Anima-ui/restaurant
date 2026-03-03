@@ -1,5 +1,7 @@
 package com.restaurant.app.domain.dto;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,20 +12,23 @@ import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class RestaurantDto {
-    private Long id;
-
+@AllArgsConstructor
+public class RestaurantCreateRequest {
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String city;
 
+    @NotBlank
     private String cuisineType;
 
+    @Valid
     @Builder.Default
-    private List<RestaurantTableDto> tables = new ArrayList<>();
+    private List<RestaurantTableRequest> tables = new ArrayList<>();
 
+    @Valid
     @Builder.Default
-    private List<DishDto> dishes = new ArrayList<>();
+    private List<DishRequest> dishes = new ArrayList<>();
 }

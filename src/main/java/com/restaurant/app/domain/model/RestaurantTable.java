@@ -6,6 +6,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,41 +22,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "restaurant_tables")
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@Table(name = "restaurants")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString(exclude = {"tables", "dishes"})
-public class Restaurant {
+@ToString(exclude = {"restaurant", "bookings"})
+public class RestaurantTable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
 
-    private String name;
+    private Integer tableNumber;
 
-    private String city;
+    private Integer seats;
 
-    private String cuisineType;
-
-    @Builder.Default
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<RestaurantTable> tables = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private Restaurant restaurant;
 
     @Builder.Default
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Dish> dishes = new ArrayList<>();
-
-    public void addTable(RestaurantTable table) {
-        tables.add(table);
-        table.setRestaurant(this);
-    }
-
-    public void addDish(Dish dish) {
-        dishes.add(dish);
-        dish.setRestaurant(this);
-    }
+    @OneToMany(mappedBy = "table", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Booking> bookings = new ArrayList<>();
 }
