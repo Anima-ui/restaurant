@@ -72,4 +72,32 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = repository.findById(id).orElseThrow();
         repository.delete(restaurant);
     }
+
+    @Transactional(readOnly = true)
+    public List<RestaurantDto> findAllRestaurantsDishesWithNPlusProblem() {
+        List<Restaurant> restaurants = repository.findAllWithoutFetch();
+        restaurants.forEach(restaurant -> restaurant.getDishes().size());
+        return restaurants.stream().map(mapper::toDto).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<RestaurantDto> findAllRestaurantsDishesOptimized() {
+        List<Restaurant> restaurants = repository.findAllWithDishesJoinFetch();
+        restaurants.forEach(restaurant -> restaurant.getDishes().size());
+        return restaurants.stream().map(mapper::toDto).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<RestaurantDto> findAllTablesWithBookingsNPlusProblem() {
+        List<Restaurant> restaurants = repository.findAllWithoutFetch();
+        restaurants.forEach(restaurant -> restaurant.getTables().forEach(table -> table.getBookings().size()));
+        return restaurants.stream().map(mapper::toDto).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<RestaurantDto> findAllTablesWithBookingsOptimized() {
+        List<Restaurant> restaurants = repository.findAllWithTablesAndBookings();
+        restaurants.forEach(restaurant -> restaurant.getTables().forEach(table -> table.getBookings().size()));
+        return restaurants.stream().map(mapper::toDto).toList();
+    }
 }

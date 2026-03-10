@@ -9,10 +9,7 @@ import com.restaurant.app.domain.dto.RestaurantTableRequest;
 import com.restaurant.app.domain.model.Dish;
 import com.restaurant.app.domain.model.Restaurant;
 import com.restaurant.app.domain.model.RestaurantTable;
-import com.restaurant.app.domain.model.Tag;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 @Component
 public class RestaurantMapper {
@@ -59,7 +56,6 @@ public class RestaurantMapper {
                 .id(dish.getId())
                 .name(dish.getName())
                 .price(dish.getPrice())
-                .tags(dish.getTags().stream().map(Tag::getName).collect(Collectors.toSet()))
                 .build();
     }
 
@@ -74,9 +70,6 @@ public class RestaurantMapper {
         return Dish.builder()
                 .name(dishRequest.getName())
                 .price(dishRequest.getPrice())
-                .tags(dishRequest.getTags().stream()
-                        .map(tagName -> Tag.builder().name(tagName).build())
-                        .collect(Collectors.toSet()))
                 .build();
     }
 

@@ -21,4 +21,12 @@ public interface RestaurantService {
     RestaurantDto update(Long id, RestaurantUpdateRequest dto);
 
     void delete(Long id);
+
+    List<RestaurantDto> findAllRestaurantsDishesWithNPlusProblem();
+
+    List<RestaurantDto> findAllRestaurantsDishesOptimized();
+
+    List<RestaurantDto> findAllTablesWithBookingsNPlusProblem();
+
+    List<RestaurantDto> findAllTablesWithBookingsOptimized();
 }
