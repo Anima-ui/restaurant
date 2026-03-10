@@ -26,6 +26,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         this.mapper = mapper;
     }
 
+    @Transactional(readOnly = true)
     public List<RestaurantDto> getAll() {
         return repository.findAll()
                 .stream()
@@ -33,11 +34,13 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public RestaurantDto getById(Long id) {
         Restaurant restaurant = repository.findById(id).orElseThrow();
         return mapper.toDto(restaurant);
     }
 
+    @Transactional(readOnly = true)
     public List<RestaurantDto> getByCity(String city) {
         return repository.findByCity(city)
                 .stream()
@@ -45,6 +48,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public List<RestaurantDto> getDetailedByCity(String city) {
         return repository.findDetailedByCity(city)
                 .stream()

@@ -691,7 +691,7 @@ If you want a clean demo from start to finish, use this order:
 
 Requirement: logical entity relations
 
-- check [ER_DIAGRAM.md](d:/javalabs/app/ER_DIAGRAM.md)
+- check [ER_DIAGRAM.md](d:/javalabs/app/docs/ER_DIAGRAM.md)
 
 Requirement: save related entities with transaction and without it
 
