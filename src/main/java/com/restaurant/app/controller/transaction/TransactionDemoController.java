@@ -4,6 +4,7 @@ import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.TransactionDemoResult;
 import com.restaurant.app.sevice.TransactionDemoService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,7 @@ public class TransactionDemoController {
                     "No exception happened, data committed."
             ));
         } catch (RuntimeException exception) {
-            return ResponseEntity.ok(transactionDemoService.getCurrentState(
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(transactionDemoService.getCurrentState(
                     "WITH_TRANSACTION",
                     "Exception thrown and transaction rolled back completely."
             ));
@@ -53,7 +54,7 @@ public class TransactionDemoController {
         try {
             transactionDemoService.saveRestaurantAndThrowException(request);
         } catch (RuntimeException exception) {
-            return ResponseEntity.ok(transactionDemoService.getCurrentState(
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(transactionDemoService.getCurrentState(
                     "EXCEPTION_NO_TX",
                     "Exception thrown after save, data remained in DB."
             ));
@@ -67,7 +68,7 @@ public class TransactionDemoController {
         try {
             transactionDemoService.saveRestaurantAndThrowExceptionWithTransactional(request);
         } catch (RuntimeException exception) {
-            return ResponseEntity.ok(transactionDemoService.getCurrentState(
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(transactionDemoService.getCurrentState(
                     "EXCEPTION_WITH_TX",
                     "Exception thrown and transaction rollback removed pending changes."
             ));

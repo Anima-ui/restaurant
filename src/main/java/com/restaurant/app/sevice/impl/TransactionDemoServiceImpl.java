@@ -110,7 +110,7 @@ public class TransactionDemoServiceImpl implements TransactionDemoService {
                 .build();
 
         restaurantRepository.save(restaurant);
-        throw new RuntimeException("Exception after save without transaction");
+        throw new IllegalStateException("Exception after save without transaction");
     }
 
     @Transactional
@@ -122,7 +122,7 @@ public class TransactionDemoServiceImpl implements TransactionDemoService {
                 .build();
 
         restaurantRepository.save(restaurant);
-        throw new RuntimeException("Exception after save with transaction");
+        throw new IllegalStateException("Exception after save with transaction");
     }
 
     public TransactionDemoResult getCurrentState(String scenario, String note) {
