@@ -2,12 +2,18 @@ package com.restaurant.app.sevice.impl;
 
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.RestaurantDto;
+import com.restaurant.app.domain.dto.RestaurantSearchRequest;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
 import com.restaurant.app.domain.model.Restaurant;
 import com.restaurant.app.mapper.RestaurantMapper;
 import com.restaurant.app.repository.RestaurantRepository;
+import com.restaurant.app.sevice.RestaurantSearchMode;
 import com.restaurant.app.sevice.RestaurantService;
+import com.restaurant.app.sevice.cache.RestaurantSearchCache;
+import com.restaurant.app.sevice.cache.RestaurantSearchCacheKey;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +26,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantMapper mapper;
 
+    private final RestaurantSearchCache restaurantSearchCache;
+
     @Autowired
-    public RestaurantServiceImpl(RestaurantRepository repository, RestaurantMapper mapper) {
+    public RestaurantServiceImpl(RestaurantRepository repository,
+                                 RestaurantMapper mapper,
+                                 RestaurantSearchCache restaurantSearchCache) {
         this.repository = repository;
         this.mapper = mapper;
+        this.restaurantSearchCache = restaurantSearchCache;
     }
 
     @Transactional(readOnly = true)
@@ -56,9 +67,20 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public Page<RestaurantDto> searchByDishFiltersJpql(RestaurantSearchRequest request, Pageable pageable) {
+        return searchWithCache(RestaurantSearchMode.JPQL, request, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<RestaurantDto> searchByDishFiltersNative(RestaurantSearchRequest request, Pageable pageable) {
+        return searchWithCache(RestaurantSearchMode.NATIVE, request, pageable);
+    }
+
     @Transactional
     public RestaurantDto create(RestaurantCreateRequest dto) {
         Restaurant saved = repository.save(mapper.toEntity(dto));
+        restaurantSearchCache.clear();
         return mapper.toDto(saved);
     }
 
@@ -68,13 +90,16 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurant.setName(dto.getName());
         restaurant.setCity(dto.getCity());
         restaurant.setCuisineType(dto.getCuisineType());
-        return mapper.toDto(repository.save(restaurant));
+        Restaurant saved = repository.save(restaurant);
+        restaurantSearchCache.clear();
+        return mapper.toDto(saved);
     }
 
     @Transactional
     public void delete(Long id) {
         Restaurant restaurant = repository.findById(id).orElseThrow();
         repository.delete(restaurant);
+        restaurantSearchCache.clear();
     }
 
     @Transactional(readOnly = true)
@@ -103,5 +128,49 @@ public class RestaurantServiceImpl implements RestaurantService {
         List<Restaurant> restaurants = repository.findAllWithTablesAndBookings();
         restaurants.forEach(restaurant -> restaurant.getTables().forEach(table -> table.getBookings().size()));
         return restaurants.stream().map(mapper::toDto).toList();
+    }
+
+    private Page<RestaurantDto> searchWithCache(RestaurantSearchMode mode,
+                                                RestaurantSearchRequest request,
+                                                Pageable pageable) {
+        RestaurantSearchCacheKey key = RestaurantSearchCacheKey.of(
+                mode,
+                request,
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                request.sortDescription(pageable.getSort())
+        );
+
+        return restaurantSearchCache.get(key)
+                .orElseGet(() -> {
+                    Page<RestaurantDto> result = executeSearch(mode, request, pageable)
+                            .map(mapper::toDto);
+                    restaurantSearchCache.put(key, result);
+                    return result;
+                });
+    }
+
+    private Page<Restaurant> executeSearch(RestaurantSearchMode mode,
+                                           RestaurantSearchRequest request,
+                                           Pageable pageable) {
+        if (mode == RestaurantSearchMode.NATIVE) {
+            return repository.searchByDishFiltersNative(
+                    request.city(),
+                    request.cuisineType(),
+                    request.dishName(),
+                    request.minDishPrice(),
+                    request.maxDishPrice(),
+                    pageable
+            );
+        }
+
+        return repository.searchByDishFiltersJpql(
+                request.city(),
+                request.cuisineType(),
+                request.dishName(),
+                request.minDishPrice(),
+                request.maxDishPrice(),
+                pageable
+        );
     }
 }

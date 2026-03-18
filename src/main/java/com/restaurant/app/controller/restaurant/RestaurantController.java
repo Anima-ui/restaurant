@@ -2,10 +2,13 @@ package com.restaurant.app.controller.restaurant;
 
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.RestaurantDto;
+import com.restaurant.app.domain.dto.RestaurantSearchRequest;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
 import com.restaurant.app.sevice.RestaurantService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +47,18 @@ public class RestaurantController implements RestaurantAPI {
     @GetMapping("/detailed")
     public ResponseEntity<List<RestaurantDto>> getDetailedByCity(@RequestParam String city) {
         return ResponseEntity.ok(restaurantServiceImpl.getDetailedByCity(city));
+    }
+
+    @GetMapping("/search/jpql")
+    public ResponseEntity<Page<RestaurantDto>> searchByDishFiltersJpql(RestaurantSearchRequest request,
+                                                                       Pageable pageable) {
+        return ResponseEntity.ok(restaurantServiceImpl.searchByDishFiltersJpql(request, pageable));
+    }
+
+    @GetMapping("/search/native")
+    public ResponseEntity<Page<RestaurantDto>> searchByDishFiltersNative(RestaurantSearchRequest request,
+                                                                         Pageable pageable) {
+        return ResponseEntity.ok(restaurantServiceImpl.searchByDishFiltersNative(request, pageable));
     }
 
     @PostMapping

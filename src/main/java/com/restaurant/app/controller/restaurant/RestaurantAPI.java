@@ -2,8 +2,11 @@ package com.restaurant.app.controller.restaurant;
 
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.RestaurantDto;
+import com.restaurant.app.domain.dto.RestaurantSearchRequest;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +23,10 @@ public interface RestaurantAPI {
     ResponseEntity<List<RestaurantDto>> getByCity(@RequestParam String city);
 
     ResponseEntity<List<RestaurantDto>> getDetailedByCity(@RequestParam String city);
+
+    ResponseEntity<Page<RestaurantDto>> searchByDishFiltersJpql(RestaurantSearchRequest request, Pageable pageable);
+
+    ResponseEntity<Page<RestaurantDto>> searchByDishFiltersNative(RestaurantSearchRequest request, Pageable pageable);
 
     ResponseEntity<RestaurantDto> create(@Valid @RequestBody RestaurantCreateRequest dto);
 
