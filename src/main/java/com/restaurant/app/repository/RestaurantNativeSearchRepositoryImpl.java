@@ -50,14 +50,14 @@ public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSea
 
     public Page<Restaurant> searchByDishFiltersNative(String city,
                                                       String cuisineType,
-                                                      String dishName,
+                                                      String dishNamePattern,
                                                       BigDecimal minDishPrice,
                                                       BigDecimal maxDishPrice,
                                                       Pageable pageable) {
         MapSqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("city", city)
                 .addValue("cuisineType", cuisineType)
-                .addValue("dishName", dishName)
+                .addValue("dishNamePattern", dishNamePattern)
                 .addValue("minDishPrice", minDishPrice)
                 .addValue("maxDishPrice", maxDishPrice)
                 .addValue("limit", pageable.getPageSize())

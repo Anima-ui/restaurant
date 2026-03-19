@@ -10,7 +10,7 @@ public interface RestaurantNativeSearchRepository {
 
     Page<Restaurant> searchByDishFiltersNative(String city,
                                                String cuisineType,
-                                               String dishName,
+                                               String dishNamePattern,
                                                BigDecimal minDishPrice,
                                                BigDecimal maxDishPrice,
                                                Pageable pageable);

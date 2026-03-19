@@ -49,9 +49,9 @@ class RestaurantRepositoryTest {
         );
 
         Page<Restaurant> result = restaurantRepository.searchByDishFiltersJpql(
-                "Moscow",
-                "Italian",
-                "Pasta",
+                "moscow",
+                "italian",
+                "%pasta%",
                 new BigDecimal("30.00"),
                 new BigDecimal("45.00"),
                 PageRequest.of(0, 10)
@@ -79,9 +79,9 @@ class RestaurantRepositoryTest {
         );
 
         Page<Restaurant> result = restaurantRepository.searchByDishFiltersNative(
-                "Moscow",
+                "moscow",
                 null,
-                "burger",
+                "%burger%",
                 null,
                 new BigDecimal("20.00"),
                 PageRequest.of(0, 10)

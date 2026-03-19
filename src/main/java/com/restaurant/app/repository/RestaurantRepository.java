@@ -34,9 +34,9 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, R
                     SELECT DISTINCT r
                     FROM Restaurant r
                     JOIN r.dishes d
-                    WHERE (:city IS NULL OR LOWER(r.city) = LOWER(:city))
-                      AND (:cuisineType IS NULL OR LOWER(r.cuisineType) = LOWER(:cuisineType))
-                      AND (:dishName IS NULL OR LOWER(d.name) LIKE LOWER(CONCAT('%', :dishName, '%')))
+                    WHERE (:city IS NULL OR LOWER(r.city) = :city)
+                      AND (:cuisineType IS NULL OR LOWER(r.cuisineType) = :cuisineType)
+                      AND (:dishNamePattern IS NULL OR LOWER(d.name) LIKE :dishNamePattern)
                       AND (:minDishPrice IS NULL OR d.price >= :minDishPrice)
                       AND (:maxDishPrice IS NULL OR d.price <= :maxDishPrice)
                     """,
@@ -44,16 +44,16 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, R
                     SELECT COUNT(DISTINCT r.id)
                     FROM Restaurant r
                     JOIN r.dishes d
-                    WHERE (:city IS NULL OR LOWER(r.city) = LOWER(:city))
-                      AND (:cuisineType IS NULL OR LOWER(r.cuisineType) = LOWER(:cuisineType))
-                      AND (:dishName IS NULL OR LOWER(d.name) LIKE LOWER(CONCAT('%', :dishName, '%')))
+                    WHERE (:city IS NULL OR LOWER(r.city) = :city)
+                      AND (:cuisineType IS NULL OR LOWER(r.cuisineType) = :cuisineType)
+                      AND (:dishNamePattern IS NULL OR LOWER(d.name) LIKE :dishNamePattern)
                       AND (:minDishPrice IS NULL OR d.price >= :minDishPrice)
                       AND (:maxDishPrice IS NULL OR d.price <= :maxDishPrice)
                     """
     )
     Page<Restaurant> searchByDishFiltersJpql(@Param("city") String city,
                                              @Param("cuisineType") String cuisineType,
-                                             @Param("dishName") String dishName,
+                                             @Param("dishNamePattern") String dishNamePattern,
                                              @Param("minDishPrice") BigDecimal minDishPrice,
                                              @Param("maxDishPrice") BigDecimal maxDishPrice,
                                              Pageable pageable);

@@ -153,11 +153,15 @@ public class RestaurantServiceImpl implements RestaurantService {
     private Page<Restaurant> executeSearch(RestaurantSearchMode mode,
                                            RestaurantSearchRequest request,
                                            Pageable pageable) {
+        String city = normalizeForCaseInsensitiveEquals(request.city());
+        String cuisineType = normalizeForCaseInsensitiveEquals(request.cuisineType());
+        String dishNamePattern = normalizeForContainsSearch(request.dishName());
+
         if (mode == RestaurantSearchMode.NATIVE) {
             return repository.searchByDishFiltersNative(
-                    request.city(),
-                    request.cuisineType(),
-                    request.dishName(),
+                    city,
+                    cuisineType,
+                    dishNamePattern,
                     request.minDishPrice(),
                     request.maxDishPrice(),
                     pageable
@@ -165,12 +169,20 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         return repository.searchByDishFiltersJpql(
-                request.city(),
-                request.cuisineType(),
-                request.dishName(),
+                city,
+                cuisineType,
+                dishNamePattern,
                 request.minDishPrice(),
                 request.maxDishPrice(),
                 pageable
         );
+    }
+
+    private String normalizeForCaseInsensitiveEquals(String value) {
+        return value == null ? null : value.toLowerCase();
+    }
+
+    private String normalizeForContainsSearch(String value) {
+        return value == null ? null : "%" + value.toLowerCase() + "%";
     }
 }

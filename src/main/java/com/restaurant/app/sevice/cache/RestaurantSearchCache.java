@@ -13,19 +13,19 @@ public class RestaurantSearchCache {
 
     private final Map<RestaurantSearchCacheKey, Page<RestaurantDto>> cache = new HashMap<>();
 
-    public synchronized Optional<Page<RestaurantDto>> get(RestaurantSearchCacheKey key) {
+    public  Optional<Page<RestaurantDto>> get(RestaurantSearchCacheKey key) {
         return Optional.ofNullable(cache.get(key));
     }
 
-    public synchronized void put(RestaurantSearchCacheKey key, Page<RestaurantDto> value) {
+    public  void put(RestaurantSearchCacheKey key, Page<RestaurantDto> value) {
         cache.put(key, value);
     }
 
-    public synchronized void clear() {
+    public  void clear() {
         cache.clear();
     }
 
-    public synchronized int size() {
+    public  int size() {
         return cache.size();
     }
 }

@@ -55,9 +55,9 @@ class RestaurantServiceImplTest {
         when(restaurantSearchCache.get(any()))
                 .thenReturn(Optional.empty(), Optional.of(new PageImpl<>(List.of(), pageable, 0)));
         when(repository.searchByDishFiltersJpql(
-                request.city(),
-                request.cuisineType(),
-                request.dishName(),
+                "moscow",
+                "italian",
+                "%pasta%",
                 request.minDishPrice(),
                 request.maxDishPrice(),
                 pageable
@@ -68,9 +68,9 @@ class RestaurantServiceImplTest {
         restaurantService.searchByDishFiltersJpql(request, pageable);
 
         verify(repository, times(1)).searchByDishFiltersJpql(
-                request.city(),
-                request.cuisineType(),
-                request.dishName(),
+                "moscow",
+                "italian",
+                "%pasta%",
                 request.minDishPrice(),
                 request.maxDishPrice(),
                 pageable
