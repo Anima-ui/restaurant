@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,13 +56,13 @@ public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSea
                                                       BigDecimal maxDishPrice,
                                                       Pageable pageable) {
         MapSqlParameterSource parameters = new MapSqlParameterSource()
-                .addValue("city", city)
-                .addValue("cuisineType", cuisineType)
-                .addValue("dishNamePattern", dishNamePattern)
-                .addValue("minDishPrice", minDishPrice)
-                .addValue("maxDishPrice", maxDishPrice)
-                .addValue("limit", pageable.getPageSize())
-                .addValue("offset", pageable.getOffset());
+                .addValue("city", city, Types.VARCHAR)
+                .addValue("cuisineType", cuisineType, Types.VARCHAR)
+                .addValue("dishNamePattern", dishNamePattern, Types.VARCHAR)
+                .addValue("minDishPrice", minDishPrice, Types.NUMERIC)
+                .addValue("maxDishPrice", maxDishPrice, Types.NUMERIC)
+                .addValue("limit", pageable.getPageSize(), Types.INTEGER)
+                .addValue("offset", pageable.getOffset(), Types.BIGINT);
 
         List<Long> restaurantIds = jdbcTemplate.queryForList(
                 buildSearchQuery(pageable.getSort()),
@@ -95,7 +96,7 @@ public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSea
 
     private String buildOrderByClause(Sort sort) {
         if (sort.isUnsorted()) {
-            return " ORDER BY r.id ASC";
+            return " ORDER BY filtered.id ASC";
         }
 
         String orderBy = sort.stream()
@@ -107,7 +108,7 @@ public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSea
                     return column + " " + order.getDirection().name();
                 })
                 .reduce((left, right) -> left + ", " + right)
-                .orElse("r.id ASC");
+                .orElse("filtered.id ASC");
 
         return " ORDER BY " + orderBy;
     }
@@ -122,10 +123,10 @@ public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSea
 
     private static Map<String, String> createSortColumns() {
         Map<String, String> columns = new HashMap<>();
-        columns.put("id", "r.id");
-        columns.put("name", "r.name");
-        columns.put("city", "r.city");
-        columns.put("cuisineType", "r.cuisine_type");
+        columns.put("id", "filtered.id");
+        columns.put("name", "filtered.name");
+        columns.put("city", "filtered.city");
+        columns.put("cuisineType", "filtered.cuisine_type");
         return Map.copyOf(columns);
     }
 }

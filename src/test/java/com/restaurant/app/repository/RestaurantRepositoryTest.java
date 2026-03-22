@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -91,6 +92,35 @@ class RestaurantRepositoryTest {
         assertThat(result.getContent())
                 .extracting(Restaurant::getName)
                 .containsExactly("Burger House");
+    }
+
+    @Test
+    void searchByDishFiltersNativeSupportsSortingByName() {
+        createRestaurant(
+                "Roma",
+                "Moscow",
+                "Italian",
+                dish("Truffle Pasta", "39.90")
+        );
+        createRestaurant(
+                "Basilico",
+                "Moscow",
+                "Italian",
+                dish("Cream Pasta", "24.00")
+        );
+
+        Page<Restaurant> result = restaurantRepository.searchByDishFiltersNative(
+                "moscow",
+                "italian",
+                "%pasta%",
+                null,
+                null,
+                PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "name"))
+        );
+
+        assertThat(result.getContent())
+                .extracting(Restaurant::getName)
+                .containsExactly("Basilico", "Roma");
     }
 
     private void createRestaurant(String name, String city, String cuisineType, Dish... dishes) {
