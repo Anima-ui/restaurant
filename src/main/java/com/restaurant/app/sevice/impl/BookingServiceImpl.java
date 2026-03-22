@@ -20,6 +20,14 @@ import java.util.List;
 @Service
 public class BookingServiceImpl implements BookingService {
 
+    private static final String NOT_FOUND_SUFFIX = " was not found";
+
+    private static final String CUSTOMER_NOT_FOUND_PREFIX = "Customer with id=";
+
+    private static final String RESTAURANT_TABLE_NOT_FOUND_PREFIX = "Restaurant table with id=";
+
+    private static final String BOOKING_NOT_FOUND_PREFIX = "Booking with id=";
+
     private final BookingRepository bookingRepository;
 
     private final CustomerRepository customerRepository;
@@ -38,10 +46,10 @@ public class BookingServiceImpl implements BookingService {
     public BookingDto create(BookingCreateRequest request) {
         Customer customer = customerRepository.findById(request.getCustomerId())
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Customer with id=" + request.getCustomerId() + " was not found"));
+                        CUSTOMER_NOT_FOUND_PREFIX + request.getCustomerId() + NOT_FOUND_SUFFIX));
         RestaurantTable table = restaurantTableRepository.findById(request.getTableId())
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Restaurant table with id=" + request.getTableId() + " was not found"));
+                        RESTAURANT_TABLE_NOT_FOUND_PREFIX + request.getTableId() + NOT_FOUND_SUFFIX));
 
         Booking booking = Booking.builder()
                 .bookingTime(request.getBookingTime())
@@ -61,13 +69,13 @@ public class BookingServiceImpl implements BookingService {
     @Transactional(readOnly = true)
     public BookingDto getById(Long id) {
         return toDto(bookingRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Booking with id=" + id + " was not found")));
+                .orElseThrow(() -> new ResourceNotFoundException(BOOKING_NOT_FOUND_PREFIX + id + NOT_FOUND_SUFFIX)));
     }
 
     @Transactional
     public BookingDto updateStatus(Long id, BookingStatus status) {
         Booking booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Booking with id=" + id + " was not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(BOOKING_NOT_FOUND_PREFIX + id + NOT_FOUND_SUFFIX));
         booking.setStatus(status);
         return toDto(bookingRepository.save(booking));
     }

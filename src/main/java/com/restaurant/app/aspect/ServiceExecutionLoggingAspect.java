@@ -20,7 +20,9 @@ public class ServiceExecutionLoggingAspect {
             return joinPoint.proceed();
         } finally {
             long durationMs = (System.nanoTime() - startedAt) / 1_000_000;
-            LOGGER.info("Executed {} in {} ms", joinPoint.getSignature().toShortString(), durationMs);
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Executed {} in {} ms", joinPoint.getSignature().toShortString(), durationMs);
+            }
         }
     }
 }

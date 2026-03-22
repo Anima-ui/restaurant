@@ -19,7 +19,7 @@ public class CustomerCreateRequest {
     private String fullName;
 
     @NotBlank
-    @Pattern(regexp = "^\\+?[0-9]{10,15}$", message = "phone must contain 10 to 15 digits and optional leading '+'")
+    @Pattern(regexp = "^\\+?\\d{10,15}$", message = "phone must contain 10 to 15 digits and optional leading '+'")
     @Schema(example = "+79990001122")
     private String phone;
 }

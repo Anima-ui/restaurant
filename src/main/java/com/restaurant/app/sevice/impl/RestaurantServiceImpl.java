@@ -23,6 +23,10 @@ import java.util.List;
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 
+    private static final String RESTAURANT_NOT_FOUND_PREFIX = "Restaurant with id=";
+
+    private static final String NOT_FOUND_SUFFIX = " was not found";
+
     private final RestaurantRepository repository;
 
     private final RestaurantMapper mapper;
@@ -49,7 +53,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Transactional(readOnly = true)
     public RestaurantDto getById(Long id) {
         Restaurant restaurant = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Restaurant with id=" + id + " was not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(RESTAURANT_NOT_FOUND_PREFIX + id + NOT_FOUND_SUFFIX));
         return mapper.toDto(restaurant);
     }
 
@@ -89,7 +93,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Transactional
     public RestaurantDto update(Long id, RestaurantUpdateRequest dto) {
         Restaurant restaurant = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Restaurant with id=" + id + " was not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(RESTAURANT_NOT_FOUND_PREFIX + id + NOT_FOUND_SUFFIX));
         restaurant.setName(dto.getName());
         restaurant.setCity(dto.getCity());
         restaurant.setCuisineType(dto.getCuisineType());
@@ -101,7 +105,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Transactional
     public void delete(Long id) {
         Restaurant restaurant = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Restaurant with id=" + id + " was not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(RESTAURANT_NOT_FOUND_PREFIX + id + NOT_FOUND_SUFFIX));
         repository.delete(restaurant);
         restaurantSearchCache.clear();
     }
