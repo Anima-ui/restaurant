@@ -64,7 +64,7 @@ public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSea
                 .addValue("offset", pageable.getOffset());
 
         List<Long> restaurantIds = jdbcTemplate.queryForList(
-                searchSql + buildOrderByClause(pageable.getSort()) + " LIMIT :limit OFFSET :offset",
+                buildSearchQuery(pageable.getSort()),
                 parameters,
                 Long.class
         );
@@ -86,6 +86,11 @@ public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSea
                 .toList();
 
         return new PageImpl<>(orderedRestaurants, pageable, total == null ? 0 : total);
+    }
+
+    @SuppressWarnings("java:S2077")
+    private String buildSearchQuery(Sort sort) {
+        return searchSql + buildOrderByClause(sort) + " LIMIT :limit OFFSET :offset";
     }
 
     private String buildOrderByClause(Sort sort) {
