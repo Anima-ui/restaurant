@@ -3,6 +3,7 @@ package com.restaurant.app.sevice.impl;
 import com.restaurant.app.domain.dto.CustomerCreateRequest;
 import com.restaurant.app.domain.dto.CustomerDto;
 import com.restaurant.app.domain.model.Customer;
+import com.restaurant.app.exception.ResourceNotFoundException;
 import com.restaurant.app.repository.CustomerRepository;
 import com.restaurant.app.sevice.CustomerService;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public CustomerDto getById(Long id) {
-        return toDto(customerRepository.findById(id).orElseThrow());
+        return toDto(customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer with id=" + id + " was not found")));
     }
 
     private CustomerDto toDto(Customer customer) {

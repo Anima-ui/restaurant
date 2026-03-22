@@ -1,0 +1,105 @@
+2026-03-22 16:31:05.439 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-03-22 16:31:05.442 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [2]
+2026-03-22 16:31:05.445 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-03-22 16:31:05.445 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [19]
+2026-03-22 16:31:05.457 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-03-22 16:31:05.457 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [19]
+2026-03-22 16:31:05.459 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-03-22 16:31:05.460 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [20]
+2026-03-22 16:31:05.461 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-03-22 16:31:05.461 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [20]
+2026-03-22 16:31:05.464 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-03-22 16:31:05.464 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-03-22 16:31:05.466 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-03-22 16:31:05.466 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-03-22 16:31:05.468 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-03-22 16:31:05.468 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [22]
+2026-03-22 16:31:05.470 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-03-22 16:31:05.470 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [22]
+2026-03-22 16:31:05.472 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 68 ms
+2026-03-22 16:31:58.690 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-22 16:31:59.234 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-03-22 16:31:59.239 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-22 16:31:59.241 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-22 16:31:59.250 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

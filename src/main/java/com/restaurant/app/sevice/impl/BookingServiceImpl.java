@@ -6,6 +6,7 @@ import com.restaurant.app.domain.model.Booking;
 import com.restaurant.app.domain.model.BookingStatus;
 import com.restaurant.app.domain.model.Customer;
 import com.restaurant.app.domain.model.RestaurantTable;
+import com.restaurant.app.exception.ResourceNotFoundException;
 import com.restaurant.app.repository.BookingRepository;
 import com.restaurant.app.repository.CustomerRepository;
 import com.restaurant.app.repository.RestaurantTableRepository;
@@ -35,8 +36,12 @@ public class BookingServiceImpl implements BookingService {
 
     @Transactional
     public BookingDto create(BookingCreateRequest request) {
-        Customer customer = customerRepository.findById(request.getCustomerId()).orElseThrow();
-        RestaurantTable table = restaurantTableRepository.findById(request.getTableId()).orElseThrow();
+        Customer customer = customerRepository.findById(request.getCustomerId())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Customer with id=" + request.getCustomerId() + " was not found"));
+        RestaurantTable table = restaurantTableRepository.findById(request.getTableId())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Restaurant table with id=" + request.getTableId() + " was not found"));
 
         Booking booking = Booking.builder()
                 .bookingTime(request.getBookingTime())
@@ -55,12 +60,14 @@ public class BookingServiceImpl implements BookingService {
 
     @Transactional(readOnly = true)
     public BookingDto getById(Long id) {
-        return toDto(bookingRepository.findById(id).orElseThrow());
+        return toDto(bookingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking with id=" + id + " was not found")));
     }
 
     @Transactional
     public BookingDto updateStatus(Long id, BookingStatus status) {
-        Booking booking = bookingRepository.findById(id).orElseThrow();
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking with id=" + id + " was not found"));
         booking.setStatus(status);
         return toDto(bookingRepository.save(booking));
     }

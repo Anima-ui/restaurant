@@ -5,6 +5,8 @@ import com.restaurant.app.domain.dto.RestaurantDto;
 import com.restaurant.app.domain.dto.RestaurantSearchRequest;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -18,19 +20,22 @@ public interface RestaurantAPI {
 
     ResponseEntity<List<RestaurantDto>> getAll();
 
-    ResponseEntity<RestaurantDto> getById(@PathVariable Long id);
+    ResponseEntity<RestaurantDto> getById(@PathVariable @Positive Long id);
 
-    ResponseEntity<List<RestaurantDto>> getByCity(@RequestParam String city);
+    ResponseEntity<List<RestaurantDto>> getByCity(@RequestParam @NotBlank String city);
 
-    ResponseEntity<List<RestaurantDto>> getDetailedByCity(@RequestParam String city);
+    ResponseEntity<List<RestaurantDto>> getDetailedByCity(@RequestParam @NotBlank String city);
 
-    ResponseEntity<Page<RestaurantDto>> searchByDishFiltersJpql(RestaurantSearchRequest request, Pageable pageable);
+    ResponseEntity<Page<RestaurantDto>> searchByDishFiltersJpql(@Valid RestaurantSearchRequest request,
+                                                                Pageable pageable);
 
-    ResponseEntity<Page<RestaurantDto>> searchByDishFiltersNative(RestaurantSearchRequest request, Pageable pageable);
+    ResponseEntity<Page<RestaurantDto>> searchByDishFiltersNative(@Valid RestaurantSearchRequest request,
+                                                                  Pageable pageable);
 
     ResponseEntity<RestaurantDto> create(@Valid @RequestBody RestaurantCreateRequest dto);
 
-    ResponseEntity<RestaurantDto> update(@PathVariable Long id, @Valid @RequestBody RestaurantUpdateRequest dto);
+    ResponseEntity<RestaurantDto> update(@PathVariable @Positive Long id,
+                                         @Valid @RequestBody RestaurantUpdateRequest dto);
 
-    ResponseEntity<Void> delete(@PathVariable Long id);
+    ResponseEntity<Void> delete(@PathVariable @Positive Long id);
 }

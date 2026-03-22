@@ -4,6 +4,7 @@ import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.TransactionDemoResult;
 import com.restaurant.app.domain.model.Restaurant;
 import com.restaurant.app.domain.model.RestaurantTable;
+import com.restaurant.app.exception.ConflictOperationException;
 import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.repository.RestaurantTableRepository;
 import com.restaurant.app.sevice.TransactionDemoService;
@@ -68,7 +69,7 @@ public class TransactionDemoServiceImpl implements TransactionDemoService {
                 .build();
         tableRepository.save(table);
 
-        throw new IllegalStateException("Simulated failure to trigger rollback");
+        throw new ConflictOperationException("Simulated failure to trigger rollback");
     }
 
     @Transactional
@@ -110,7 +111,7 @@ public class TransactionDemoServiceImpl implements TransactionDemoService {
                 .build();
 
         restaurantRepository.save(restaurant);
-        throw new IllegalStateException("Exception after save without transaction");
+        throw new ConflictOperationException("Exception after save without transaction");
     }
 
     @Transactional
@@ -122,7 +123,7 @@ public class TransactionDemoServiceImpl implements TransactionDemoService {
                 .build();
 
         restaurantRepository.save(restaurant);
-        throw new IllegalStateException("Exception after save with transaction");
+        throw new ConflictOperationException("Exception after save with transaction");
     }
 
     public TransactionDemoResult getCurrentState(String scenario, String note) {

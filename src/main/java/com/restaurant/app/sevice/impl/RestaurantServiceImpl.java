@@ -5,6 +5,7 @@ import com.restaurant.app.domain.dto.RestaurantDto;
 import com.restaurant.app.domain.dto.RestaurantSearchRequest;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
 import com.restaurant.app.domain.model.Restaurant;
+import com.restaurant.app.exception.ResourceNotFoundException;
 import com.restaurant.app.mapper.RestaurantMapper;
 import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.sevice.RestaurantSearchMode;
@@ -47,7 +48,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Transactional(readOnly = true)
     public RestaurantDto getById(Long id) {
-        Restaurant restaurant = repository.findById(id).orElseThrow();
+        Restaurant restaurant = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Restaurant with id=" + id + " was not found"));
         return mapper.toDto(restaurant);
     }
 
@@ -86,7 +88,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Transactional
     public RestaurantDto update(Long id, RestaurantUpdateRequest dto) {
-        Restaurant restaurant = repository.findById(id).orElseThrow();
+        Restaurant restaurant = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Restaurant with id=" + id + " was not found"));
         restaurant.setName(dto.getName());
         restaurant.setCity(dto.getCity());
         restaurant.setCuisineType(dto.getCuisineType());
@@ -97,7 +100,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Transactional
     public void delete(Long id) {
-        Restaurant restaurant = repository.findById(id).orElseThrow();
+        Restaurant restaurant = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Restaurant with id=" + id + " was not found"));
         repository.delete(restaurant);
         restaurantSearchCache.clear();
     }

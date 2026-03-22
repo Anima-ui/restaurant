@@ -2,10 +2,12 @@ package com.restaurant.app.controller.transaction;
 
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.TransactionDemoResult;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import com.restaurant.app.sevice.TransactionDemoService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/transactions")
+@Validated
+@Tag(name = "Transactions", description = "Transaction demonstration endpoints")
 public class TransactionDemoController {
 
     private final TransactionDemoService transactionDemoService;
@@ -23,60 +27,45 @@ public class TransactionDemoController {
     }
 
     @PostMapping("/partial")
+    @Operation(summary = "Save partially without transaction")
     public ResponseEntity<TransactionDemoResult> partialSave(@Valid @RequestBody RestaurantCreateRequest request) {
         return ResponseEntity.ok(transactionDemoService.savePartiallyWithoutTransaction(request));
     }
 
     @PostMapping("/rollback")
+    @Operation(summary = "Trigger rollback within transaction")
     public ResponseEntity<TransactionDemoResult> fullRollback(@Valid @RequestBody RestaurantCreateRequest request) {
-        try {
-            transactionDemoService.rollbackCompletelyWithTransaction(request);
-            return ResponseEntity.ok(transactionDemoService.getCurrentState(
-                    "WITH_TRANSACTION",
-                    "No exception happened, data committed."
-            ));
-        } catch (RuntimeException exception) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(transactionDemoService.getCurrentState(
-                    "WITH_TRANSACTION",
-                    "Exception thrown and transaction rolled back completely."
-            ));
-        }
+        transactionDemoService.rollbackCompletelyWithTransaction(request);
+        return ResponseEntity.ok(transactionDemoService.getCurrentState(
+                "WITH_TRANSACTION",
+                "No exception happened, data committed."
+        ));
     }
 
     @PostMapping("/cascade")
+    @Operation(summary = "Save restaurant and tables with cascade")
     public ResponseEntity<TransactionDemoResult> cascadeSave(@Valid @RequestBody RestaurantCreateRequest request) {
         return ResponseEntity.ok(transactionDemoService.saveWithCascade(request));
     }
 
     @PostMapping("/exception-no-tx")
+    @Operation(summary = "Throw exception after save without transaction")
     public ResponseEntity<TransactionDemoResult> exceptionWithoutTransaction(
             @Valid @RequestBody RestaurantCreateRequest request) {
-        try {
-            transactionDemoService.saveRestaurantAndThrowException(request);
-        } catch (RuntimeException exception) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(transactionDemoService.getCurrentState(
-                    "EXCEPTION_NO_TX",
-                    "Exception thrown after save, data remained in DB."
-            ));
-        }
+        transactionDemoService.saveRestaurantAndThrowException(request);
         return ResponseEntity.ok(new TransactionDemoResult());
     }
 
     @PostMapping("/exception-with-tx")
+    @Operation(summary = "Throw exception after save with transaction")
     public ResponseEntity<TransactionDemoResult> exceptionWithTransaction(
             @Valid @RequestBody RestaurantCreateRequest request) {
-        try {
-            transactionDemoService.saveRestaurantAndThrowExceptionWithTransactional(request);
-        } catch (RuntimeException exception) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(transactionDemoService.getCurrentState(
-                    "EXCEPTION_WITH_TX",
-                    "Exception thrown and transaction rollback removed pending changes."
-            ));
-        }
+        transactionDemoService.saveRestaurantAndThrowExceptionWithTransactional(request);
         return ResponseEntity.ok(new TransactionDemoResult());
     }
 
     @GetMapping("/state")
+    @Operation(summary = "Get current transaction demo state")
     public ResponseEntity<TransactionDemoResult> getCurrentState() {
         return ResponseEntity.ok(transactionDemoService.getCurrentState(
                 "CURRENT",
