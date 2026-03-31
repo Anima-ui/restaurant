@@ -44,17 +44,105 @@ class RestaurantSearchCacheKeyTest {
                 .isEqualTo(first)
                 .hasSameHashCodeAs(second)
                 .isNotEqualTo(new Object())
-                .isNotEqualTo(null);
-        assertThat(first).isNotEqualTo(new RestaurantSearchCacheKey(
-                RestaurantSearchMode.NATIVE,
-                "Moscow",
-                "Italian",
-                "Pasta",
-                BigDecimal.TEN,
-                new BigDecimal("30"),
-                0,
-                10,
-                "name:ASC"
-        ));
+                .isNotEqualTo(null)
+                .isNotEqualTo(new RestaurantSearchCacheKey(
+                        RestaurantSearchMode.NATIVE,
+                        "Moscow",
+                        "Italian",
+                        "Pasta",
+                        BigDecimal.TEN,
+                        new BigDecimal("30"),
+                        0,
+                        10,
+                        "name:ASC"
+                ))
+                .isNotEqualTo(new RestaurantSearchCacheKey(
+                        RestaurantSearchMode.JPQL,
+                        "Saint Petersburg",
+                        "Italian",
+                        "Pasta",
+                        BigDecimal.TEN,
+                        new BigDecimal("30"),
+                        0,
+                        10,
+                        "name:ASC"
+                ))
+                .isNotEqualTo(new RestaurantSearchCacheKey(
+                        RestaurantSearchMode.JPQL,
+                        "Moscow",
+                        "Japanese",
+                        "Pasta",
+                        BigDecimal.TEN,
+                        new BigDecimal("30"),
+                        0,
+                        10,
+                        "name:ASC"
+                ))
+                .isNotEqualTo(new RestaurantSearchCacheKey(
+                        RestaurantSearchMode.JPQL,
+                        "Moscow",
+                        "Italian",
+                        "Sushi",
+                        BigDecimal.TEN,
+                        new BigDecimal("30"),
+                        0,
+                        10,
+                        "name:ASC"
+                ))
+                .isNotEqualTo(new RestaurantSearchCacheKey(
+                        RestaurantSearchMode.JPQL,
+                        "Moscow",
+                        "Italian",
+                        "Pasta",
+                        BigDecimal.ONE,
+                        new BigDecimal("30"),
+                        0,
+                        10,
+                        "name:ASC"
+                ))
+                .isNotEqualTo(new RestaurantSearchCacheKey(
+                        RestaurantSearchMode.JPQL,
+                        "Moscow",
+                        "Italian",
+                        "Pasta",
+                        BigDecimal.TEN,
+                        new BigDecimal("31"),
+                        0,
+                        10,
+                        "name:ASC"
+                ))
+                .isNotEqualTo(new RestaurantSearchCacheKey(
+                        RestaurantSearchMode.JPQL,
+                        "Moscow",
+                        "Italian",
+                        "Pasta",
+                        BigDecimal.TEN,
+                        new BigDecimal("30"),
+                        1,
+                        10,
+                        "name:ASC"
+                ))
+                .isNotEqualTo(new RestaurantSearchCacheKey(
+                        RestaurantSearchMode.JPQL,
+                        "Moscow",
+                        "Italian",
+                        "Pasta",
+                        BigDecimal.TEN,
+                        new BigDecimal("30"),
+                        0,
+                        20,
+                        "name:ASC"
+                ))
+                .isNotEqualTo(new RestaurantSearchCacheKey(
+                        RestaurantSearchMode.JPQL,
+                        "Moscow",
+                        "Italian",
+                        "Pasta",
+                        BigDecimal.TEN,
+                        new BigDecimal("30"),
+                        0,
+                        10,
+                        "city:DESC"
+                ));
     }
 }

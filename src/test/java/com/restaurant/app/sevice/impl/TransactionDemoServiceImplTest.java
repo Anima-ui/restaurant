@@ -159,6 +159,22 @@ class TransactionDemoServiceImplTest {
     }
 
     @Test
+    void bulkCreateCustomersWithoutTransactionStopsWhenPhoneAlreadyExistsInDatabase() {
+        CustomerBulkCreateRequest request = CustomerBulkCreateRequest.builder()
+                .customers(List.of(
+                        CustomerCreateRequest.builder().fullName("Ivan").phone("+79990001122").build()
+                ))
+                .build();
+
+        when(customerRepository.findByPhone("+79990001122"))
+                .thenReturn(Optional.of(Customer.builder().id(99L).phone("+79990001122").build()));
+        when(customerRepository.count()).thenReturn(5L);
+
+        assertThat(transactionDemoService.bulkCreateCustomersWithoutTransaction(request).getSavedCount())
+                .isZero();
+    }
+
+    @Test
     void bulkCreateCustomersWithTransactionThrowsConflictOnDuplicatePhone() {
         CustomerBulkCreateRequest request = CustomerBulkCreateRequest.builder()
                 .customers(List.of(
@@ -197,6 +213,22 @@ class TransactionDemoServiceImplTest {
 
         assertThat(transactionDemoService.bulkCreateCustomersWithTransaction(request).getSavedCount())
                 .isEqualTo(2);
+    }
+
+    @Test
+    void bulkCreateCustomersWithTransactionThrowsWhenPhoneAlreadyExistsInDatabase() {
+        CustomerBulkCreateRequest request = CustomerBulkCreateRequest.builder()
+                .customers(List.of(
+                        CustomerCreateRequest.builder().fullName("Ivan").phone("+79990001122").build()
+                ))
+                .build();
+
+        when(customerRepository.findByPhone("+79990001122"))
+                .thenReturn(Optional.of(Customer.builder().id(99L).phone("+79990001122").build()));
+
+        assertThatThrownBy(() -> transactionDemoService.bulkCreateCustomersWithTransaction(request))
+                .isInstanceOf(ConflictOperationException.class)
+                .hasMessageContaining("+79990001122");
     }
 
     @Test
