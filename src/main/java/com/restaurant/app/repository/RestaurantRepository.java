@@ -1,5 +1,6 @@
 package com.restaurant.app.repository;
 
+import com.restaurant.app.domain.dto.RestaurantSearchResultDto;
 import com.restaurant.app.domain.model.Restaurant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,30 +32,39 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, R
 
     @Query(
             value = """
-                    SELECT DISTINCT r
+                    SELECT DISTINCT new com.restaurant.app.domain.dto.RestaurantSearchResultDto(
+                        r.id,
+                        r.name,
+                        r.city,
+                        r.cuisineType
+                    )
                     FROM Restaurant r
-                    JOIN r.dishes d
                     WHERE (:city IS NULL OR LOWER(r.city) = :city)
                       AND (:cuisineType IS NULL OR LOWER(r.cuisineType) = :cuisineType)
-                      AND (:dishNamePattern IS NULL OR LOWER(d.name) LIKE :dishNamePattern)
-                      AND (:minDishPrice IS NULL OR d.price >= :minDishPrice)
-                      AND (:maxDishPrice IS NULL OR d.price <= :maxDishPrice)
+                      AND (:dishNamePattern IS NULL OR EXISTS (
+                          SELECT 1 FROM Dish d WHERE d.restaurant = r
+                          AND LOWER(d.name) LIKE :dishNamePattern
+                          AND (:minDishPrice IS NULL OR d.price >= :minDishPrice)
+                          AND (:maxDishPrice IS NULL OR d.price <= :maxDishPrice)
+                      ))
                     """,
             countQuery = """
                     SELECT COUNT(DISTINCT r.id)
                     FROM Restaurant r
-                    JOIN r.dishes d
                     WHERE (:city IS NULL OR LOWER(r.city) = :city)
                       AND (:cuisineType IS NULL OR LOWER(r.cuisineType) = :cuisineType)
-                      AND (:dishNamePattern IS NULL OR LOWER(d.name) LIKE :dishNamePattern)
-                      AND (:minDishPrice IS NULL OR d.price >= :minDishPrice)
-                      AND (:maxDishPrice IS NULL OR d.price <= :maxDishPrice)
+                      AND (:dishNamePattern IS NULL OR EXISTS (
+                          SELECT 1 FROM Dish d WHERE d.restaurant = r
+                          AND LOWER(d.name) LIKE :dishNamePattern
+                          AND (:minDishPrice IS NULL OR d.price >= :minDishPrice)
+                          AND (:maxDishPrice IS NULL OR d.price <= :maxDishPrice)
+                      ))
                     """
     )
-    Page<Restaurant> searchByDishFiltersJpql(@Param("city") String city,
-                                             @Param("cuisineType") String cuisineType,
-                                             @Param("dishNamePattern") String dishNamePattern,
-                                             @Param("minDishPrice") BigDecimal minDishPrice,
-                                             @Param("maxDishPrice") BigDecimal maxDishPrice,
-                                             Pageable pageable);
+    Page<RestaurantSearchResultDto> searchByDishFiltersJpql(@Param("city") String city,
+                                                            @Param("cuisineType") String cuisineType,
+                                                            @Param("dishNamePattern") String dishNamePattern,
+                                                            @Param("minDishPrice") BigDecimal minDishPrice,
+                                                            @Param("maxDishPrice") BigDecimal maxDishPrice,
+                                                            Pageable pageable);
 }

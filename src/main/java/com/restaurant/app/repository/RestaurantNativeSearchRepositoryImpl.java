@@ -1,7 +1,6 @@
 package com.restaurant.app.repository;
 
-import com.restaurant.app.domain.model.Restaurant;
-import jakarta.persistence.EntityManager;
+import com.restaurant.app.domain.dto.RestaurantSearchResultDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -22,7 +21,6 @@ import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 @Repository
 public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSearchRepository {
@@ -31,30 +29,26 @@ public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSea
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    private final EntityManager entityManager;
-
     private final String searchSql;
 
     private final String countSql;
 
     public RestaurantNativeSearchRepositoryImpl(NamedParameterJdbcTemplate jdbcTemplate,
-                                                EntityManager entityManager,
                                                 @Value("classpath:sql/restaurant-search-native.sql")
                                                 Resource restaurantSearchNativeResource,
                                                 @Value("classpath:sql/restaurant-search-native-count.sql")
                                                 Resource restaurantSearchNativeCountResource) {
         this.jdbcTemplate = jdbcTemplate;
-        this.entityManager = entityManager;
         this.searchSql = readSql(restaurantSearchNativeResource);
         this.countSql = readSql(restaurantSearchNativeCountResource);
     }
 
-    public Page<Restaurant> searchByDishFiltersNative(String city,
-                                                      String cuisineType,
-                                                      String dishNamePattern,
-                                                      BigDecimal minDishPrice,
-                                                      BigDecimal maxDishPrice,
-                                                      Pageable pageable) {
+    public Page<RestaurantSearchResultDto> searchByDishFiltersNative(String city,
+                                                                     String cuisineType,
+                                                                     String dishNamePattern,
+                                                                     BigDecimal minDishPrice,
+                                                                     BigDecimal maxDishPrice,
+                                                                     Pageable pageable) {
         MapSqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("city", city, Types.VARCHAR)
                 .addValue("cuisineType", cuisineType, Types.VARCHAR)
@@ -64,29 +58,22 @@ public class RestaurantNativeSearchRepositoryImpl implements RestaurantNativeSea
                 .addValue("limit", pageable.getPageSize(), Types.INTEGER)
                 .addValue("offset", pageable.getOffset(), Types.BIGINT);
 
-        List<Long> restaurantIds = jdbcTemplate.queryForList(
+        List<RestaurantSearchResultDto> restaurants = jdbcTemplate.query(
                 buildSearchQuery(pageable.getSort()),
                 parameters,
-                Long.class
+                (resultSet, rowNum) -> RestaurantSearchResultDto.builder()
+                        .id(resultSet.getLong("id"))
+                        .name(resultSet.getString("name"))
+                        .city(resultSet.getString("city"))
+                        .cuisineType(resultSet.getString("cuisine_type"))
+                        .build()
         );
 
         Long total = jdbcTemplate.queryForObject(countSql, parameters, Long.class);
-        if (restaurantIds.isEmpty()) {
+        if (restaurants.isEmpty()) {
             return new PageImpl<>(List.of(), pageable, total == null ? 0 : total);
         }
-
-        List<Restaurant> restaurants = entityManager.createQuery(
-                        "SELECT r FROM Restaurant r WHERE r.id IN :ids", Restaurant.class)
-                .setParameter("ids", restaurantIds)
-                .getResultList();
-
-        Map<Long, Restaurant> restaurantsById = restaurants.stream()
-                .collect(java.util.stream.Collectors.toMap(Restaurant::getId, Function.identity()));
-        List<Restaurant> orderedRestaurants = restaurantIds.stream()
-                .map(restaurantsById::get)
-                .toList();
-
-        return new PageImpl<>(orderedRestaurants, pageable, total == null ? 0 : total);
+        return new PageImpl<>(restaurants, pageable, total == null ? 0 : total);
     }
 
     @SuppressWarnings("java:S2077")

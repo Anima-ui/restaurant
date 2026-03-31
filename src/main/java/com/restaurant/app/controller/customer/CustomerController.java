@@ -1,5 +1,7 @@
 package com.restaurant.app.controller.customer;
 
+import com.restaurant.app.domain.dto.CustomerBulkCreateRequest;
+import com.restaurant.app.domain.dto.CustomerBulkResult;
 import com.restaurant.app.domain.dto.CustomerCreateRequest;
 import com.restaurant.app.domain.dto.CustomerDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,6 +37,12 @@ public class CustomerController {
     @Operation(summary = "Create customer")
     public ResponseEntity<CustomerDto> create(@Valid @RequestBody CustomerCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.create(request));
+    }
+
+    @PostMapping("/bulk")
+    @Operation(summary = "Create customers in bulk")
+    public ResponseEntity<CustomerBulkResult> createBulk(@Valid @RequestBody CustomerBulkCreateRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createBulk(request));
     }
 
     @GetMapping

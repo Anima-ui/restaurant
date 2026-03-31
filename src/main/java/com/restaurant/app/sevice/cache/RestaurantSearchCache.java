@@ -1,6 +1,6 @@
 package com.restaurant.app.sevice.cache;
 
-import com.restaurant.app.domain.dto.RestaurantDto;
+import com.restaurant.app.domain.dto.RestaurantSearchResultDto;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +11,13 @@ import java.util.Optional;
 @Component
 public class RestaurantSearchCache {
 
-    private final Map<RestaurantSearchCacheKey, Page<RestaurantDto>> cache = new HashMap<>();
+    private final Map<RestaurantSearchCacheKey, Page<RestaurantSearchResultDto>> cache = new HashMap<>();
 
-    public  Optional<Page<RestaurantDto>> get(RestaurantSearchCacheKey key) {
+    public  Optional<Page<RestaurantSearchResultDto>> get(RestaurantSearchCacheKey key) {
         return Optional.ofNullable(cache.get(key));
     }
 
-    public  void put(RestaurantSearchCacheKey key, Page<RestaurantDto> value) {
+    public  void put(RestaurantSearchCacheKey key, Page<RestaurantSearchResultDto> value) {
         cache.put(key, value);
     }
 

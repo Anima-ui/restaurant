@@ -1,4 +1,4 @@
-SELECT filtered.id
+SELECT filtered.id, filtered.name, filtered.city, filtered.cuisine_type
 FROM (
     SELECT r.id, r.name, r.city, r.cuisine_type
     FROM restaurants r

@@ -3,6 +3,7 @@ package com.restaurant.app.controller.restaurant;
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.RestaurantDto;
 import com.restaurant.app.domain.dto.RestaurantSearchRequest;
+import com.restaurant.app.domain.dto.RestaurantSearchResultDto;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -26,11 +27,11 @@ public interface RestaurantAPI {
 
     ResponseEntity<List<RestaurantDto>> getDetailedByCity(@RequestParam @NotBlank String city);
 
-    ResponseEntity<Page<RestaurantDto>> searchByDishFiltersJpql(@Valid RestaurantSearchRequest request,
-                                                                Pageable pageable);
+    ResponseEntity<Page<RestaurantSearchResultDto>> searchByDishFiltersJpql(@Valid RestaurantSearchRequest request,
+                                                                            Pageable pageable);
 
-    ResponseEntity<Page<RestaurantDto>> searchByDishFiltersNative(@Valid RestaurantSearchRequest request,
-                                                                  Pageable pageable);
+    ResponseEntity<Page<RestaurantSearchResultDto>> searchByDishFiltersNative(@Valid RestaurantSearchRequest request,
+                                                                              Pageable pageable);
 
     ResponseEntity<RestaurantDto> create(@Valid @RequestBody RestaurantCreateRequest dto);
 

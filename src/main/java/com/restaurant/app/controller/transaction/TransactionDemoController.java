@@ -1,5 +1,7 @@
 package com.restaurant.app.controller.transaction;
 
+import com.restaurant.app.domain.dto.CustomerBulkCreateRequest;
+import com.restaurant.app.domain.dto.CustomerBulkResult;
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.TransactionDemoResult;
 import io.swagger.v3.oas.annotations.Operation;
@@ -62,6 +64,20 @@ public class TransactionDemoController {
             @Valid @RequestBody RestaurantCreateRequest request) {
         transactionDemoService.saveRestaurantAndThrowExceptionWithTransactional(request);
         return ResponseEntity.ok(new TransactionDemoResult());
+    }
+
+    @PostMapping("/customers/bulk-no-tx")
+    @Operation(summary = "Bulk create customers without transaction")
+    public ResponseEntity<CustomerBulkResult> bulkCustomersWithoutTransaction(
+            @Valid @RequestBody CustomerBulkCreateRequest request) {
+        return ResponseEntity.ok(transactionDemoService.bulkCreateCustomersWithoutTransaction(request));
+    }
+
+    @PostMapping("/customers/bulk-with-tx")
+    @Operation(summary = "Bulk create customers with transaction")
+    public ResponseEntity<CustomerBulkResult> bulkCustomersWithTransaction(
+            @Valid @RequestBody CustomerBulkCreateRequest request) {
+        return ResponseEntity.ok(transactionDemoService.bulkCreateCustomersWithTransaction(request));
     }
 
     @GetMapping("/state")

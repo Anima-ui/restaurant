@@ -1,0 +1,364 @@
+2026-03-23 13:17:29.282 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [null]
+2026-03-23 13:17:29.286 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [null]
+2026-03-23 13:17:29.286 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (5:VARCHAR) <- [%pasta%]
+2026-03-23 13:17:29.287 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [%pasta%]
+2026-03-23 13:17:29.287 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [null]
+2026-03-23 13:17:29.287 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [null]
+2026-03-23 13:17:29.324 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [null]
+2026-03-23 13:17:29.325 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [null]
+2026-03-23 13:17:29.325 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (11:INTEGER) <- [1]
+2026-03-23 13:17:29.364 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        count(distinct r1_0.id) 
+    from
+        restaurants r1_0 
+    where
+        (
+            ? is null 
+            or lower(r1_0.city)=?
+        ) 
+        and (
+            ? is null 
+            or lower(r1_0.cuisine_type)=?
+        ) 
+        and (
+            ? is null 
+            or exists(select
+                1 from dishes d1_0 
+            where
+                d1_0.restaurant_id=r1_0.id 
+                and lower(d1_0.name) like ? escape '' 
+                and (? is null 
+                or d1_0.price>=?) 
+                and (? is null 
+                or d1_0.price<=?))
+        )
+2026-03-23 13:17:29.365 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [moscow]
+2026-03-23 13:17:29.366 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [moscow]
+2026-03-23 13:17:29.366 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [null]
+2026-03-23 13:17:29.366 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [null]
+2026-03-23 13:17:29.366 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (5:VARCHAR) <- [%pasta%]
+2026-03-23 13:17:29.366 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [%pasta%]
+2026-03-23 13:17:29.366 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [null]
+2026-03-23 13:17:29.366 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [null]
+2026-03-23 13:17:29.367 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [null]
+2026-03-23 13:17:29.367 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [null]
+2026-03-23 13:17:29.378 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.searchByDishFiltersJpql(..) in 302 ms
+2026-03-23 13:17:29.597 WARN  [http-nio-8080-exec-1] o.s.d.w.c.SpringDataJackson3Configuration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-03-23 13:18:14.211 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.searchByDishFiltersJpql(..) in 0 ms
+2026-03-23 13:19:06.127 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-03-23 13:19:06.129 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2026-03-23 13:19:06.198 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-03-23 13:19:06.198 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2026-03-23 13:19:06.217 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-03-23 13:19:06.217 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [1]
+2026-03-23 13:19:06.224 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.update(..) in 119 ms
+2026-03-23 13:19:06.264 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    update
+        restaurants 
+    set
+        city=?,
+        cuisine_type=?,
+        name=? 
+    where
+        id=?
+2026-03-23 13:19:06.267 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Saint Petersburg]
+2026-03-23 13:19:06.267 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Mediterranean]
+2026-03-23 13:19:06.267 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Basilico Updated]
+2026-03-23 13:19:06.267 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (4:BIGINT) <- [1]
+2026-03-23 13:19:13.073 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        distinct r1_0.id,
+        r1_0.name,
+        r1_0.city,
+        r1_0.cuisine_type 
+    from
+        restaurants r1_0 
+    where
+        (
+            ? is null 
+            or lower(r1_0.city)=?
+        ) 
+        and (
+            ? is null 
+            or lower(r1_0.cuisine_type)=?
+        ) 
+        and (
+            ? is null 
+            or exists(select
+                1 from dishes d1_0 
+            where
+                d1_0.restaurant_id=r1_0.id 
+                and lower(d1_0.name) like ? escape '' 
+                and (? is null 
+                or d1_0.price>=?) 
+                and (? is null 
+                or d1_0.price<=?))
+        ) 
+    order by
+        r1_0.name desc 
+    fetch
+        first ? rows only
+2026-03-23 13:19:13.074 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [moscow]
+2026-03-23 13:19:13.074 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [moscow]
+2026-03-23 13:19:13.075 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [null]
+2026-03-23 13:19:13.075 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [null]
+2026-03-23 13:19:13.075 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (5:VARCHAR) <- [%pasta%]
+2026-03-23 13:19:13.075 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [%pasta%]
+2026-03-23 13:19:13.075 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [null]
+2026-03-23 13:19:13.075 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [null]
+2026-03-23 13:19:13.075 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [null]
+2026-03-23 13:19:13.075 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [null]
+2026-03-23 13:19:13.075 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (11:INTEGER) <- [1]
+2026-03-23 13:19:13.083 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        count(distinct r1_0.id) 
+    from
+        restaurants r1_0 
+    where
+        (
+            ? is null 
+            or lower(r1_0.city)=?
+        ) 
+        and (
+            ? is null 
+            or lower(r1_0.cuisine_type)=?
+        ) 
+        and (
+            ? is null 
+            or exists(select
+                1 from dishes d1_0 
+            where
+                d1_0.restaurant_id=r1_0.id 
+                and lower(d1_0.name) like ? escape '' 
+                and (? is null 
+                or d1_0.price>=?) 
+                and (? is null 
+                or d1_0.price<=?))
+        )
+2026-03-23 13:19:13.083 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [moscow]
+2026-03-23 13:19:13.084 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [moscow]
+2026-03-23 13:19:13.084 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [null]
+2026-03-23 13:19:13.084 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [null]
+2026-03-23 13:19:13.085 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (5:VARCHAR) <- [%pasta%]
+2026-03-23 13:19:13.085 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [%pasta%]
+2026-03-23 13:19:13.085 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [null]
+2026-03-23 13:19:13.085 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [null]
+2026-03-23 13:19:13.085 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [null]
+2026-03-23 13:19:13.085 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [null]
+2026-03-23 13:19:13.088 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.searchByDishFiltersJpql(..) in 28 ms
+2026-03-23 13:22:39.887 WARN  [http-nio-8080-exec-6] c.r.a.e.GlobalExceptionHandler - Constraint violation for request GET /api/v1/restaurants/-9999
+2026-03-23 13:23:20.230 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-03-23 13:23:20.231 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [3]
+2026-03-23 13:23:20.238 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-03-23 13:23:20.238 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [3]
+2026-03-23 13:23:20.243 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-03-23 13:23:20.243 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [3]
+2026-03-23 13:23:20.248 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getById(..) in 19 ms
+2026-03-23 13:26:23.103 WARN  [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m23s720ms262µs500ns).
+2026-03-23 13:26:31.904 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-23 13:26:32.491 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-03-23 13:26:32.497 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-23 13:26:32.500 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-23 13:26:32.507 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-23 17:33:30.775 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-03-23 17:33:30.822 INFO  [main] com.restaurant.app.AppApplication - Starting AppApplication using Java 23.0.2 with PID 3028 (D:\javalabs\app\target\classes started by Colorful in D:\javalabs\app)
+2026-03-23 17:33:30.823 DEBUG [main] com.restaurant.app.AppApplication - Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-03-23 17:33:30.823 INFO  [main] com.restaurant.app.AppApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-23 17:33:31.589 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-23 17:33:31.669 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 5 JPA repository interfaces.
+2026-03-23 17:33:32.195 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-03-23 17:33:32.209 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-23 17:33:32.212 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-23 17:33:32.212 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-03-23 17:33:32.267 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1403 ms
+2026-03-23 17:33:32.459 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-23 17:33:32.519 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-03-23 17:33:32.904 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-23 17:33:32.932 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-23 17:33:33.978 WARN  [main] org.hibernate.orm.jdbc.error - HHH000247: ErrorCode: 0, SQLState: 08001
+2026-03-23 17:33:33.978 WARN  [main] org.hibernate.orm.jdbc.error - Подсоединение по адресу localhost:5432 отклонено. Проверьте что хост и порт указаны правильно и что postmaster принимает TCP/IP-подсоединения.
+2026-03-23 17:33:33.989 WARN  [main] org.hibernate.orm.jdbc - HHH100046: Could not obtain connection to query JDBC database metadata
+org.hibernate.exception.JDBCConnectionException: Unable to obtain isolated JDBC connection [Подсоединение по адресу localhost:5432 отклонено. Проверьте что хост и порт указаны правильно и что postmaster принимает TCP/IP-подсоединения.] [n/a]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:80)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:101)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:51)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:366)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:44)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:251)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:203)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1392)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.populateSessionFactoryBuilder(EntityManagerFactoryBuilderImpl.java:1472)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1454)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.restaurant.app.AppApplication.main(AppApplication.java:10)
+Caused by: org.postgresql.util.PSQLException: Подсоединение по адресу localhost:5432 отклонено. Проверьте что хост и порт указаны правильно и что postmaster принимает TCP/IP-подсоединения.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:373)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:57)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:290)
+	at org.postgresql.Driver.makeConnection(Driver.java:448)
+	at org.postgresql.Driver.connect(Driver.java:298)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:97)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111)
+	at org.hibernate.engine.jdbc.connections.internal.DataSourceConnectionProvider.getConnection(DataSourceConnectionProvider.java:137)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:508)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcIsolationDelegate.delegateWork(JdbcIsolationDelegate.java:48)
+	... 37 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: getsockopt
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:549)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:760)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:261)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:122)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:146)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:289)
+	... 51 common frames omitted
+2026-03-23 17:33:33.995 ERROR [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+2026-03-23 17:33:33.996 WARN  [main] o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+2026-03-23 17:33:33.998 INFO  [main] o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2026-03-23 17:33:34.010 INFO  [main] o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-03-23 17:33:34.023 ERROR [main] o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.restaurant.app.AppApplication.main(AppApplication.java:10)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment] due to: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:273)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:235)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:212)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:44)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:251)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:203)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:170)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1392)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.populateSessionFactoryBuilder(EntityManagerFactoryBuilderImpl.java:1472)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1454)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813)
+	... 15 common frames omitted
+Caused by: org.hibernate.HibernateException: Unable to determine Dialect without JDBC metadata (please set 'jakarta.persistence.jdbc.url' for common cases or 'hibernate.dialect' when a custom Dialect implementation must be provided)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:190)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:86)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentWithDefaults(JdbcEnvironmentInitiator.java:200)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironmentUsingJdbcMetadata(JdbcEnvironmentInitiator.java:452)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.getJdbcEnvironment(JdbcEnvironmentInitiator.java:143)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:120)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:80)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:133)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:260)
+	... 31 common frames omitted

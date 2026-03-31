@@ -2,6 +2,7 @@ package com.restaurant.app.repository;
 
 import com.restaurant.app.domain.model.Dish;
 import com.restaurant.app.domain.model.Restaurant;
+import com.restaurant.app.domain.dto.RestaurantSearchResultDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ class RestaurantRepositoryTest {
                 dish("Sushi Set", "18.00")
         );
 
-        Page<Restaurant> result = restaurantRepository.searchByDishFiltersJpql(
+        Page<RestaurantSearchResultDto> result = restaurantRepository.searchByDishFiltersJpql(
                 "moscow",
                 "italian",
                 "%pasta%",
@@ -60,7 +61,7 @@ class RestaurantRepositoryTest {
 
         assertThat(result.getTotalElements()).isEqualTo(1);
         assertThat(result.getContent())
-                .extracting(Restaurant::getName)
+                .extracting(RestaurantSearchResultDto::getName)
                 .containsExactly("Roma");
     }
 
@@ -79,7 +80,7 @@ class RestaurantRepositoryTest {
                 dish("Cheeseburger", "14.00")
         );
 
-        Page<Restaurant> result = restaurantRepository.searchByDishFiltersNative(
+        Page<RestaurantSearchResultDto> result = restaurantRepository.searchByDishFiltersNative(
                 "moscow",
                 null,
                 "%burger%",
@@ -90,7 +91,7 @@ class RestaurantRepositoryTest {
 
         assertThat(result.getTotalElements()).isEqualTo(1);
         assertThat(result.getContent())
-                .extracting(Restaurant::getName)
+                .extracting(RestaurantSearchResultDto::getName)
                 .containsExactly("Burger House");
     }
 
@@ -109,7 +110,7 @@ class RestaurantRepositoryTest {
                 dish("Cream Pasta", "24.00")
         );
 
-        Page<Restaurant> result = restaurantRepository.searchByDishFiltersNative(
+        Page<RestaurantSearchResultDto> result = restaurantRepository.searchByDishFiltersNative(
                 "moscow",
                 "italian",
                 "%pasta%",
@@ -119,11 +120,11 @@ class RestaurantRepositoryTest {
         );
 
         assertThat(result.getContent())
-                .extracting(Restaurant::getName)
+                .extracting(RestaurantSearchResultDto::getName)
                 .containsExactly("Basilico", "Roma");
     }
 
-    private void createRestaurant(String name, String city, String cuisineType, Dish... dishes) {
+    private Restaurant createRestaurant(String name, String city, String cuisineType, Dish... dishes) {
         Restaurant restaurant = Restaurant.builder()
                 .name(name)
                 .city(city)
@@ -132,7 +133,7 @@ class RestaurantRepositoryTest {
         for (Dish dish : dishes) {
             restaurant.addDish(dish);
         }
-        restaurantRepository.saveAndFlush(restaurant);
+        return restaurantRepository.saveAndFlush(restaurant);
     }
 
     private Dish dish(String name, String price) {

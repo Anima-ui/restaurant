@@ -1,15 +1,27 @@
 package com.restaurant.app.sevice.impl;
 
+import com.restaurant.app.domain.dto.CustomerBulkCreateRequest;
+import com.restaurant.app.domain.dto.CustomerBulkResult;
+import com.restaurant.app.domain.dto.CustomerCreateRequest;
+import com.restaurant.app.domain.dto.CustomerDto;
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.TransactionDemoResult;
+import com.restaurant.app.domain.model.Customer;
 import com.restaurant.app.domain.model.Restaurant;
 import com.restaurant.app.domain.model.RestaurantTable;
 import com.restaurant.app.exception.ConflictOperationException;
+import com.restaurant.app.repository.CustomerRepository;
 import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.repository.RestaurantTableRepository;
 import com.restaurant.app.sevice.TransactionDemoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TransactionDemoServiceImpl implements TransactionDemoService {
@@ -18,10 +30,14 @@ public class TransactionDemoServiceImpl implements TransactionDemoService {
 
     private final RestaurantTableRepository tableRepository;
 
+    private final CustomerRepository customerRepository;
+
     public TransactionDemoServiceImpl(RestaurantRepository restaurantRepository,
-                                      RestaurantTableRepository tableRepository) {
+                                      RestaurantTableRepository tableRepository,
+                                      CustomerRepository customerRepository) {
         this.restaurantRepository = restaurantRepository;
         this.tableRepository = tableRepository;
+        this.customerRepository = customerRepository;
     }
 
     public TransactionDemoResult savePartiallyWithoutTransaction(RestaurantCreateRequest request) {
@@ -132,6 +148,88 @@ public class TransactionDemoServiceImpl implements TransactionDemoService {
                 .restaurantsInDb(restaurantRepository.count())
                 .tablesInDb(tableRepository.count())
                 .note(note)
+                .build();
+    }
+
+    public CustomerBulkResult bulkCreateCustomersWithoutTransaction(CustomerBulkCreateRequest request) {
+        List<CustomerCreateRequest> customers = getCustomersFromBulkRequest(request);
+        List<CustomerDto> savedCustomers = new ArrayList<>();
+        Set<String> processedPhones = new LinkedHashSet<>();
+
+        try {
+            for (CustomerCreateRequest customerRequest : customers) {
+                if (!processedPhones.add(customerRequest.getPhone())
+                        || customerRepository.findByPhone(customerRequest.getPhone()).isPresent()) {
+                    throw new ConflictOperationException(
+                            "Bulk demo conflict for phone=" + customerRequest.getPhone()
+                    );
+                }
+                savedCustomers.add(saveCustomer(customerRequest));
+            }
+        } catch (RuntimeException exception) {
+            return CustomerBulkResult.builder()
+                    .scenario("CUSTOMER_BULK_WITHOUT_TX")
+                    .requestedCount(customers.size())
+                    .savedCount(savedCustomers.size())
+                    .customersInDb(customerRepository.count())
+                    .savedCustomers(savedCustomers)
+                    .note("Exception happened, already saved customers remained in DB without transaction")
+                    .build();
+        }
+
+        return CustomerBulkResult.builder()
+                .scenario("CUSTOMER_BULK_WITHOUT_TX")
+                .requestedCount(customers.size())
+                .savedCount(savedCustomers.size())
+                .customersInDb(customerRepository.count())
+                .savedCustomers(savedCustomers)
+                .note("Bulk demo completed without exception")
+                .build();
+    }
+
+    @Transactional
+    public CustomerBulkResult bulkCreateCustomersWithTransaction(CustomerBulkCreateRequest request) {
+        List<CustomerCreateRequest> customers = getCustomersFromBulkRequest(request);
+        Set<String> processedPhones = new LinkedHashSet<>();
+
+        customers.forEach(customerRequest -> {
+            if (!processedPhones.add(customerRequest.getPhone())
+                    || customerRepository.findByPhone(customerRequest.getPhone()).isPresent()) {
+                throw new ConflictOperationException(
+                        "Bulk demo conflict for phone=" + customerRequest.getPhone()
+                );
+            }
+            saveCustomer(customerRequest);
+        });
+
+        return CustomerBulkResult.builder()
+                .scenario("CUSTOMER_BULK_WITH_TX")
+                .requestedCount(customers.size())
+                .savedCount(customers.size())
+                .customersInDb(customerRepository.count())
+                .note("Bulk demo completed in transaction")
+                .build();
+    }
+
+    private List<CustomerCreateRequest> getCustomersFromBulkRequest(CustomerBulkCreateRequest request) {
+        return Optional
+                .ofNullable(request.getCustomers())
+                .filter(customers -> !customers.isEmpty())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Customer bulk request must contain at least one item"
+                ));
+    }
+
+    private CustomerDto saveCustomer(CustomerCreateRequest request) {
+        Customer savedCustomer = customerRepository.save(Customer.builder()
+                .fullName(request.getFullName())
+                .phone(request.getPhone())
+                .build());
+
+        return CustomerDto.builder()
+                .id(savedCustomer.getId())
+                .fullName(savedCustomer.getFullName())
+                .phone(savedCustomer.getPhone())
                 .build();
     }
 }

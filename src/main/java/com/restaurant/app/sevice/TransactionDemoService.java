@@ -1,5 +1,7 @@
 package com.restaurant.app.sevice;
 
+import com.restaurant.app.domain.dto.CustomerBulkCreateRequest;
+import com.restaurant.app.domain.dto.CustomerBulkResult;
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.TransactionDemoResult;
 
@@ -16,4 +18,8 @@ public interface TransactionDemoService {
     TransactionDemoResult saveRestaurantAndThrowException(RestaurantCreateRequest request);
 
     TransactionDemoResult saveRestaurantAndThrowExceptionWithTransactional(RestaurantCreateRequest request);
+
+    CustomerBulkResult bulkCreateCustomersWithoutTransaction(CustomerBulkCreateRequest request);
+
+    CustomerBulkResult bulkCreateCustomersWithTransaction(CustomerBulkCreateRequest request);
 }

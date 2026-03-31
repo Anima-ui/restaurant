@@ -3,6 +3,7 @@ package com.restaurant.app.controller.restaurant;
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.RestaurantDto;
 import com.restaurant.app.domain.dto.RestaurantSearchRequest;
+import com.restaurant.app.domain.dto.RestaurantSearchResultDto;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -66,15 +67,17 @@ public class RestaurantController implements RestaurantAPI {
 
     @GetMapping("/search/jpql")
     @Operation(summary = "Search restaurants with JPQL and Pageable")
-    public ResponseEntity<Page<RestaurantDto>> searchByDishFiltersJpql(@Valid RestaurantSearchRequest request,
-                                                                       Pageable pageable) {
+    public ResponseEntity<Page<RestaurantSearchResultDto>> searchByDishFiltersJpql(
+            @Valid RestaurantSearchRequest request,
+            Pageable pageable) {
         return ResponseEntity.ok(restaurantServiceImpl.searchByDishFiltersJpql(request, pageable));
     }
 
     @GetMapping("/search/native")
     @Operation(summary = "Search restaurants with native SQL and Pageable")
-    public ResponseEntity<Page<RestaurantDto>> searchByDishFiltersNative(@Valid RestaurantSearchRequest request,
-                                                                         Pageable pageable) {
+    public ResponseEntity<Page<RestaurantSearchResultDto>> searchByDishFiltersNative(
+            @Valid RestaurantSearchRequest request,
+            Pageable pageable) {
         return ResponseEntity.ok(restaurantServiceImpl.searchByDishFiltersNative(request, pageable));
     }
 

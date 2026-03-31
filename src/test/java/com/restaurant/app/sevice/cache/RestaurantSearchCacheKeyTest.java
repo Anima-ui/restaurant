@@ -1,0 +1,59 @@
+package com.restaurant.app.sevice.cache;
+
+import com.restaurant.app.domain.dto.RestaurantSearchRequest;
+import com.restaurant.app.sevice.RestaurantSearchMode;
+import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+class RestaurantSearchCacheKeyTest {
+
+    @Test
+    void ofCreatesEqualKeysAndHashCodeMatches() {
+        RestaurantSearchRequest request = new RestaurantSearchRequest(
+                "Moscow",
+                "Italian",
+                "Pasta",
+                BigDecimal.TEN,
+                new BigDecimal("30")
+        );
+
+        RestaurantSearchCacheKey first = RestaurantSearchCacheKey.of(
+                RestaurantSearchMode.JPQL,
+                request,
+                0,
+                10,
+                "name:ASC"
+        );
+        RestaurantSearchCacheKey second = new RestaurantSearchCacheKey(
+                RestaurantSearchMode.JPQL,
+                "Moscow",
+                "Italian",
+                "Pasta",
+                BigDecimal.TEN,
+                new BigDecimal("30"),
+                0,
+                10,
+                "name:ASC"
+        );
+
+        assertThat(first).isEqualTo(second);
+        assertThat(first).isEqualTo(first);
+        assertThat(first.hashCode()).isEqualTo(second.hashCode());
+        assertThat(first).isNotEqualTo(new Object());
+        assertThat(first).isNotEqualTo(null);
+        assertThat(first).isNotEqualTo(new RestaurantSearchCacheKey(
+                RestaurantSearchMode.NATIVE,
+                "Moscow",
+                "Italian",
+                "Pasta",
+                BigDecimal.TEN,
+                new BigDecimal("30"),
+                0,
+                10,
+                "name:ASC"
+        ));
+    }
+}

@@ -3,6 +3,7 @@ package com.restaurant.app.sevice.impl;
 import com.restaurant.app.domain.dto.RestaurantCreateRequest;
 import com.restaurant.app.domain.dto.RestaurantDto;
 import com.restaurant.app.domain.dto.RestaurantSearchRequest;
+import com.restaurant.app.domain.dto.RestaurantSearchResultDto;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
 import com.restaurant.app.domain.model.Restaurant;
 import com.restaurant.app.exception.ResourceNotFoundException;
@@ -74,12 +75,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Transactional(readOnly = true)
-    public Page<RestaurantDto> searchByDishFiltersJpql(RestaurantSearchRequest request, Pageable pageable) {
-        return searchWithCache(RestaurantSearchMode.JPQL, request, pageable);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<RestaurantDto> searchByDishFiltersNative(RestaurantSearchRequest request, Pageable pageable) {
+    public Page<RestaurantSearchResultDto> searchByDishFiltersNative(RestaurantSearchRequest request,
+                                                                     Pageable pageable) {
         return searchWithCache(RestaurantSearchMode.NATIVE, request, pageable);
     }
 
@@ -138,9 +135,14 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurants.stream().map(mapper::toDto).toList();
     }
 
-    private Page<RestaurantDto> searchWithCache(RestaurantSearchMode mode,
-                                                RestaurantSearchRequest request,
-                                                Pageable pageable) {
+    @Transactional(readOnly = true)
+    public Page<RestaurantSearchResultDto> searchByDishFiltersJpql(RestaurantSearchRequest request, Pageable pageable) {
+        return searchWithCache(RestaurantSearchMode.JPQL, request, pageable);
+    }
+
+    private Page<RestaurantSearchResultDto> searchWithCache(RestaurantSearchMode mode,
+                                                            RestaurantSearchRequest request,
+                                                            Pageable pageable) {
         RestaurantSearchCacheKey key = RestaurantSearchCacheKey.of(
                 mode,
                 request,
@@ -151,16 +153,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         return restaurantSearchCache.get(key)
                 .orElseGet(() -> {
-                    Page<RestaurantDto> result = executeSearch(mode, request, pageable)
-                            .map(mapper::toDto);
+                    Page<RestaurantSearchResultDto> result = executeSearch(mode, request, pageable);
                     restaurantSearchCache.put(key, result);
                     return result;
                 });
     }
 
-    private Page<Restaurant> executeSearch(RestaurantSearchMode mode,
-                                           RestaurantSearchRequest request,
-                                           Pageable pageable) {
+    private Page<RestaurantSearchResultDto> executeSearch(RestaurantSearchMode mode,
+                                                          RestaurantSearchRequest request,
+                                                          Pageable pageable) {
         String city = normalizeForCaseInsensitiveEquals(request.city());
         String cuisineType = normalizeForCaseInsensitiveEquals(request.cuisineType());
         String dishNamePattern = normalizeForContainsSearch(request.dishName());
