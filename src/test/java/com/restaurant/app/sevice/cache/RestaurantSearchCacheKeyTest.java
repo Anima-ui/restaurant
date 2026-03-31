@@ -39,11 +39,12 @@ class RestaurantSearchCacheKeyTest {
                 "name:ASC"
         );
 
-        assertThat(first).isEqualTo(second);
-        assertThat(first).isEqualTo(first);
-        assertThat(first.hashCode()).isEqualTo(second.hashCode());
-        assertThat(first).isNotEqualTo(new Object());
-        assertThat(first).isNotEqualTo(null);
+        assertThat(first)
+                .isEqualTo(second)
+                .isEqualTo(first)
+                .hasSameHashCodeAs(second)
+                .isNotEqualTo(new Object())
+                .isNotEqualTo(null);
         assertThat(first).isNotEqualTo(new RestaurantSearchCacheKey(
                 RestaurantSearchMode.NATIVE,
                 "Moscow",

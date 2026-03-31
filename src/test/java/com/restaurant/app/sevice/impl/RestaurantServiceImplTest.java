@@ -202,9 +202,10 @@ class RestaurantServiceImplTest {
 
     @Test
     void updateThrowsWhenRestaurantIsMissing() {
+        RestaurantUpdateRequest request = RestaurantUpdateRequest.builder().build();
         when(repository.findById(1L)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> restaurantService.update(1L, RestaurantUpdateRequest.builder().build()))
+        assertThatThrownBy(() -> restaurantService.update(1L, request))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("Restaurant with id=1");
     }
