@@ -59,12 +59,6 @@ public class RestaurantController implements RestaurantAPI {
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/detailed")
-    @Operation(summary = "Get detailed restaurants by city")
-    public ResponseEntity<List<RestaurantDto>> getDetailedByCity(@RequestParam @NotBlank String city) {
-        return ResponseEntity.ok(restaurantServiceImpl.getDetailedByCity(city));
-    }
-
     @GetMapping("/search/jpql")
     @Operation(summary = "Search restaurants with JPQL and Pageable")
     public ResponseEntity<Page<RestaurantSearchResultDto>> searchByDishFiltersJpql(

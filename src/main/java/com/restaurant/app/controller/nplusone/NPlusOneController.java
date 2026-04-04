@@ -34,8 +34,4 @@ public class NPlusOneController {
         return ResponseEntity.ok(restaurantService.findAllTablesWithBookingsNPlusProblem());
     }
 
-    @GetMapping("/nested-optimized")
-    public ResponseEntity<List<RestaurantDto>> nestedNPlusOptimized() {
-        return ResponseEntity.ok(restaurantService.findAllTablesWithBookingsOptimized());
-    }
 }

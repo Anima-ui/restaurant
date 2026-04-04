@@ -1,0 +1,940 @@
+2026-03-31 19:56:35.393 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [moscow]
+2026-03-31 19:56:35.405 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [moscow]
+2026-03-31 19:56:35.405 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [italian]
+2026-03-31 19:56:35.405 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [italian]
+2026-03-31 19:56:35.406 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (5:VARCHAR) <- [%pasta%]
+2026-03-31 19:56:35.406 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [%pasta%]
+2026-03-31 19:56:35.406 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [30.00]
+2026-03-31 19:56:35.406 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [30.00]
+2026-03-31 19:56:35.407 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [45.00]
+2026-03-31 19:56:35.407 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [45.00]
+2026-03-31 19:56:35.407 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (11:INTEGER) <- [10]
+2026-03-31 19:56:35.530 DEBUG [main] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-03-31 19:56:35.533 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:56:35.533 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:56:35.534 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Italian]
+2026-03-31 19:56:35.534 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Roma]
+2026-03-31 19:56:35.535 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:56:35.535 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Truffle Pasta]
+2026-03-31 19:56:35.535 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [39.90]
+2026-03-31 19:56:35.536 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [3]
+2026-03-31 19:56:35.538 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:56:35.538 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:56:35.538 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Italian]
+2026-03-31 19:56:35.538 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Basilico]
+2026-03-31 19:56:35.540 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:56:35.540 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Cream Pasta]
+2026-03-31 19:56:35.540 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [24.00]
+2026-03-31 19:56:35.540 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [4]
+2026-03-31 19:56:35.552 DEBUG [main] o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+2026-03-31 19:56:35.553 DEBUG [main] o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT filtered.id, filtered.name, filtered.city, filtered.cuisine_type
+FROM (
+    SELECT r.id, r.name, r.city, r.cuisine_type
+    FROM restaurants r
+    JOIN dishes d ON d.restaurant_id = r.id
+    WHERE (? IS NULL OR LOWER(r.city) = ?)
+      AND (? IS NULL OR LOWER(r.cuisine_type) = ?)
+      AND (? IS NULL OR LOWER(d.name) LIKE ?)
+      AND (? IS NULL OR d.price >= ?)
+      AND (? IS NULL OR d.price <= ?)
+    GROUP BY r.id, r.name, r.city, r.cuisine_type
+) filtered
+ ORDER BY filtered.name ASC LIMIT ? OFFSET ?]
+2026-03-31 19:56:35.584 DEBUG [main] o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+2026-03-31 19:56:35.584 DEBUG [main] o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT COUNT(DISTINCT r.id)
+FROM restaurants r
+JOIN dishes d ON d.restaurant_id = r.id
+WHERE (? IS NULL OR LOWER(r.city) = ?)
+  AND (? IS NULL OR LOWER(r.cuisine_type) = ?)
+  AND (? IS NULL OR LOWER(d.name) LIKE ?)
+  AND (? IS NULL OR d.price >= ?)
+  AND (? IS NULL OR d.price <= ?)
+]
+2026-03-31 19:56:35.597 DEBUG [main] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-03-31 19:56:35.599 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:56:35.599 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:56:35.599 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Italian]
+2026-03-31 19:56:35.599 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Roma]
+2026-03-31 19:56:35.600 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:56:35.601 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Truffle Pasta]
+2026-03-31 19:56:35.601 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [39.90]
+2026-03-31 19:56:35.601 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [5]
+2026-03-31 19:56:35.603 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:56:35.603 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:56:35.603 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [American]
+2026-03-31 19:56:35.603 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Burger House]
+2026-03-31 19:56:35.604 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:56:35.604 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Cheeseburger]
+2026-03-31 19:56:35.604 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [14.00]
+2026-03-31 19:56:35.604 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [6]
+2026-03-31 19:56:35.606 DEBUG [main] o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+2026-03-31 19:56:35.606 DEBUG [main] o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT filtered.id, filtered.name, filtered.city, filtered.cuisine_type
+FROM (
+    SELECT r.id, r.name, r.city, r.cuisine_type
+    FROM restaurants r
+    JOIN dishes d ON d.restaurant_id = r.id
+    WHERE (? IS NULL OR LOWER(r.city) = ?)
+      AND (? IS NULL OR LOWER(r.cuisine_type) = ?)
+      AND (? IS NULL OR LOWER(d.name) LIKE ?)
+      AND (? IS NULL OR d.price >= ?)
+      AND (? IS NULL OR d.price <= ?)
+    GROUP BY r.id, r.name, r.city, r.cuisine_type
+) filtered
+ ORDER BY filtered.id ASC LIMIT ? OFFSET ?]
+2026-03-31 19:56:35.610 DEBUG [main] o.s.jdbc.core.JdbcTemplate - Executing prepared SQL query
+2026-03-31 19:56:35.610 DEBUG [main] o.s.jdbc.core.JdbcTemplate - Executing prepared SQL statement [SELECT COUNT(DISTINCT r.id)
+FROM restaurants r
+JOIN dishes d ON d.restaurant_id = r.id
+WHERE (? IS NULL OR LOWER(r.city) = ?)
+  AND (? IS NULL OR LOWER(r.cuisine_type) = ?)
+  AND (? IS NULL OR LOWER(d.name) LIKE ?)
+  AND (? IS NULL OR d.price >= ?)
+  AND (? IS NULL OR d.price <= ?)
+]
+2026-03-31 19:56:37.059 DEBUG [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@74f649a7, started on Tue Mar 31 19:56:22 MSK 2026
+2026-03-31 19:56:37.071 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-31 19:56:37.570 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists amenities cascade 
+2026-03-31 19:56:37.574 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists bookings cascade 
+2026-03-31 19:56:37.576 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists customers cascade 
+2026-03-31 19:56:37.577 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists dishes cascade 
+2026-03-31 19:56:37.578 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurant_amenities cascade 
+2026-03-31 19:56:37.579 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurant_tables cascade 
+2026-03-31 19:56:37.580 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurants cascade 
+2026-03-31 19:56:37.589 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-31 19:56:37.592 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-31 19:56:37.595 DEBUG [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@60486fcc, started on Tue Mar 31 19:56:33 MSK 2026
+2026-03-31 19:56:37.598 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-31 19:56:37.599 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists amenities cascade 
+2026-03-31 19:56:37.600 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists bookings cascade 
+2026-03-31 19:56:37.603 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists customers cascade 
+2026-03-31 19:56:37.604 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists dishes cascade 
+2026-03-31 19:56:37.605 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurant_amenities cascade 
+2026-03-31 19:56:37.608 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurant_tables cascade 
+2026-03-31 19:56:37.609 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurants cascade 
+2026-03-31 19:56:37.611 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2026-03-31 19:56:37.614 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2026-03-31 19:57:06.571 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-03-31 19:57:06.622 INFO  [main] c.restaurant.app.AppApplicationTests - Starting AppApplicationTests using Java 23.0.2 with PID 6160 (started by Colorful in D:\javalabs\app)
+2026-03-31 19:57:06.631 DEBUG [main] c.restaurant.app.AppApplicationTests - Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-03-31 19:57:06.632 INFO  [main] c.restaurant.app.AppApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 19:57:08.151 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-31 19:57:08.257 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 87 ms. Found 5 JPA repository interfaces.
+2026-03-31 19:57:09.236 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-31 19:57:09.346 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-03-31 19:57:10.300 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-31 19:57:10.357 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-31 19:57:10.982 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:restaurant-app user=SA
+2026-03-31 19:57:10.986 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-31 19:57:11.120 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:restaurant-app]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: RESTAURANT-APP/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-31 19:57:12.803 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 19:57:12.837 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists amenities cascade 
+2026-03-31 19:57:12.839 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists bookings cascade 
+2026-03-31 19:57:12.840 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists customers cascade 
+2026-03-31 19:57:12.841 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists dishes cascade 
+2026-03-31 19:57:12.841 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists restaurant_amenities cascade 
+2026-03-31 19:57:12.842 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists restaurant_tables cascade 
+2026-03-31 19:57:12.842 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists restaurants cascade 
+2026-03-31 19:57:12.852 DEBUG [main] org.hibernate.SQL - 
+    create table amenities (
+        id bigint generated by default as identity,
+        name varchar(255),
+        primary key (id)
+    )
+2026-03-31 19:57:12.868 DEBUG [main] org.hibernate.SQL - 
+    create table bookings (
+        booking_time timestamp(6),
+        customer_id bigint not null,
+        id bigint generated by default as identity,
+        table_id bigint not null,
+        status enum ('CANCELED','CONFIRMED','CREATED'),
+        primary key (id)
+    )
+2026-03-31 19:57:12.869 DEBUG [main] org.hibernate.SQL - 
+    create table customers (
+        id bigint generated by default as identity,
+        full_name varchar(255),
+        phone varchar(255),
+        primary key (id)
+    )
+2026-03-31 19:57:12.871 DEBUG [main] org.hibernate.SQL - 
+    create table dishes (
+        price numeric(38,2),
+        id bigint generated by default as identity,
+        restaurant_id bigint not null,
+        name varchar(255),
+        primary key (id)
+    )
+2026-03-31 19:57:12.872 DEBUG [main] org.hibernate.SQL - 
+    create table restaurant_amenities (
+        amenity_id bigint not null,
+        restaurant_id bigint not null,
+        primary key (amenity_id, restaurant_id)
+    )
+2026-03-31 19:57:12.875 DEBUG [main] org.hibernate.SQL - 
+    create table restaurant_tables (
+        seats integer,
+        table_number integer,
+        id bigint generated by default as identity,
+        restaurant_id bigint not null,
+        primary key (id)
+    )
+2026-03-31 19:57:12.877 DEBUG [main] org.hibernate.SQL - 
+    create table restaurants (
+        id bigint generated by default as identity,
+        city varchar(255),
+        cuisine_type varchar(255),
+        name varchar(255),
+        primary key (id)
+    )
+2026-03-31 19:57:12.878 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists bookings 
+       add constraint FKbvfibgflhsb0g2hnjauiv5khs 
+       foreign key (customer_id) 
+       references customers
+2026-03-31 19:57:12.907 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists bookings 
+       add constraint FKboqshdprbnm2ri6xqi0inmm6y 
+       foreign key (table_id) 
+       references restaurant_tables
+2026-03-31 19:57:12.911 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists dishes 
+       add constraint FKpslsa9mci7gsfhwukb3mx7s6n 
+       foreign key (restaurant_id) 
+       references restaurants
+2026-03-31 19:57:12.913 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists restaurant_amenities 
+       add constraint FKnlrhtkan6q3wjev8yttbcdoxh 
+       foreign key (amenity_id) 
+       references amenities
+2026-03-31 19:57:12.915 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists restaurant_amenities 
+       add constraint FKii1dnuqfv4x35573u0whb3j9u 
+       foreign key (restaurant_id) 
+       references restaurants
+2026-03-31 19:57:12.917 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists restaurant_tables 
+       add constraint FK1xp9xi4k8gkpatx0tfw7hjix3 
+       foreign key (restaurant_id) 
+       references restaurants
+2026-03-31 19:57:12.921 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-31 19:57:13.177 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-31 19:57:16.455 INFO  [main] c.restaurant.app.AppApplicationTests - Started AppApplicationTests in 10.578 seconds (process running for 14.501)
+2026-03-31 19:57:16.907 INFO  [main] o.s.t.c.s.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.restaurant.app.repository.RestaurantRepositoryTest]: RestaurantRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-31 19:57:16.927 INFO  [main] o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.restaurant.app.AppApplication for test class com.restaurant.app.repository.RestaurantRepositoryTest
+2026-03-31 19:57:16.995 INFO  [main] c.r.a.r.RestaurantRepositoryTest - Starting RestaurantRepositoryTest using Java 23.0.2 with PID 6160 (started by Colorful in D:\javalabs\app)
+2026-03-31 19:57:16.995 DEBUG [main] c.r.a.r.RestaurantRepositoryTest - Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-03-31 19:57:16.995 INFO  [main] c.r.a.r.RestaurantRepositoryTest - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 19:57:17.180 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-31 19:57:17.207 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23 ms. Found 5 JPA repository interfaces.
+2026-03-31 19:57:17.333 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-31 19:57:17.359 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-31 19:57:17.360 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2026-03-31 19:57:17.363 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:restaurant-repository user=SA
+2026-03-31 19:57:17.363 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2026-03-31 19:57:17.364 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:restaurant-repository]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: RESTAURANT-REPOSITORY/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-31 19:57:17.439 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 19:57:17.440 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists amenities cascade 
+2026-03-31 19:57:17.441 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists bookings cascade 
+2026-03-31 19:57:17.441 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists customers cascade 
+2026-03-31 19:57:17.441 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists dishes cascade 
+2026-03-31 19:57:17.441 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists restaurant_amenities cascade 
+2026-03-31 19:57:17.442 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists restaurant_tables cascade 
+2026-03-31 19:57:17.442 DEBUG [main] org.hibernate.SQL - 
+    drop table if exists restaurants cascade 
+2026-03-31 19:57:17.442 DEBUG [main] org.hibernate.SQL - 
+    create table amenities (
+        id bigint generated by default as identity,
+        name varchar(255),
+        primary key (id)
+    )
+2026-03-31 19:57:17.444 DEBUG [main] org.hibernate.SQL - 
+    create table bookings (
+        booking_time timestamp(6),
+        customer_id bigint not null,
+        id bigint generated by default as identity,
+        table_id bigint not null,
+        status enum ('CANCELED','CONFIRMED','CREATED'),
+        primary key (id)
+    )
+2026-03-31 19:57:17.445 DEBUG [main] org.hibernate.SQL - 
+    create table customers (
+        id bigint generated by default as identity,
+        full_name varchar(255),
+        phone varchar(255),
+        primary key (id)
+    )
+2026-03-31 19:57:17.446 DEBUG [main] org.hibernate.SQL - 
+    create table dishes (
+        price numeric(38,2),
+        id bigint generated by default as identity,
+        restaurant_id bigint not null,
+        name varchar(255),
+        primary key (id)
+    )
+2026-03-31 19:57:17.448 DEBUG [main] org.hibernate.SQL - 
+    create table restaurant_amenities (
+        amenity_id bigint not null,
+        restaurant_id bigint not null,
+        primary key (amenity_id, restaurant_id)
+    )
+2026-03-31 19:57:17.449 DEBUG [main] org.hibernate.SQL - 
+    create table restaurant_tables (
+        seats integer,
+        table_number integer,
+        id bigint generated by default as identity,
+        restaurant_id bigint not null,
+        primary key (id)
+    )
+2026-03-31 19:57:17.450 DEBUG [main] org.hibernate.SQL - 
+    create table restaurants (
+        id bigint generated by default as identity,
+        city varchar(255),
+        cuisine_type varchar(255),
+        name varchar(255),
+        primary key (id)
+    )
+2026-03-31 19:57:17.451 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists bookings 
+       add constraint FKbvfibgflhsb0g2hnjauiv5khs 
+       foreign key (customer_id) 
+       references customers
+2026-03-31 19:57:17.453 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists bookings 
+       add constraint FKboqshdprbnm2ri6xqi0inmm6y 
+       foreign key (table_id) 
+       references restaurant_tables
+2026-03-31 19:57:17.454 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists dishes 
+       add constraint FKpslsa9mci7gsfhwukb3mx7s6n 
+       foreign key (restaurant_id) 
+       references restaurants
+2026-03-31 19:57:17.456 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists restaurant_amenities 
+       add constraint FKnlrhtkan6q3wjev8yttbcdoxh 
+       foreign key (amenity_id) 
+       references amenities
+2026-03-31 19:57:17.458 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists restaurant_amenities 
+       add constraint FKii1dnuqfv4x35573u0whb3j9u 
+       foreign key (restaurant_id) 
+       references restaurants
+2026-03-31 19:57:17.460 DEBUG [main] org.hibernate.SQL - 
+    alter table if exists restaurant_tables 
+       add constraint FK1xp9xi4k8gkpatx0tfw7hjix3 
+       foreign key (restaurant_id) 
+       references restaurants
+2026-03-31 19:57:17.462 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-31 19:57:17.991 INFO  [main] c.r.a.r.RestaurantRepositoryTest - Started RestaurantRepositoryTest in 1.047 seconds (process running for 16.036)
+2026-03-31 19:57:18.113 DEBUG [main] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-03-31 19:57:18.242 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.247 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:57:18.247 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Italian]
+2026-03-31 19:57:18.247 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Roma]
+2026-03-31 19:57:18.270 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.270 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Truffle Pasta]
+2026-03-31 19:57:18.271 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [39.90]
+2026-03-31 19:57:18.272 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [1]
+2026-03-31 19:57:18.273 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.274 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Risotto]
+2026-03-31 19:57:18.274 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [22.50]
+2026-03-31 19:57:18.274 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [1]
+2026-03-31 19:57:18.296 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.297 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:57:18.297 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Japanese]
+2026-03-31 19:57:18.298 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Tokyo]
+2026-03-31 19:57:18.299 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.299 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Sushi Set]
+2026-03-31 19:57:18.299 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [18.00]
+2026-03-31 19:57:18.299 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [2]
+2026-03-31 19:57:18.353 DEBUG [main] org.hibernate.SQL - 
+    select
+        distinct r1_0.id,
+        r1_0.name,
+        r1_0.city,
+        r1_0.cuisine_type 
+    from
+        restaurants r1_0 
+    where
+        (
+            ? is null 
+            or lower(r1_0.city)=?
+        ) 
+        and (
+            ? is null 
+            or lower(r1_0.cuisine_type)=?
+        ) 
+        and (
+            ? is null 
+            or exists(select
+                1 from dishes d1_0 
+            where
+                d1_0.restaurant_id=r1_0.id 
+                and lower(d1_0.name) like ? escape '' 
+                and (? is null 
+                or d1_0.price>=?) 
+                and (? is null 
+                or d1_0.price<=?))
+        ) 
+    fetch
+        first ? rows only
+2026-03-31 19:57:18.357 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [moscow]
+2026-03-31 19:57:18.358 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [moscow]
+2026-03-31 19:57:18.358 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [italian]
+2026-03-31 19:57:18.358 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [italian]
+2026-03-31 19:57:18.358 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (5:VARCHAR) <- [%pasta%]
+2026-03-31 19:57:18.358 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [%pasta%]
+2026-03-31 19:57:18.358 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [30.00]
+2026-03-31 19:57:18.358 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [30.00]
+2026-03-31 19:57:18.359 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [45.00]
+2026-03-31 19:57:18.359 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [45.00]
+2026-03-31 19:57:18.359 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (11:INTEGER) <- [10]
+2026-03-31 19:57:18.475 DEBUG [main] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-03-31 19:57:18.476 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.477 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:57:18.477 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Italian]
+2026-03-31 19:57:18.477 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Roma]
+2026-03-31 19:57:18.479 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.479 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Truffle Pasta]
+2026-03-31 19:57:18.479 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [39.90]
+2026-03-31 19:57:18.479 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [3]
+2026-03-31 19:57:18.482 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.482 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:57:18.482 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Italian]
+2026-03-31 19:57:18.483 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Basilico]
+2026-03-31 19:57:18.483 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.484 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Cream Pasta]
+2026-03-31 19:57:18.484 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [24.00]
+2026-03-31 19:57:18.484 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [4]
+2026-03-31 19:57:18.542 DEBUG [main] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-03-31 19:57:18.545 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.545 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:57:18.545 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Italian]
+2026-03-31 19:57:18.545 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Roma]
+2026-03-31 19:57:18.547 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.548 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Truffle Pasta]
+2026-03-31 19:57:18.548 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [39.90]
+2026-03-31 19:57:18.548 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [5]
+2026-03-31 19:57:18.550 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.550 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-03-31 19:57:18.550 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [American]
+2026-03-31 19:57:18.550 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Burger House]
+2026-03-31 19:57:18.551 DEBUG [main] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id, id) 
+    values
+        (?, ?, ?, default)
+2026-03-31 19:57:18.552 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Cheeseburger]
+2026-03-31 19:57:18.552 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [14.00]
+2026-03-31 19:57:18.552 TRACE [main] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [6]
+2026-03-31 19:57:19.555 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-31 19:57:19.821 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists amenities cascade 
+2026-03-31 19:57:19.823 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists bookings cascade 
+2026-03-31 19:57:19.824 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists customers cascade 
+2026-03-31 19:57:19.825 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists dishes cascade 
+2026-03-31 19:57:19.825 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurant_amenities cascade 
+2026-03-31 19:57:19.826 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurant_tables cascade 
+2026-03-31 19:57:19.827 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurants cascade 
+2026-03-31 19:57:19.832 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-31 19:57:19.834 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-31 19:57:19.838 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-31 19:57:19.838 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists amenities cascade 
+2026-03-31 19:57:19.840 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists bookings cascade 
+2026-03-31 19:57:19.842 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists customers cascade 
+2026-03-31 19:57:19.843 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists dishes cascade 
+2026-03-31 19:57:19.844 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurant_amenities cascade 
+2026-03-31 19:57:19.847 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurant_tables cascade 
+2026-03-31 19:57:19.849 DEBUG [SpringApplicationShutdownHook] org.hibernate.SQL - 
+    drop table if exists restaurants cascade 
+2026-03-31 19:57:19.851 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2026-03-31 19:57:19.856 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2026-03-31 21:33:55.243 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-03-31 21:33:55.317 INFO  [main] com.restaurant.app.AppApplication - Starting AppApplication using Java 23.0.2 with PID 19068 (D:\javalabs\app\target\classes started by Colorful in D:\javalabs\app)
+2026-03-31 21:33:55.318 DEBUG [main] com.restaurant.app.AppApplication - Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-03-31 21:33:55.319 INFO  [main] com.restaurant.app.AppApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 21:33:56.477 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-31 21:33:56.567 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 77 ms. Found 5 JPA repository interfaces.
+2026-03-31 21:33:57.464 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-03-31 21:33:57.479 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-31 21:33:57.482 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-31 21:33:57.483 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-03-31 21:33:57.548 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2151 ms
+2026-03-31 21:33:57.787 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-31 21:33:57.898 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-03-31 21:33:58.473 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-31 21:33:58.525 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-31 21:33:58.690 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@23d23d98
+2026-03-31 21:33:58.693 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-31 21:33:58.830 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/restaurant_lab]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.13
+	Default catalog/schema: restaurant_lab/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-31 21:34:00.050 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 21:34:00.153 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-31 21:34:00.305 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-31 21:34:02.519 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-03-31 21:34:02.534 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-03-31 21:34:02.539 INFO  [main] com.restaurant.app.AppApplication - Started AppApplication in 8.107 seconds (process running for 9.03)
+2026-03-31 21:34:49.664 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-31 21:34:49.664 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-31 21:34:49.667 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-03-31 21:34:50.103 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone in (?, ?)
+2026-03-31 21:34:50.105 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001122]
+2026-03-31 21:34:50.105 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001123]
+2026-03-31 21:34:50.175 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:34:50.177 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-03-31 21:34:50.178 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001122]
+2026-03-31 21:34:50.197 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:34:50.198 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-03-31 21:34:50.198 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001123]
+2026-03-31 21:34:50.225 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        customers c1_0
+2026-03-31 21:34:50.231 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.createBulk(..) in 238 ms
+2026-03-31 21:38:58.821 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-03-31 21:38:58.823 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001130]
+2026-03-31 21:38:58.828 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:38:58.828 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-03-31 21:38:58.828 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001130]
+2026-03-31 21:38:58.839 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        customers c1_0
+2026-03-31 21:38:58.845 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed TransactionDemoServiceImpl.bulkCreateCustomersWithoutTransaction(..) in 118 ms
+2026-03-31 21:42:07.829 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-03-31 21:42:07.831 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001122]
+2026-03-31 21:42:07.843 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        customers c1_0
+2026-03-31 21:42:07.849 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed TransactionDemoServiceImpl.bulkCreateCustomersWithoutTransaction(..) in 21 ms
+2026-03-31 21:42:55.352 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-03-31 21:42:55.352 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001140]
+2026-03-31 21:42:55.356 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:42:55.356 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-03-31 21:42:55.356 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001140]
+2026-03-31 21:42:55.359 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed TransactionDemoServiceImpl.bulkCreateCustomersWithTransaction(..) in 8 ms
+2026-03-31 21:42:55.376 WARN  [http-nio-8080-exec-9] c.r.a.e.GlobalExceptionHandler - Conflict for request POST /api/v1/transactions/customers/bulk-with-tx: Bulk demo conflict for phone=+79990001140
+2026-03-31 21:43:51.255 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-03-31 21:43:51.255 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001140]
+2026-03-31 21:43:51.258 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:43:51.258 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-03-31 21:43:51.259 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001140]
+2026-03-31 21:43:51.261 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed TransactionDemoServiceImpl.bulkCreateCustomersWithTransaction(..) in 6 ms
+2026-03-31 21:43:51.263 WARN  [http-nio-8080-exec-5] c.r.a.e.GlobalExceptionHandler - Conflict for request POST /api/v1/transactions/customers/bulk-with-tx: Bulk demo conflict for phone=+79990001140
+2026-03-31 21:43:57.469 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-03-31 21:43:57.472 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001130]
+2026-03-31 21:43:57.475 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:43:57.475 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-03-31 21:43:57.476 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001130]
+2026-03-31 21:43:57.483 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        customers c1_0
+2026-03-31 21:43:57.487 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed TransactionDemoServiceImpl.bulkCreateCustomersWithoutTransaction(..) in 18 ms
+2026-03-31 21:44:44.177 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone in (?, ?, ?)
+2026-03-31 21:44:44.177 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001122]
+2026-03-31 21:44:44.178 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001123]
+2026-03-31 21:44:44.178 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [+79990001124]
+2026-03-31 21:44:44.183 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:44:44.183 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-03-31 21:44:44.183 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001122]
+2026-03-31 21:44:44.186 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:44:44.187 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-03-31 21:44:44.187 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001123]
+2026-03-31 21:44:44.190 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:44:44.191 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Jhony Dep]
+2026-03-31 21:44:44.191 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001124]
+2026-03-31 21:44:44.195 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        customers c1_0
+2026-03-31 21:44:44.198 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.createBulk(..) in 24 ms
+2026-03-31 21:52:59.199 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-03-31 21:52:59.203 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 26 ms
+2026-03-31 21:54:50.314 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-03-31 21:54:50.316 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001130]
+2026-03-31 21:54:50.318 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-03-31 21:54:50.319 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-03-31 21:54:50.319 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001130]
+2026-03-31 21:54:50.332 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        customers c1_0
+2026-03-31 21:54:50.337 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed TransactionDemoServiceImpl.bulkCreateCustomersWithoutTransaction(..) in 23 ms
+2026-03-31 21:54:54.153 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-03-31 21:54:54.157 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 6 ms
+2026-03-31 21:55:49.860 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-31 21:55:49.870 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-03-31 21:55:49.874 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-31 21:55:49.876 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-31 21:55:49.879 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

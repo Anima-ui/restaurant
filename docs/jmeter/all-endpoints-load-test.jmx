@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="All Project Endpoints Load Test" enabled="true">
+      <stringProp name="TestPlan.comments">JMeter scenario for every project endpoint, including expected-conflict transaction endpoints</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="host" elementType="Argument">
+            <stringProp name="Argument.name">host</stringProp>
+            <stringProp name="Argument.value">localhost</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="port" elementType="Argument">
+            <stringProp name="Argument.name">port</stringProp>
+            <stringProp name="Argument.value">8080</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Positive Endpoints Load" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Defaults" enabled="true">
+          <stringProp name="HTTPSampler.domain">${__P(host,${host})}</stringProp>
+          <stringProp name="HTTPSampler.port">${__P(port,${port})}</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="Cookie Manager" enabled="true"/>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create Main Restaurant" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "name": "Load Restaurant ${__threadNum}-${__RandomString(6,abcdefghijklmnopqrstuvwxyz,)}",
+  "city": "Moscow",
+  "cuisineType": "Italian",
+  "tables": [
+    { "tableNumber": 1, "seats": 2 },
+    { "tableNumber": 2, "seats": 4 }
+  ],
+  "dishes": [
+    { "name": "Pasta Carbonara", "price": 14.00 },
+    { "name": "Truffle Pasta", "price": 29.00 }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/restaurants</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Restaurant ID" enabled="true"><stringProp name="RegexExtractor.useHeaders">false</stringProp><stringProp name="RegexExtractor.refname">restaurantId</stringProp><stringProp name="RegexExtractor.regex">"id"\s*:\s*(\d+)</stringProp><stringProp name="RegexExtractor.template">$1$</stringProp><stringProp name="RegexExtractor.default">1</stringProp><stringProp name="RegexExtractor.match_number">1</stringProp></RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Table ID" enabled="true"><stringProp name="RegexExtractor.useHeaders">false</stringProp><stringProp name="RegexExtractor.refname">tableId</stringProp><stringProp name="RegexExtractor.regex">"tables"\s*:\s*\[\s*\{\s*"id"\s*:\s*(\d+)</stringProp><stringProp name="RegexExtractor.template">$1$</stringProp><stringProp name="RegexExtractor.default">1</stringProp><stringProp name="RegexExtractor.match_number">1</stringProp></RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create Deletable Restaurant" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "name": "Delete Restaurant ${__threadNum}-${__RandomString(6,abcdefghijklmnopqrstuvwxyz,)}",
+  "city": "Moscow",
+  "cuisineType": "Italian",
+  "tables": [
+    { "tableNumber": 11, "seats": 2 }
+  ],
+  "dishes": [
+    { "name": "Delete Pasta", "price": 12.00 }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/restaurants</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Delete Restaurant ID" enabled="true"><stringProp name="RegexExtractor.useHeaders">false</stringProp><stringProp name="RegexExtractor.refname">deleteRestaurantId</stringProp><stringProp name="RegexExtractor.regex">"id"\s*:\s*(\d+)</stringProp><stringProp name="RegexExtractor.template">$1$</stringProp><stringProp name="RegexExtractor.default">1</stringProp><stringProp name="RegexExtractor.match_number">1</stringProp></RegexExtractor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Restaurants All" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/restaurants/all</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Restaurant By ID" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/restaurants/${restaurantId}</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Restaurants By City" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/restaurants?city=Moscow</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Search JPQL" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/restaurants/search/jpql?city=Moscow&amp;dishName=pasta&amp;page=0&amp;size=2&amp;sort=name,asc</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Search Native" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/restaurants/search/native?city=Moscow&amp;dishName=pasta&amp;page=0&amp;size=2&amp;sort=name,asc</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Update Restaurant" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "name": "Updated Restaurant ${__threadNum}-${__RandomString(6,abcdefghijklmnopqrstuvwxyz,)}",
+  "city": "Saint Petersburg",
+  "cuisineType": "Mediterranean"
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/restaurants/${restaurantId}</stringProp>
+          <stringProp name="HTTPSampler.method">PUT</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create Customer" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "fullName": "Load Customer ${__threadNum}",
+  "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}"
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/customers</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree><RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Customer ID" enabled="true"><stringProp name="RegexExtractor.useHeaders">false</stringProp><stringProp name="RegexExtractor.refname">customerId</stringProp><stringProp name="RegexExtractor.regex">"id"\s*:\s*(\d+)</stringProp><stringProp name="RegexExtractor.template">$1$</stringProp><stringProp name="RegexExtractor.default">1</stringProp><stringProp name="RegexExtractor.match_number">1</stringProp></RegexExtractor><hashTree/></hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Customer Bulk" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "customers": [
+    { "fullName": "Bulk User A ${__threadNum}", "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}" },
+    { "fullName": "Bulk User B ${__threadNum}", "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}" }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/customers/bulk</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Async Customer Bulk" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "customers": [
+    { "fullName": "Async User A ${__threadNum}", "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}" },
+    { "fullName": "Async User B ${__threadNum}", "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}" },
+    { "fullName": "Async User C ${__threadNum}", "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}" }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/customers/bulk/async</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree><RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Task ID" enabled="true"><stringProp name="RegexExtractor.useHeaders">false</stringProp><stringProp name="RegexExtractor.refname">taskId</stringProp><stringProp name="RegexExtractor.regex">"taskId"\s*:\s*(\d+)</stringProp><stringProp name="RegexExtractor.template">$1$</stringProp><stringProp name="RegexExtractor.default">1</stringProp><stringProp name="RegexExtractor.match_number">1</stringProp></RegexExtractor><hashTree/></hashTree>
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Wait Before Task Status Poll" enabled="true"><stringProp name="ConstantTimer.delay">1000</stringProp></ConstantTimer>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Async Task Status" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/customers/bulk/tasks/${taskId}</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Customers All" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/customers</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Customer By ID" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/customers/${customerId}</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Create Booking" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "bookingTime": "2099-12-31T19:00:00",
+  "status": "CREATED",
+  "customerId": ${customerId},
+  "tableId": ${tableId}
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/bookings</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree><RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract Booking ID" enabled="true"><stringProp name="RegexExtractor.useHeaders">false</stringProp><stringProp name="RegexExtractor.refname">bookingId</stringProp><stringProp name="RegexExtractor.regex">"id"\s*:\s*(\d+)</stringProp><stringProp name="RegexExtractor.template">$1$</stringProp><stringProp name="RegexExtractor.default">1</stringProp><stringProp name="RegexExtractor.match_number">1</stringProp></RegexExtractor><hashTree/></hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Bookings All" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/bookings</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Booking By ID" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/bookings/${bookingId}</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Booking Status" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "status": "CONFIRMED"
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/bookings/${bookingId}/status</stringProp>
+          <stringProp name="HTTPSampler.method">PUT</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Booking Statuses" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/bookings/statuses</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET NPlusOne Problem" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/nplusone/problem</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET NPlusOne Optimized" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/nplusone/optimized</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Nested NPlusOne Problem" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/nplusone/nested-problem</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Transaction Partial" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "name": "Tx Partial ${__threadNum}-${__RandomString(5,abcdefghijklmnopqrstuvwxyz,)}",
+  "city": "Moscow",
+  "cuisineType": "Italian",
+  "tables": [
+    { "tableNumber": 21, "seats": 2 }
+  ],
+  "dishes": [
+    { "name": "Partial Pasta", "price": 13.00 }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/transactions/partial</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Transaction Cascade" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "name": "Tx Cascade ${__threadNum}-${__RandomString(5,abcdefghijklmnopqrstuvwxyz,)}",
+  "city": "Moscow",
+  "cuisineType": "Italian",
+  "tables": [
+    { "tableNumber": 31, "seats": 2 }
+  ],
+  "dishes": [
+    { "name": "Cascade Pasta", "price": 15.00 }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/transactions/cascade</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Transaction Customers Bulk No TX" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "customers": [
+    { "fullName": "Tx Bulk NoTx A ${__threadNum}", "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}" },
+    { "fullName": "Tx Bulk NoTx B ${__threadNum}", "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}" }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/transactions/customers/bulk-no-tx</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Transaction Customers Bulk With TX" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "customers": [
+    { "fullName": "Tx Bulk Tx A ${__threadNum}", "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}" },
+    { "fullName": "Tx Bulk Tx B ${__threadNum}", "phone": "+79${__threadNum}${__RandomString(8,0123456789,)}" }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp>
+          <stringProp name="HTTPSampler.path">/api/v1/transactions/customers/bulk-with-tx</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Transaction State" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/transactions/state</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Concurrency Unsafe" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/concurrency/race-condition/unsafe?threads=64&amp;incrementsPerThread=1000</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET Concurrency Atomic" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/concurrency/race-condition/atomic?threads=64&amp;incrementsPerThread=1000</stringProp><stringProp name="HTTPSampler.method">GET</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="DELETE Restaurant" enabled="true"><stringProp name="HTTPSampler.path">/api/v1/restaurants/${deleteRestaurantId}</stringProp><stringProp name="HTTPSampler.method">DELETE</stringProp></HTTPSamplerProxy>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Expected 409 Endpoints" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true"><boolProp name="LoopController.continue_forever">false</boolProp><stringProp name="LoopController.loops">1</stringProp></elementProp>
+        <stringProp name="ThreadGroup.num_threads">3</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">3</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Defaults Conflicts" enabled="true"><stringProp name="HTTPSampler.domain">${__P(host,${host})}</stringProp><stringProp name="HTTPSampler.port">${__P(port,${port})}</stringProp><stringProp name="HTTPSampler.protocol">http</stringProp></ConfigTestElement>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager Conflicts" enabled="true"><collectionProp name="HeaderManager.headers"><elementProp name="" elementType="Header"><stringProp name="Header.name">Content-Type</stringProp><stringProp name="Header.value">application/json</stringProp></elementProp></collectionProp></HeaderManager>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Transaction Rollback Expected 409" enabled="true"><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "name": "Tx Rollback ${__threadNum}-${__RandomString(5,abcdefghijklmnopqrstuvwxyz,)}",
+  "city": "Moscow",
+  "cuisineType": "Italian",
+  "tables": [
+    { "tableNumber": 41, "seats": 2 }
+  ],
+  "dishes": [
+    { "name": "Rollback Pasta", "price": 13.00 }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp><stringProp name="HTTPSampler.path">/api/v1/transactions/rollback</stringProp><stringProp name="HTTPSampler.method">POST</stringProp></HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Treat 409 As Success Rollback" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">if (prev.getResponseCode() == '409') {
+    prev.setSuccessful(true)
+    prev.setResponseMessage('Expected 409 Conflict')
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Transaction Exception No TX Expected 409" enabled="true"><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "name": "Tx Exception NoTx ${__threadNum}-${__RandomString(5,abcdefghijklmnopqrstuvwxyz,)}",
+  "city": "Moscow",
+  "cuisineType": "Italian",
+  "tables": [
+    { "tableNumber": 51, "seats": 2 }
+  ],
+  "dishes": [
+    { "name": "NoTx Pasta", "price": 13.00 }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp><stringProp name="HTTPSampler.path">/api/v1/transactions/exception-no-tx</stringProp><stringProp name="HTTPSampler.method">POST</stringProp></HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Treat 409 As Success No TX" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">if (prev.getResponseCode() == '409') {
+    prev.setSuccessful(true)
+    prev.setResponseMessage('Expected 409 Conflict')
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST Transaction Exception With TX Expected 409" enabled="true"><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments"><elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">{
+  "name": "Tx Exception Tx ${__threadNum}-${__RandomString(5,abcdefghijklmnopqrstuvwxyz,)}",
+  "city": "Moscow",
+  "cuisineType": "Italian",
+  "tables": [
+    { "tableNumber": 61, "seats": 2 }
+  ],
+  "dishes": [
+    { "name": "WithTx Pasta", "price": 13.00 }
+  ]
+}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp></collectionProp></elementProp><stringProp name="HTTPSampler.path">/api/v1/transactions/exception-with-tx</stringProp><stringProp name="HTTPSampler.method">POST</stringProp></HTTPSamplerProxy>
+        <hashTree>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Treat 409 As Success With TX" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">if (prev.getResponseCode() == '409') {
+    prev.setSuccessful(true)
+    prev.setResponseMessage('Expected 409 Conflict')
+}</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

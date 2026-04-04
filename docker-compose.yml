@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   postgres:
     image: postgres:16-alpine
@@ -34,6 +32,27 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+
+  jmeter:
+    image: justb4/jmeter:5.5
+    container_name: restaurant-jmeter
+    profiles: ["load-test"]
+    working_dir: /tests
+    volumes:
+      - ./docs/jmeter:/tests
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command:
+      - -n
+      - -t
+      - /tests/all-endpoints-load-test.jmx
+      - -l
+      - /tests/results/all-endpoints-results.jtl
+      - -e
+      - -o
+      - /tests/results/report
+      - -Jhost=host.docker.internal
+      - -Jport=8080
 
 volumes:
   postgres_data:

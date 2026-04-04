@@ -21,3 +21,8 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+app:
+  async:
+    bulk:
+      processing-delay-ms: 6000
+      enforce-min-delay: true

@@ -4,8 +4,11 @@ import com.restaurant.app.domain.dto.CustomerBulkCreateRequest;
 import com.restaurant.app.domain.dto.CustomerBulkResult;
 import com.restaurant.app.domain.dto.CustomerCreateRequest;
 import com.restaurant.app.domain.dto.CustomerDto;
+import com.restaurant.app.domain.dto.AsyncCustomerBulkTaskStatusDto;
+import com.restaurant.app.domain.dto.AsyncTaskStartResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import com.restaurant.app.sevice.AsyncCustomerBulkTaskService;
 import com.restaurant.app.sevice.CustomerService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
@@ -29,8 +32,12 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    public CustomerController(CustomerService customerService) {
+    private final AsyncCustomerBulkTaskService asyncCustomerBulkTaskService;
+
+    public CustomerController(CustomerService customerService,
+                              AsyncCustomerBulkTaskService asyncCustomerBulkTaskService) {
         this.customerService = customerService;
+        this.asyncCustomerBulkTaskService = asyncCustomerBulkTaskService;
     }
 
     @PostMapping
@@ -43,6 +50,19 @@ public class CustomerController {
     @Operation(summary = "Create customers in bulk")
     public ResponseEntity<CustomerBulkResult> createBulk(@Valid @RequestBody CustomerBulkCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createBulk(request));
+    }
+
+    @PostMapping("/bulk/async")
+    @Operation(summary = "Start async bulk customer creation")
+    public ResponseEntity<AsyncTaskStartResponse> createBulkAsync(
+            @Valid @RequestBody CustomerBulkCreateRequest request) {
+        return ResponseEntity.accepted().body(asyncCustomerBulkTaskService.startBulkCreate(request));
+    }
+
+    @GetMapping("/bulk/tasks/{taskId}")
+    @Operation(summary = "Get async bulk customer task status")
+    public ResponseEntity<AsyncCustomerBulkTaskStatusDto> getBulkTaskStatus(@PathVariable @Positive Long taskId) {
+        return ResponseEntity.ok(asyncCustomerBulkTaskService.getTaskStatus(taskId));
     }
 
     @GetMapping

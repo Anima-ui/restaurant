@@ -25,8 +25,6 @@ public interface RestaurantAPI {
 
     ResponseEntity<List<RestaurantDto>> getByCity(@RequestParam @NotBlank String city);
 
-    ResponseEntity<List<RestaurantDto>> getDetailedByCity(@RequestParam @NotBlank String city);
-
     ResponseEntity<Page<RestaurantSearchResultDto>> searchByDishFiltersJpql(@Valid RestaurantSearchRequest request,
                                                                             Pageable pageable);
 
