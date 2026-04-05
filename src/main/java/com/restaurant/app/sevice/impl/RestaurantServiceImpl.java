@@ -5,9 +5,11 @@ import com.restaurant.app.domain.dto.RestaurantDto;
 import com.restaurant.app.domain.dto.RestaurantSearchRequest;
 import com.restaurant.app.domain.dto.RestaurantSearchResultDto;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
+import com.restaurant.app.domain.model.Amenity;
 import com.restaurant.app.domain.model.Restaurant;
 import com.restaurant.app.exception.ResourceNotFoundException;
 import com.restaurant.app.mapper.RestaurantMapper;
+import com.restaurant.app.repository.AmenityRepository;
 import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.sevice.RestaurantSearchMode;
 import com.restaurant.app.sevice.RestaurantService;
@@ -20,6 +22,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -32,14 +38,18 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantMapper mapper;
 
+    private final AmenityRepository amenityRepository;
+
     private final RestaurantSearchCache restaurantSearchCache;
 
     @Autowired
     public RestaurantServiceImpl(RestaurantRepository repository,
                                  RestaurantMapper mapper,
+                                 AmenityRepository amenityRepository,
                                  RestaurantSearchCache restaurantSearchCache) {
         this.repository = repository;
         this.mapper = mapper;
+        this.amenityRepository = amenityRepository;
         this.restaurantSearchCache = restaurantSearchCache;
     }
 
@@ -82,7 +92,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Transactional
     public RestaurantDto create(RestaurantCreateRequest dto) {
-        Restaurant saved = repository.save(mapper.toEntity(dto));
+        Restaurant restaurant = mapper.toEntity(dto);
+        restaurant.setAmenities(resolveAmenities(dto.getAmenities()));
+        Restaurant saved = repository.save(restaurant);
         restaurantSearchCache.clear();
         return mapper.toDto(saved);
     }
@@ -94,6 +106,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurant.setName(dto.getName());
         restaurant.setCity(dto.getCity());
         restaurant.setCuisineType(dto.getCuisineType());
+        restaurant.setAmenities(resolveAmenities(dto.getAmenities()));
         Restaurant saved = repository.save(restaurant);
         restaurantSearchCache.clear();
         return mapper.toDto(saved);
@@ -193,5 +206,24 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private String normalizeForContainsSearch(String value) {
         return value == null ? null : "%" + value.toLowerCase() + "%";
+    }
+
+    private Set<Amenity> resolveAmenities(List<String> amenityNames) {
+        return amenityNames == null
+                ? Set.of()
+                : amenityNames.stream()
+                .filter(Objects::nonNull)
+                .map(String::trim)
+                .filter(name -> !name.isEmpty())
+                .map(name -> amenityRepository.findByNameIgnoreCase(name)
+                        .orElseGet(() -> amenityRepository.save(Amenity.builder()
+                                .name(toDisplayAmenity(name))
+                                .build())))
+                .collect(java.util.stream.Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    private String toDisplayAmenity(String value) {
+        String lowerCase = value.toLowerCase(Locale.ROOT);
+        return Character.toUpperCase(lowerCase.charAt(0)) + lowerCase.substring(1);
     }
 }

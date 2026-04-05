@@ -26,4 +26,7 @@ public class RestaurantDto {
 
     @Builder.Default
     private List<DishDto> dishes = new ArrayList<>();
+
+    @Builder.Default
+    private List<String> amenities = new ArrayList<>();
 }

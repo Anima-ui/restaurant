@@ -42,4 +42,8 @@ public class RestaurantCreateRequest {
     @Builder.Default
     @ArraySchema(schema = @Schema(implementation = DishRequest.class))
     private List<DishRequest> dishes = new ArrayList<>();
+
+    @Builder.Default
+    @ArraySchema(schema = @Schema(implementation = String.class))
+    private List<String> amenities = new ArrayList<>();
 }

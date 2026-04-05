@@ -5,12 +5,14 @@ import com.restaurant.app.domain.dto.RestaurantDto;
 import com.restaurant.app.domain.dto.RestaurantSearchRequest;
 import com.restaurant.app.domain.dto.RestaurantSearchResultDto;
 import com.restaurant.app.domain.dto.RestaurantUpdateRequest;
+import com.restaurant.app.domain.model.Amenity;
 import com.restaurant.app.domain.model.Booking;
 import com.restaurant.app.domain.model.Dish;
 import com.restaurant.app.domain.model.Restaurant;
 import com.restaurant.app.domain.model.RestaurantTable;
 import com.restaurant.app.exception.ResourceNotFoundException;
 import com.restaurant.app.mapper.RestaurantMapper;
+import com.restaurant.app.repository.AmenityRepository;
 import com.restaurant.app.repository.RestaurantRepository;
 import com.restaurant.app.sevice.cache.RestaurantSearchCache;
 import org.junit.jupiter.api.Test;
@@ -42,6 +44,9 @@ class RestaurantServiceImplTest {
 
     @Mock
     private RestaurantMapper mapper;
+
+    @Mock
+    private AmenityRepository amenityRepository;
 
     @Mock
     private RestaurantSearchCache restaurantSearchCache;
@@ -166,6 +171,33 @@ class RestaurantServiceImplTest {
                 .name("Roma")
                 .city("Moscow")
                 .cuisineType("Italian")
+                .amenities(List.of("WiFi", "Parking"))
+                .build();
+        Restaurant restaurant = restaurant(1L, "Roma");
+        RestaurantDto dto = RestaurantDto.builder().id(1L).name("Roma").build();
+        Amenity wifi = Amenity.builder().id(1L).name("WiFi").build();
+        Amenity parking = Amenity.builder().id(2L).name("Parking").build();
+
+        when(mapper.toEntity(request)).thenReturn(restaurant);
+        when(amenityRepository.findByNameIgnoreCase("WiFi")).thenReturn(Optional.of(wifi));
+        when(amenityRepository.findByNameIgnoreCase("Parking")).thenReturn(Optional.empty());
+        when(amenityRepository.save(any(Amenity.class))).thenReturn(parking);
+        when(repository.save(restaurant)).thenReturn(restaurant);
+        when(mapper.toDto(restaurant)).thenReturn(dto);
+
+        assertThat(restaurantService.create(request)).isEqualTo(dto);
+
+        assertThat(restaurant.getAmenities()).containsExactlyInAnyOrder(wifi, parking);
+        verify(restaurantSearchCache).clear();
+    }
+
+    @Test
+    void createWithNullAmenitiesKeepsRestaurantAmenitiesEmpty() {
+        RestaurantCreateRequest request = RestaurantCreateRequest.builder()
+                .name("Roma")
+                .city("Moscow")
+                .cuisineType("Italian")
+                .amenities(null)
                 .build();
         Restaurant restaurant = restaurant(1L, "Roma");
         RestaurantDto dto = RestaurantDto.builder().id(1L).name("Roma").build();
@@ -176,6 +208,9 @@ class RestaurantServiceImplTest {
 
         assertThat(restaurantService.create(request)).isEqualTo(dto);
 
+        assertThat(restaurant.getAmenities()).isEmpty();
+        verify(amenityRepository, never()).findByNameIgnoreCase(any());
+        verify(amenityRepository, never()).save(any(Amenity.class));
         verify(restaurantSearchCache).clear();
     }
 
@@ -185,6 +220,32 @@ class RestaurantServiceImplTest {
                 .name("Basilico")
                 .city("Saint Petersburg")
                 .cuisineType("Italian")
+                .amenities(List.of("Terrace"))
+                .build();
+        Restaurant restaurant = restaurant(1L, "Roma");
+        RestaurantDto dto = RestaurantDto.builder().id(1L).name("Basilico").build();
+        Amenity terrace = Amenity.builder().id(3L).name("Terrace").build();
+
+        when(repository.findById(1L)).thenReturn(Optional.of(restaurant));
+        when(amenityRepository.findByNameIgnoreCase("Terrace")).thenReturn(Optional.of(terrace));
+        when(repository.save(restaurant)).thenReturn(restaurant);
+        when(mapper.toDto(restaurant)).thenReturn(dto);
+
+        assertThat(restaurantService.update(1L, request)).isEqualTo(dto);
+        assertThat(restaurant.getName()).isEqualTo("Basilico");
+        assertThat(restaurant.getCity()).isEqualTo("Saint Petersburg");
+        assertThat(restaurant.getCuisineType()).isEqualTo("Italian");
+        assertThat(restaurant.getAmenities()).containsExactly(terrace);
+        verify(restaurantSearchCache).clear();
+    }
+
+    @Test
+    void updateIgnoresBlankAmenities() {
+        RestaurantUpdateRequest request = RestaurantUpdateRequest.builder()
+                .name("Basilico")
+                .city("Saint Petersburg")
+                .cuisineType("Italian")
+                .amenities(List.of("   ", "\t"))
                 .build();
         Restaurant restaurant = restaurant(1L, "Roma");
         RestaurantDto dto = RestaurantDto.builder().id(1L).name("Basilico").build();
@@ -194,9 +255,10 @@ class RestaurantServiceImplTest {
         when(mapper.toDto(restaurant)).thenReturn(dto);
 
         assertThat(restaurantService.update(1L, request)).isEqualTo(dto);
-        assertThat(restaurant.getName()).isEqualTo("Basilico");
-        assertThat(restaurant.getCity()).isEqualTo("Saint Petersburg");
-        assertThat(restaurant.getCuisineType()).isEqualTo("Italian");
+
+        assertThat(restaurant.getAmenities()).isEmpty();
+        verify(amenityRepository, never()).findByNameIgnoreCase(any());
+        verify(amenityRepository, never()).save(any(Amenity.class));
         verify(restaurantSearchCache).clear();
     }
 

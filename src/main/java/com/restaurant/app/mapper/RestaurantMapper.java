@@ -22,6 +22,10 @@ public class RestaurantMapper {
                 .cuisineType(restaurant.getCuisineType())
                 .tables(restaurant.getTables().stream().map(this::toTableDto).toList())
                 .dishes(restaurant.getDishes().stream().map(this::toDishDto).toList())
+                .amenities(restaurant.getAmenities().stream()
+                        .map(amenity -> amenity.getName())
+                        .sorted()
+                        .toList())
                 .build();
     }
 
