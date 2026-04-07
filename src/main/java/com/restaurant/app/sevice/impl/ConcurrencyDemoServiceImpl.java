@@ -31,7 +31,7 @@ public class ConcurrencyDemoServiceImpl implements ConcurrencyDemoService {
     public RaceConditionDemoResult runAtomicCounterDemo(int threads, int incrementsPerThread) {
         SafeCounter counter = new SafeCounter();
         return runDemo(
-                "ATOMIC_COUNTER",
+                "SAFE_COUNTER",
                 threads,
                 incrementsPerThread,
                 counter::increment,
