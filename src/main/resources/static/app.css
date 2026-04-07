@@ -122,6 +122,7 @@ textarea {
   display: grid;
   grid-template-columns: 380px 1fr;
   gap: 20px;
+  align-items: start;
 }
 
 .panel {

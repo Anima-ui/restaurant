@@ -6,6 +6,7 @@ import com.restaurant.app.domain.model.BookingStatus;
 import com.restaurant.app.domain.model.Customer;
 import com.restaurant.app.domain.model.Restaurant;
 import com.restaurant.app.domain.model.RestaurantTable;
+import com.restaurant.app.exception.ConflictOperationException;
 import com.restaurant.app.exception.ResourceNotFoundException;
 import com.restaurant.app.repository.BookingRepository;
 import com.restaurant.app.repository.CustomerRepository;
@@ -66,6 +67,11 @@ class BookingServiceImplTest {
 
         when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
         when(restaurantTableRepository.findById(2L)).thenReturn(Optional.of(table));
+        when(bookingRepository.existsByTableIdAndBookingTimeAndStatusIn(
+                2L,
+                request.getBookingTime(),
+                List.of(BookingStatus.CREATED, BookingStatus.CONFIRMED)
+        )).thenReturn(false);
         when(bookingRepository.save(any(Booking.class))).thenReturn(savedBooking);
 
         assertThat(bookingService.create(request).getRestaurantName()).isEqualTo("Roma");
@@ -103,6 +109,35 @@ class BookingServiceImplTest {
         assertThatThrownBy(() -> bookingService.create(request))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("Restaurant table with id=2");
+    }
+
+    @Test
+    void createThrowsWhenTableIsAlreadyBookedForSelectedTime() {
+        BookingCreateRequest request = BookingCreateRequest.builder()
+                .bookingTime(LocalDateTime.now().plusDays(1))
+                .status(BookingStatus.CREATED)
+                .customerId(1L)
+                .tableId(2L)
+                .build();
+        Customer customer = Customer.builder().id(1L).fullName("Ivan").build();
+        Restaurant restaurant = Restaurant.builder().id(10L).name("Roma").build();
+        RestaurantTable table = RestaurantTable.builder()
+                .id(2L)
+                .tableNumber(7)
+                .restaurant(restaurant)
+                .build();
+
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+        when(restaurantTableRepository.findById(2L)).thenReturn(Optional.of(table));
+        when(bookingRepository.existsByTableIdAndBookingTimeAndStatusIn(
+                2L,
+                request.getBookingTime(),
+                List.of(BookingStatus.CREATED, BookingStatus.CONFIRMED)
+        )).thenReturn(true);
+
+        assertThatThrownBy(() -> bookingService.create(request))
+                .isInstanceOf(ConflictOperationException.class)
+                .hasMessage("Table is already booked for the selected time");
     }
 
     @Test

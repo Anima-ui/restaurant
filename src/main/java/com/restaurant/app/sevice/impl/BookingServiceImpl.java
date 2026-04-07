@@ -6,6 +6,7 @@ import com.restaurant.app.domain.model.Booking;
 import com.restaurant.app.domain.model.BookingStatus;
 import com.restaurant.app.domain.model.Customer;
 import com.restaurant.app.domain.model.RestaurantTable;
+import com.restaurant.app.exception.ConflictOperationException;
 import com.restaurant.app.exception.ResourceNotFoundException;
 import com.restaurant.app.repository.BookingRepository;
 import com.restaurant.app.repository.CustomerRepository;
@@ -27,6 +28,9 @@ public class BookingServiceImpl implements BookingService {
     private static final String RESTAURANT_TABLE_NOT_FOUND_PREFIX = "Restaurant table with id=";
 
     private static final String BOOKING_NOT_FOUND_PREFIX = "Booking with id=";
+
+    private static final String TABLE_ALREADY_BOOKED_MESSAGE =
+            "Table is already booked for the selected time";
 
     private final BookingRepository bookingRepository;
 
@@ -50,6 +54,15 @@ public class BookingServiceImpl implements BookingService {
         RestaurantTable table = restaurantTableRepository.findById(request.getTableId())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         RESTAURANT_TABLE_NOT_FOUND_PREFIX + request.getTableId() + NOT_FOUND_SUFFIX));
+
+        boolean tableAlreadyBooked = bookingRepository.existsByTableIdAndBookingTimeAndStatusIn(
+                request.getTableId(),
+                request.getBookingTime(),
+                List.of(BookingStatus.CREATED, BookingStatus.CONFIRMED)
+        );
+        if (tableAlreadyBooked) {
+            throw new ConflictOperationException(TABLE_ALREADY_BOOKED_MESSAGE);
+        }
 
         Booking booking = Booking.builder()
                 .bookingTime(request.getBookingTime())

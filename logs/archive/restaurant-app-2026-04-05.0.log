@@ -1,0 +1,2808 @@
+2026-04-05 20:44:47.216 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-04-05 20:44:47.266 INFO  [main] com.restaurant.app.AppApplication - Starting AppApplication using Java 23.0.2 with PID 21108 (D:\javalabs\app\target\classes started by Colorful in D:\javalabs\app)
+2026-04-05 20:44:47.266 DEBUG [main] com.restaurant.app.AppApplication - Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-04-05 20:44:47.268 INFO  [main] com.restaurant.app.AppApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-05 20:44:48.192 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-05 20:44:48.262 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 60 ms. Found 6 JPA repository interfaces.
+2026-04-05 20:44:48.945 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-05 20:44:48.962 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-05 20:44:48.965 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-05 20:44:48.965 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-05 20:44:49.035 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1712 ms
+2026-04-05 20:44:49.249 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-05 20:44:49.313 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-04-05 20:44:49.773 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-05 20:44:49.807 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-05 20:44:49.966 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@36f05595
+2026-04-05 20:44:49.968 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-05 20:44:50.086 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/restaurant_lab]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.13
+	Default catalog/schema: restaurant_lab/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-05 20:44:51.106 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-05 20:44:51.197 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-05 20:44:51.311 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-05 20:44:52.818 INFO  [main] o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-04-05 20:44:53.236 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-05 20:44:53.250 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-04-05 20:44:53.253 INFO  [main] com.restaurant.app.AppApplication - Started AppApplication in 6.737 seconds (process running for 7.761)
+2026-04-05 20:44:59.802 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-05 20:44:59.802 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-05 20:44:59.804 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-04-05 20:44:59.988 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.createTask(..) in 0 ms
+2026-04-05 20:44:59.992 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markRunning(..) in 0 ms
+2026-04-05 20:44:59.992 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.startBulkCreate(..) in 4 ms
+2026-04-05 20:44:59.992 INFO  [customer-bulk-1] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 1 started
+2026-04-05 20:45:06.097 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-05 20:45:06.097 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001140]
+2026-04-05 20:45:06.139 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-05 20:45:06.140 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Pet]
+2026-04-05 20:45:06.140 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001140]
+2026-04-05 20:45:06.151 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 150 ms
+2026-04-05 20:45:06.164 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 1 ms
+2026-04-05 20:45:10.873 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-05 20:45:10.873 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-05 20:45:12.170 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-05 20:45:12.170 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001141]
+2026-04-05 20:45:12.172 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-05 20:45:12.173 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-04-05 20:45:12.173 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001141]
+2026-04-05 20:45:12.174 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 5 ms
+2026-04-05 20:45:12.177 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-05 20:45:18.181 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-05 20:45:18.181 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001142]
+2026-04-05 20:45:18.184 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-05 20:45:18.184 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-05 20:45:18.185 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001142]
+2026-04-05 20:45:18.186 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 5 ms
+2026-04-05 20:45:18.197 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-05 20:45:24.201 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-05 20:45:24.201 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001143]
+2026-04-05 20:45:24.204 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-05 20:45:24.204 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-05 20:45:24.204 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001143]
+2026-04-05 20:45:24.206 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 5 ms
+2026-04-05 20:45:24.217 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-05 20:45:24.219 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markCompleted(..) in 0 ms
+2026-04-05 20:45:24.219 INFO  [customer-bulk-1] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 1 completed
+2026-04-05 20:45:24.219 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskProcessor.processTask(..) in 24227 ms
+2026-04-05 20:46:43.382 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed ConcurrencyDemoServiceImpl.runUnsafeCounterDemo(..) in 8 ms
+2026-04-05 20:47:39.110 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed ConcurrencyDemoServiceImpl.runAtomicCounterDemo(..) in 16 ms
+2026-04-05 20:52:46.481 ERROR [http-nio-8080-exec-10] c.r.a.e.GlobalExceptionHandler - Unexpected error for request GET /favicon.ico
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico for request '/favicon.ico'.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:527)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:50)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2026-04-05 20:52:46.811 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 20:52:46.811 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 20:52:46.820 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 40 ms
+2026-04-05 20:52:46.820 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 27 ms
+2026-04-05 20:52:46.838 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 20:52:46.849 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 11 ms
+2026-04-05 20:53:08.890 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone in (?, ?, ?)
+2026-04-05 20:53:08.890 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001122]
+2026-04-05 20:53:08.890 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001123]
+2026-04-05 20:53:08.890 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [+79990001124]
+2026-04-05 20:53:08.895 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-05 20:53:08.895 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-04-05 20:53:08.895 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001122]
+2026-04-05 20:53:08.897 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-05 20:53:08.897 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-05 20:53:08.898 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001123]
+2026-04-05 20:53:08.900 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-05 20:53:08.900 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Jhony Dep]
+2026-04-05 20:53:08.900 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001124]
+2026-04-05 20:53:08.920 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        count(*) 
+    from
+        customers c1_0
+2026-04-05 20:53:08.923 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.createBulk(..) in 51 ms
+2026-04-05 20:53:17.453 ERROR [http-nio-8080-exec-2] c.r.a.e.GlobalExceptionHandler - Unexpected error for request GET /favicon.ico
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico for request '/favicon.ico'.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:527)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:50)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2026-04-05 20:53:17.666 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 20:53:17.666 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 20:53:17.669 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 5 ms
+2026-04-05 20:53:17.683 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 20:53:17.684 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 21 ms
+2026-04-05 20:53:17.685 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 4 ms
+2026-04-05 20:56:36.155 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        a1_0.id,
+        a1_0.name 
+    from
+        amenities a1_0 
+    where
+        upper(a1_0.name)=upper(?)
+2026-04-05 20:56:36.156 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Wifi]
+2026-04-05 20:56:36.162 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        amenities
+        (name) 
+    values
+        (?)
+2026-04-05 20:56:36.163 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Wifi]
+2026-04-05 20:56:36.166 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        a1_0.id,
+        a1_0.name 
+    from
+        amenities a1_0 
+    where
+        upper(a1_0.name)=upper(?)
+2026-04-05 20:56:36.166 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Free Beating You]
+2026-04-05 20:56:36.168 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        amenities
+        (name) 
+    values
+        (?)
+2026-04-05 20:56:36.168 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Free beating you]
+2026-04-05 20:56:36.169 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name) 
+    values
+        (?, ?, ?)
+2026-04-05 20:56:36.170 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-04-05 20:56:36.170 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Italian]
+2026-04-05 20:56:36.170 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Popa murovya]
+2026-04-05 20:56:36.178 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id) 
+    values
+        (?, ?, ?)
+2026-04-05 20:56:36.178 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Pasta]
+2026-04-05 20:56:36.178 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [14]
+2026-04-05 20:56:36.179 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [122]
+2026-04-05 20:56:36.182 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id) 
+    values
+        (?, ?, ?)
+2026-04-05 20:56:36.182 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Meat]
+2026-04-05 20:56:36.183 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [22.99]
+2026-04-05 20:56:36.183 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [122]
+2026-04-05 20:56:36.185 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id) 
+    values
+        (?, ?, ?)
+2026-04-05 20:56:36.186 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Spoiled Water]
+2026-04-05 20:56:36.186 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [24.5]
+2026-04-05 20:56:36.186 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [122]
+2026-04-05 20:56:36.188 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_tables
+        (restaurant_id, seats, table_number) 
+    values
+        (?, ?, ?)
+2026-04-05 20:56:36.188 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 20:56:36.188 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [2]
+2026-04-05 20:56:36.188 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:INTEGER) <- [1]
+2026-04-05 20:56:36.192 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_tables
+        (restaurant_id, seats, table_number) 
+    values
+        (?, ?, ?)
+2026-04-05 20:56:36.193 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 20:56:36.193 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [2]
+2026-04-05 20:56:36.193 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:INTEGER) <- [2]
+2026-04-05 20:56:36.194 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_tables
+        (restaurant_id, seats, table_number) 
+    values
+        (?, ?, ?)
+2026-04-05 20:56:36.195 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 20:56:36.195 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [4]
+2026-04-05 20:56:36.195 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:INTEGER) <- [3]
+2026-04-05 20:56:36.199 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.create(..) in 49 ms
+2026-04-05 20:56:36.205 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_amenities
+        (restaurant_id, amenity_id) 
+    values
+        (?, ?)
+2026-04-05 20:56:36.205 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 20:56:36.205 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [1]
+2026-04-05 20:56:36.208 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_amenities
+        (restaurant_id, amenity_id) 
+    values
+        (?, ?)
+2026-04-05 20:56:36.209 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 20:56:36.209 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [2]
+2026-04-05 20:56:36.227 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 20:56:36.238 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 20:56:36.238 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 20:56:36.246 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 20:56:36.246 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 20:56:36.249 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 20:56:36.249 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 20:56:36.253 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 27 ms
+2026-04-05 20:56:36.259 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 20:56:36.262 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 4 ms
+2026-04-05 20:56:36.267 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 20:56:36.269 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 2 ms
+2026-04-05 21:00:40.985 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        a1_0.id,
+        a1_0.name 
+    from
+        amenities a1_0 
+    where
+        upper(a1_0.name)=upper(?)
+2026-04-05 21:00:40.986 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Wifi]
+2026-04-05 21:00:40.989 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name) 
+    values
+        (?, ?, ?)
+2026-04-05 21:00:40.989 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-04-05 21:00:40.989 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [NonItalian]
+2026-04-05 21:00:40.989 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [second]
+2026-04-05 21:00:40.991 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id) 
+    values
+        (?, ?, ?)
+2026-04-05 21:00:40.991 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Pasta]
+2026-04-05 21:00:40.991 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [14]
+2026-04-05 21:00:40.991 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [123]
+2026-04-05 21:00:40.993 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_tables
+        (restaurant_id, seats, table_number) 
+    values
+        (?, ?, ?)
+2026-04-05 21:00:40.994 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [123]
+2026-04-05 21:00:40.994 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [2]
+2026-04-05 21:00:40.994 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (3:INTEGER) <- [1]
+2026-04-05 21:00:40.995 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.create(..) in 11 ms
+2026-04-05 21:00:40.996 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_amenities
+        (restaurant_id, amenity_id) 
+    values
+        (?, ?)
+2026-04-05 21:00:40.996 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [123]
+2026-04-05 21:00:40.996 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [1]
+2026-04-05 21:00:41.008 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:00:41.011 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:00:41.011 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:00:41.014 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id = any (?)
+2026-04-05 21:00:41.014 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:ARRAY) <- [[122, 123]]
+2026-04-05 21:00:41.023 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:00:41.024 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:00:41.025 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:00:41.025 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [123]
+2026-04-05 21:00:41.027 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:00:41.027 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [123]
+2026-04-05 21:00:41.029 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 21 ms
+2026-04-05 21:00:41.035 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:00:41.038 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 3 ms
+2026-04-05 21:00:41.042 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:00:41.044 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 2 ms
+2026-04-05 21:04:39.923 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:04:39.923 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [123]
+2026-04-05 21:04:39.928 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:04:39.928 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [123]
+2026-04-05 21:04:39.932 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:04:39.933 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [123]
+2026-04-05 21:04:39.934 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        b1_0.table_id,
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status 
+    from
+        bookings b1_0 
+    where
+        b1_0.table_id=?
+2026-04-05 21:04:39.934 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [157]
+2026-04-05 21:04:39.936 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.delete(..) in 21 ms
+2026-04-05 21:04:39.940 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    delete 
+    from
+        restaurant_amenities 
+    where
+        restaurant_id=?
+2026-04-05 21:04:39.940 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [123]
+2026-04-05 21:04:39.947 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    delete 
+    from
+        dishes 
+    where
+        id=?
+2026-04-05 21:04:39.947 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [94]
+2026-04-05 21:04:39.951 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    delete 
+    from
+        restaurant_tables 
+    where
+        id=?
+2026-04-05 21:04:39.951 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [157]
+2026-04-05 21:04:39.952 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    delete 
+    from
+        restaurants 
+    where
+        id=?
+2026-04-05 21:04:39.953 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [123]
+2026-04-05 21:04:39.965 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:04:39.968 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:04:39.968 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:04:39.970 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:04:39.971 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:04:39.972 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:04:39.973 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:04:39.976 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 11 ms
+2026-04-05 21:04:39.983 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:04:39.986 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 4 ms
+2026-04-05 21:04:39.992 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:04:39.994 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 2 ms
+2026-04-05 21:04:43.895 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:04:43.895 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:04:43.898 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:04:43.898 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:04:43.899 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:04:43.899 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:04:43.901 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        b1_0.table_id,
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status 
+    from
+        bookings b1_0 
+    where
+        b1_0.table_id=?
+2026-04-05 21:04:43.901 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [154]
+2026-04-05 21:04:43.903 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        b1_0.table_id,
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status 
+    from
+        bookings b1_0 
+    where
+        b1_0.table_id=?
+2026-04-05 21:04:43.903 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [155]
+2026-04-05 21:04:43.906 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        b1_0.table_id,
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status 
+    from
+        bookings b1_0 
+    where
+        b1_0.table_id=?
+2026-04-05 21:04:43.906 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [156]
+2026-04-05 21:04:43.907 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.delete(..) in 12 ms
+2026-04-05 21:04:43.908 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    delete 
+    from
+        restaurant_amenities 
+    where
+        restaurant_id=?
+2026-04-05 21:04:43.908 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:04:43.910 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    delete 
+    from
+        dishes 
+    where
+        id=?
+2026-04-05 21:04:43.910 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [91]
+2026-04-05 21:04:43.912 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    delete 
+    from
+        dishes 
+    where
+        id=?
+2026-04-05 21:04:43.912 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [92]
+2026-04-05 21:04:43.913 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    delete 
+    from
+        dishes 
+    where
+        id=?
+2026-04-05 21:04:43.913 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [93]
+2026-04-05 21:04:43.914 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    delete 
+    from
+        restaurant_tables 
+    where
+        id=?
+2026-04-05 21:04:43.914 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [154]
+2026-04-05 21:04:43.915 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    delete 
+    from
+        restaurant_tables 
+    where
+        id=?
+2026-04-05 21:04:43.916 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [155]
+2026-04-05 21:04:43.916 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    delete 
+    from
+        restaurant_tables 
+    where
+        id=?
+2026-04-05 21:04:43.916 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [156]
+2026-04-05 21:04:43.917 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    delete 
+    from
+        restaurants 
+    where
+        id=?
+2026-04-05 21:04:43.918 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [122]
+2026-04-05 21:04:43.929 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:04:43.930 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 2 ms
+2026-04-05 21:04:43.931 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:04:43.933 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:04:43.936 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 7 ms
+2026-04-05 21:04:43.937 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 5 ms
+2026-04-05 21:05:35.806 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        a1_0.id,
+        a1_0.name 
+    from
+        amenities a1_0 
+    where
+        upper(a1_0.name)=upper(?)
+2026-04-05 21:05:35.806 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Wifi]
+2026-04-05 21:05:35.810 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        a1_0.id,
+        a1_0.name 
+    from
+        amenities a1_0 
+    where
+        upper(a1_0.name)=upper(?)
+2026-04-05 21:05:35.810 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Free Beating You]
+2026-04-05 21:05:35.812 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    insert 
+    into
+        restaurants
+        (city, cuisine_type, name) 
+    values
+        (?, ?, ?)
+2026-04-05 21:05:35.813 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Moscow]
+2026-04-05 21:05:35.813 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [Italian]
+2026-04-05 21:05:35.813 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [Popa murovya]
+2026-04-05 21:05:35.815 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id) 
+    values
+        (?, ?, ?)
+2026-04-05 21:05:35.815 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Pasta]
+2026-04-05 21:05:35.815 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [14]
+2026-04-05 21:05:35.815 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [124]
+2026-04-05 21:05:35.817 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    insert 
+    into
+        dishes
+        (name, price, restaurant_id) 
+    values
+        (?, ?, ?)
+2026-04-05 21:05:35.817 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Boiled water]
+2026-04-05 21:05:35.817 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (2:NUMERIC) <- [15]
+2026-04-05 21:05:35.817 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (3:BIGINT) <- [124]
+2026-04-05 21:05:35.818 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_tables
+        (restaurant_id, seats, table_number) 
+    values
+        (?, ?, ?)
+2026-04-05 21:05:35.819 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:05:35.819 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [2]
+2026-04-05 21:05:35.819 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (3:INTEGER) <- [1]
+2026-04-05 21:05:35.821 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_tables
+        (restaurant_id, seats, table_number) 
+    values
+        (?, ?, ?)
+2026-04-05 21:05:35.821 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:05:35.821 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (2:INTEGER) <- [3]
+2026-04-05 21:05:35.821 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (3:INTEGER) <- [2]
+2026-04-05 21:05:35.823 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.create(..) in 18 ms
+2026-04-05 21:05:35.823 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_amenities
+        (restaurant_id, amenity_id) 
+    values
+        (?, ?)
+2026-04-05 21:05:35.823 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:05:35.823 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [1]
+2026-04-05 21:05:35.825 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    insert 
+    into
+        restaurant_amenities
+        (restaurant_id, amenity_id) 
+    values
+        (?, ?)
+2026-04-05 21:05:35.825 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:05:35.825 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [2]
+2026-04-05 21:05:35.845 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:05:35.847 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:05:35.847 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:05:35.848 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:05:35.848 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:05:35.848 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 2 ms
+2026-04-05 21:05:35.851 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:05:35.851 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 6 ms
+2026-04-05 21:05:35.851 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:05:35.853 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:05:35.853 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:05:35.856 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 11 ms
+2026-04-05 21:06:02.922 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        distinct r1_0.id,
+        r1_0.name,
+        r1_0.city,
+        r1_0.cuisine_type 
+    from
+        restaurants r1_0 
+    where
+        (
+            ? is null 
+            or lower(r1_0.city)=?
+        ) 
+        and (
+            ? is null 
+            or lower(r1_0.cuisine_type)=?
+        ) 
+        and (
+            ? is null 
+            or exists(select
+                1 from dishes d1_0 
+            where
+                d1_0.restaurant_id=r1_0.id 
+                and lower(d1_0.name) like ? escape '' 
+                and (? is null 
+                or d1_0.price>=?) 
+                and (? is null 
+                or d1_0.price<=?))
+        ) 
+    order by
+        r1_0.name 
+    fetch
+        first ? rows only
+2026-04-05 21:06:02.922 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [moscow]
+2026-04-05 21:06:02.922 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [moscow]
+2026-04-05 21:06:02.922 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [null]
+2026-04-05 21:06:02.923 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [null]
+2026-04-05 21:06:02.923 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (5:JAVA_OBJECT) <- [null]
+2026-04-05 21:06:02.923 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [null]
+2026-04-05 21:06:02.923 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [null]
+2026-04-05 21:06:02.923 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [null]
+2026-04-05 21:06:02.923 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [null]
+2026-04-05 21:06:02.923 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [null]
+2026-04-05 21:06:02.923 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (11:INTEGER) <- [10]
+2026-04-05 21:06:02.932 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.searchByDishFiltersJpql(..) in 47 ms
+2026-04-05 21:06:02.937 WARN  [http-nio-8080-exec-1] o.s.d.w.c.SpringDataJackson3Configuration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2026-04-05 21:06:08.130 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        distinct r1_0.id,
+        r1_0.name,
+        r1_0.city,
+        r1_0.cuisine_type 
+    from
+        restaurants r1_0 
+    where
+        (
+            ? is null 
+            or lower(r1_0.city)=?
+        ) 
+        and (
+            ? is null 
+            or lower(r1_0.cuisine_type)=?
+        ) 
+        and (
+            ? is null 
+            or exists(select
+                1 from dishes d1_0 
+            where
+                d1_0.restaurant_id=r1_0.id 
+                and lower(d1_0.name) like ? escape '' 
+                and (? is null 
+                or d1_0.price>=?) 
+                and (? is null 
+                or d1_0.price<=?))
+        ) 
+    order by
+        r1_0.name 
+    fetch
+        first ? rows only
+2026-04-05 21:06:08.130 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [mosco]
+2026-04-05 21:06:08.130 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [mosco]
+2026-04-05 21:06:08.130 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [null]
+2026-04-05 21:06:08.130 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [null]
+2026-04-05 21:06:08.130 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (5:JAVA_OBJECT) <- [null]
+2026-04-05 21:06:08.130 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [null]
+2026-04-05 21:06:08.131 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [null]
+2026-04-05 21:06:08.131 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [null]
+2026-04-05 21:06:08.131 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [null]
+2026-04-05 21:06:08.131 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [null]
+2026-04-05 21:06:08.131 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (11:INTEGER) <- [10]
+2026-04-05 21:06:08.136 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.searchByDishFiltersJpql(..) in 6 ms
+2026-04-05 21:06:13.324 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        distinct r1_0.id,
+        r1_0.name,
+        r1_0.city,
+        r1_0.cuisine_type 
+    from
+        restaurants r1_0 
+    where
+        (
+            ? is null 
+            or lower(r1_0.city)=?
+        ) 
+        and (
+            ? is null 
+            or lower(r1_0.cuisine_type)=?
+        ) 
+        and (
+            ? is null 
+            or exists(select
+                1 from dishes d1_0 
+            where
+                d1_0.restaurant_id=r1_0.id 
+                and lower(d1_0.name) like ? escape '' 
+                and (? is null 
+                or d1_0.price>=?) 
+                and (? is null 
+                or d1_0.price<=?))
+        ) 
+    order by
+        r1_0.name 
+    fetch
+        first ? rows only
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [null]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [null]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [italian]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [italian]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (5:JAVA_OBJECT) <- [null]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [null]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [null]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [null]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [null]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [null]
+2026-04-05 21:06:13.325 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (11:INTEGER) <- [10]
+2026-04-05 21:06:13.328 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.searchByDishFiltersJpql(..) in 4 ms
+2026-04-05 21:10:35.934 ERROR [http-nio-8080-exec-3] c.r.a.e.GlobalExceptionHandler - Unexpected error for request GET /favicon.ico
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico for request '/favicon.ico'.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:527)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:50)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2026-04-05 21:10:40.418 ERROR [http-nio-8080-exec-8] c.r.a.e.GlobalExceptionHandler - Unexpected error for request GET /.well-known/appspecific/com.chrome.devtools.json
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource .well-known/appspecific/com.chrome.devtools.json for request '/.well-known/appspecific/com.chrome.devtools.json'.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:527)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:50)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2026-04-05 21:11:04.299 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        distinct r1_0.id,
+        r1_0.name,
+        r1_0.city,
+        r1_0.cuisine_type 
+    from
+        restaurants r1_0 
+    where
+        (
+            ? is null 
+            or lower(r1_0.city)=?
+        ) 
+        and (
+            ? is null 
+            or lower(r1_0.cuisine_type)=?
+        ) 
+        and (
+            ? is null 
+            or exists(select
+                1 from dishes d1_0 
+            where
+                d1_0.restaurant_id=r1_0.id 
+                and lower(d1_0.name) like ? escape '' 
+                and (? is null 
+                or d1_0.price>=?) 
+                and (? is null 
+                or d1_0.price<=?))
+        ) 
+    order by
+        r1_0.name 
+    fetch
+        first ? rows only
+2026-04-05 21:11:04.299 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [null]
+2026-04-05 21:11:04.299 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [null]
+2026-04-05 21:11:04.299 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [null]
+2026-04-05 21:11:04.299 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (4:VARCHAR) <- [null]
+2026-04-05 21:11:04.299 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (5:JAVA_OBJECT) <- [null]
+2026-04-05 21:11:04.299 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (6:VARCHAR) <- [null]
+2026-04-05 21:11:04.299 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (7:NUMERIC) <- [null]
+2026-04-05 21:11:04.300 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (8:NUMERIC) <- [null]
+2026-04-05 21:11:04.300 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (9:NUMERIC) <- [null]
+2026-04-05 21:11:04.300 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (10:NUMERIC) <- [null]
+2026-04-05 21:11:04.300 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (11:INTEGER) <- [10]
+2026-04-05 21:11:04.302 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.searchByDishFiltersJpql(..) in 4 ms
+2026-04-05 21:11:31.048 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:11:31.048 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:11:31.052 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:11:31.052 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:11:31.060 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    insert 
+    into
+        bookings
+        (booking_time, customer_id, status, table_id) 
+    values
+        (?, ?, ?, ?)
+2026-04-05 21:11:31.061 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:TIMESTAMP) <- [2099-12-31T19:00]
+2026-04-05 21:11:31.062 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [295]
+2026-04-05 21:11:31.062 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [CREATED]
+2026-04-05 21:11:31.062 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (4:BIGINT) <- [158]
+2026-04-05 21:11:31.068 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:11:31.068 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:31.070 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.create(..) in 23 ms
+2026-04-05 21:11:31.087 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:11:31.090 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:11:31.090 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:31.094 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:11:31.094 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:31.097 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:11:31.097 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:31.101 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 15 ms
+2026-04-05 21:11:31.108 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:11:31.113 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:11:31.114 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:11:31.118 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:11:31.118 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:11:31.120 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:11:31.121 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:31.123 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 16 ms
+2026-04-05 21:11:31.135 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:11:31.140 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 6 ms
+2026-04-05 21:11:39.406 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0 
+    where
+        b1_0.id=?
+2026-04-05 21:11:39.408 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-04-05 21:11:39.415 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:11:39.415 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:11:39.416 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:11:39.416 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:11:39.418 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:11:39.419 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:39.420 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.updateStatus(..) in 12 ms
+2026-04-05 21:11:39.426 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    update
+        bookings 
+    set
+        booking_time=?,
+        customer_id=?,
+        status=?,
+        table_id=? 
+    where
+        id=?
+2026-04-05 21:11:39.426 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:TIMESTAMP) <- [2099-12-31T19:00]
+2026-04-05 21:11:39.426 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [295]
+2026-04-05 21:11:39.426 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [CONFIRMED]
+2026-04-05 21:11:39.426 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (4:BIGINT) <- [158]
+2026-04-05 21:11:39.427 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (5:BIGINT) <- [21]
+2026-04-05 21:11:39.440 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:11:39.442 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:11:39.444 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:11:39.444 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:39.444 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:11:39.447 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:11:39.447 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:39.450 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:11:39.450 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:39.450 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 11 ms
+2026-04-05 21:11:39.455 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:11:39.455 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 16 ms
+2026-04-05 21:11:39.455 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:11:39.459 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:11:39.460 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:11:39.464 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:11:39.464 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:39.467 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 25 ms
+2026-04-05 21:11:58.598 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0 
+    where
+        b1_0.id=?
+2026-04-05 21:11:58.598 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-04-05 21:11:58.601 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:11:58.602 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:11:58.604 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:11:58.604 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:11:58.607 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:11:58.607 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:58.609 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.updateStatus(..) in 10 ms
+2026-04-05 21:11:58.620 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:11:58.621 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:11:58.621 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:11:58.625 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 6 ms
+2026-04-05 21:11:58.625 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:11:58.625 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:11:58.625 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:11:58.625 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:58.628 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:11:58.628 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:11:58.628 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:11:58.629 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:58.630 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:11:58.630 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:58.634 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:11:58.634 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:11:58.636 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 15 ms
+2026-04-05 21:11:58.640 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 20 ms
+2026-04-05 21:12:00.414 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0 
+    where
+        b1_0.id=?
+2026-04-05 21:12:00.414 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-04-05 21:12:00.417 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:00.417 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:00.419 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:00.420 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:00.422 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:00.422 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:00.423 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.updateStatus(..) in 10 ms
+2026-04-05 21:12:00.424 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    update
+        bookings 
+    set
+        booking_time=?,
+        customer_id=?,
+        status=?,
+        table_id=? 
+    where
+        id=?
+2026-04-05 21:12:00.424 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:TIMESTAMP) <- [2099-12-31T19:00]
+2026-04-05 21:12:00.424 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [295]
+2026-04-05 21:12:00.424 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [CANCELED]
+2026-04-05 21:12:00.424 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (4:BIGINT) <- [158]
+2026-04-05 21:12:00.424 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (5:BIGINT) <- [21]
+2026-04-05 21:12:00.446 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:12:00.448 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:12:00.448 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:12:00.452 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:12:00.452 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:00.452 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:00.452 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:00.452 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 7 ms
+2026-04-05 21:12:00.453 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:00.454 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:12:00.454 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:00.454 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:00.457 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:00.457 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:12:00.457 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:00.457 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:00.459 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 12 ms
+2026-04-05 21:12:00.459 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 12 ms
+2026-04-05 21:12:01.646 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0 
+    where
+        b1_0.id=?
+2026-04-05 21:12:01.646 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-04-05 21:12:01.649 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:01.649 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:01.651 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:01.651 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:01.653 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:01.653 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:01.655 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.updateStatus(..) in 9 ms
+2026-04-05 21:12:01.666 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:12:01.666 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:12:01.666 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:12:01.669 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:12:01.669 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:01.670 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 5 ms
+2026-04-05 21:12:01.670 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:12:01.670 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:01.670 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:01.670 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:01.674 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:12:01.674 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:01.676 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:01.676 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:01.679 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:01.679 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:01.679 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 13 ms
+2026-04-05 21:12:01.683 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 16 ms
+2026-04-05 21:12:04.717 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0 
+    where
+        b1_0.id=?
+2026-04-05 21:12:04.717 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-04-05 21:12:04.721 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:04.721 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:04.722 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:04.723 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:04.727 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:04.727 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:04.728 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.updateStatus(..) in 10 ms
+2026-04-05 21:12:04.729 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    update
+        bookings 
+    set
+        booking_time=?,
+        customer_id=?,
+        status=?,
+        table_id=? 
+    where
+        id=?
+2026-04-05 21:12:04.729 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (1:TIMESTAMP) <- [2099-12-31T19:00]
+2026-04-05 21:12:04.730 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [295]
+2026-04-05 21:12:04.730 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [CONFIRMED]
+2026-04-05 21:12:04.730 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (4:BIGINT) <- [158]
+2026-04-05 21:12:04.730 TRACE [http-nio-8080-exec-6] org.hibernate.orm.jdbc.bind - binding parameter (5:BIGINT) <- [21]
+2026-04-05 21:12:04.745 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:12:04.745 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:12:04.745 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:12:04.748 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:12:04.748 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:04.748 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:04.748 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:04.749 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 6 ms
+2026-04-05 21:12:04.750 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:04.751 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:04.752 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:12:04.752 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:04.754 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:04.755 TRACE [http-nio-8080-exec-5] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:04.755 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:12:04.756 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:04.757 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 14 ms
+2026-04-05 21:12:04.758 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 13 ms
+2026-04-05 21:12:05.237 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0 
+    where
+        b1_0.id=?
+2026-04-05 21:12:05.237 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-04-05 21:12:05.239 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:05.240 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:05.243 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:05.243 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:05.244 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:05.245 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.246 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.updateStatus(..) in 9 ms
+2026-04-05 21:12:05.247 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    update
+        bookings 
+    set
+        booking_time=?,
+        customer_id=?,
+        status=?,
+        table_id=? 
+    where
+        id=?
+2026-04-05 21:12:05.247 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:TIMESTAMP) <- [2099-12-31T19:00]
+2026-04-05 21:12:05.248 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [295]
+2026-04-05 21:12:05.248 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [CANCELED]
+2026-04-05 21:12:05.248 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (4:BIGINT) <- [158]
+2026-04-05 21:12:05.248 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (5:BIGINT) <- [21]
+2026-04-05 21:12:05.259 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:12:05.259 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:12:05.259 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:12:05.262 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:12:05.263 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.263 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:05.263 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:05.264 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 5 ms
+2026-04-05 21:12:05.265 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:05.265 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:12:05.265 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.265 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:05.267 DEBUG [http-nio-8080-exec-8] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:05.267 DEBUG [http-nio-8080-exec-9] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:12:05.267 TRACE [http-nio-8080-exec-9] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.267 TRACE [http-nio-8080-exec-8] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.269 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 10 ms
+2026-04-05 21:12:05.269 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 10 ms
+2026-04-05 21:12:05.693 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0 
+    where
+        b1_0.id=?
+2026-04-05 21:12:05.693 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-04-05 21:12:05.697 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:05.697 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:05.699 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:05.700 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:05.701 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:05.701 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.703 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.updateStatus(..) in 10 ms
+2026-04-05 21:12:05.704 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    update
+        bookings 
+    set
+        booking_time=?,
+        customer_id=?,
+        status=?,
+        table_id=? 
+    where
+        id=?
+2026-04-05 21:12:05.704 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (1:TIMESTAMP) <- [2099-12-31T19:00]
+2026-04-05 21:12:05.704 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [295]
+2026-04-05 21:12:05.704 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [CONFIRMED]
+2026-04-05 21:12:05.704 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (4:BIGINT) <- [158]
+2026-04-05 21:12:05.705 TRACE [http-nio-8080-exec-3] org.hibernate.orm.jdbc.bind - binding parameter (5:BIGINT) <- [21]
+2026-04-05 21:12:05.716 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:12:05.716 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:12:05.716 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:12:05.718 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:05.718 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:12:05.719 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.719 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:05.721 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 5 ms
+2026-04-05 21:12:05.721 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:05.721 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:05.721 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:12:05.722 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.724 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:05.724 DEBUG [http-nio-8080-exec-1] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:12:05.724 TRACE [http-nio-8080-exec-10] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.724 TRACE [http-nio-8080-exec-1] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:05.726 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 10 ms
+2026-04-05 21:12:05.726 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 11 ms
+2026-04-05 21:12:06.361 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0 
+    where
+        b1_0.id=?
+2026-04-05 21:12:06.361 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [21]
+2026-04-05 21:12:06.364 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:06.364 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:06.366 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:06.366 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:06.368 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:06.368 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:06.371 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.updateStatus(..) in 9 ms
+2026-04-05 21:12:06.371 DEBUG [http-nio-8080-exec-4] org.hibernate.SQL - 
+    update
+        bookings 
+    set
+        booking_time=?,
+        customer_id=?,
+        status=?,
+        table_id=? 
+    where
+        id=?
+2026-04-05 21:12:06.372 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (1:TIMESTAMP) <- [2099-12-31T19:00]
+2026-04-05 21:12:06.372 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (2:BIGINT) <- [295]
+2026-04-05 21:12:06.372 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (3:VARCHAR) <- [CANCELED]
+2026-04-05 21:12:06.372 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (4:BIGINT) <- [158]
+2026-04-05 21:12:06.372 TRACE [http-nio-8080-exec-4] org.hibernate.orm.jdbc.bind - binding parameter (5:BIGINT) <- [21]
+2026-04-05 21:12:06.395 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:12:06.397 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:12:06.397 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:12:06.398 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        t1_0.restaurant_id,
+        t1_0.id,
+        t1_0.seats,
+        t1_0.table_number 
+    from
+        restaurant_tables t1_0 
+    where
+        t1_0.restaurant_id=?
+2026-04-05 21:12:06.399 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:06.401 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.id=?
+2026-04-05 21:12:06.401 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [295]
+2026-04-05 21:12:06.403 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        d1_0.restaurant_id,
+        d1_0.id,
+        d1_0.name,
+        d1_0.price 
+    from
+        dishes d1_0 
+    where
+        d1_0.restaurant_id=?
+2026-04-05 21:12:06.403 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:06.403 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 10 ms
+2026-04-05 21:12:06.404 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        rt1_0.id,
+        rt1_0.restaurant_id,
+        rt1_0.seats,
+        rt1_0.table_number 
+    from
+        restaurant_tables rt1_0 
+    where
+        rt1_0.id=?
+2026-04-05 21:12:06.404 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [158]
+2026-04-05 21:12:06.406 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        a1_0.restaurant_id,
+        a1_1.id,
+        a1_1.name 
+    from
+        restaurant_amenities a1_0 
+    join
+        amenities a1_1 
+            on a1_1.id=a1_0.amenity_id 
+    where
+        a1_0.restaurant_id=?
+2026-04-05 21:12:06.406 TRACE [http-nio-8080-exec-7] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:06.406 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0 
+    where
+        r1_0.id=?
+2026-04-05 21:12:06.406 TRACE [http-nio-8080-exec-2] org.hibernate.orm.jdbc.bind - binding parameter (1:BIGINT) <- [124]
+2026-04-05 21:12:06.409 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 15 ms
+2026-04-05 21:12:06.409 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 13 ms
+2026-04-05 21:13:00.719 ERROR [http-nio-8080-exec-8] c.r.a.e.GlobalExceptionHandler - Unexpected error for request GET /favicon.ico
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico for request '/favicon.ico'.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:527)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:50)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2026-04-05 21:13:00.726 DEBUG [http-nio-8080-exec-3] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:13:00.726 DEBUG [http-nio-8080-exec-6] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:13:00.730 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 5 ms
+2026-04-05 21:13:00.733 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 10 ms
+2026-04-05 21:13:00.741 DEBUG [http-nio-8080-exec-10] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:13:00.744 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 4 ms
+2026-04-05 21:13:13.374 ERROR [http-nio-8080-exec-4] c.r.a.e.GlobalExceptionHandler - Unexpected error for request GET /favicon.ico
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource favicon.ico for request '/favicon.ico'.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:527)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:50)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:892)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:128)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:107)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:492)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1779)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:946)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+2026-04-05 21:13:13.611 DEBUG [http-nio-8080-exec-5] org.hibernate.SQL - 
+    select
+        r1_0.id,
+        r1_0.city,
+        r1_0.cuisine_type,
+        r1_0.name 
+    from
+        restaurants r1_0
+2026-04-05 21:13:13.611 DEBUG [http-nio-8080-exec-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0
+2026-04-05 21:13:13.613 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed RestaurantServiceImpl.getAll() in 3 ms
+2026-04-05 21:13:13.615 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.getAll() in 6 ms
+2026-04-05 21:13:13.624 DEBUG [http-nio-8080-exec-7] org.hibernate.SQL - 
+    select
+        b1_0.id,
+        b1_0.booking_time,
+        b1_0.customer_id,
+        b1_0.status,
+        b1_0.table_id 
+    from
+        bookings b1_0
+2026-04-05 21:13:13.627 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed BookingServiceImpl.getAll() in 4 ms
+2026-04-05 21:13:55.259 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-05 21:13:55.785 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-05 21:13:55.800 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-05 21:13:55.802 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-05 21:13:55.805 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -2,11 +2,12 @@ package com.restaurant.app.sevice.impl;
 
 import com.restaurant.app.domain.dto.RaceConditionDemoResult;
 import com.restaurant.app.sevice.ConcurrencyDemoService;
+import com.restaurant.app.util.SafeCounter;
+import com.restaurant.app.util.UnsafeCounter;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.IntSupplier;
 import org.springframework.stereotype.Service;
 
@@ -28,13 +29,13 @@ public class ConcurrencyDemoServiceImpl implements ConcurrencyDemoService {
     }
 
     public RaceConditionDemoResult runAtomicCounterDemo(int threads, int incrementsPerThread) {
-        AtomicInteger counter = new AtomicInteger();
+        SafeCounter counter = new SafeCounter();
         return runDemo(
                 "ATOMIC_COUNTER",
                 threads,
                 incrementsPerThread,
-                counter::incrementAndGet,
-                counter::get,
+                counter::increment,
+                counter::getValue,
                 "Atomic counter removes lost updates"
         );
     }
@@ -59,7 +60,7 @@ public class ConcurrencyDemoServiceImpl implements ConcurrencyDemoService {
                         }
                     } finally {
                         doneLatch.countDown();
-                    }
+                    } 
                 });
             }
 
@@ -95,19 +96,6 @@ public class ConcurrencyDemoServiceImpl implements ConcurrencyDemoService {
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
             throw new IllegalStateException("Thread execution was interrupted", exception);
-        }
-    }
-
-    private static final class UnsafeCounter {
-
-        private int value;
-
-        private void increment() {
-            value = value + 1;
-        }
-
-        private int getValue() {
-            return value;
         }
     }
 }
