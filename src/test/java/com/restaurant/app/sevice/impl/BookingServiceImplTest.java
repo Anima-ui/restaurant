@@ -49,29 +49,32 @@ class BookingServiceImplTest {
                 .status(BookingStatus.CREATED)
                 .customerId(1L)
                 .tableId(2L)
+                .guestCount(2)
                 .build();
         Customer customer = Customer.builder().id(1L).fullName("Ivan").build();
         Restaurant restaurant = Restaurant.builder().id(10L).name("Roma").build();
         RestaurantTable table = RestaurantTable.builder()
                 .id(2L)
                 .tableNumber(7)
+                .seats(2)
                 .restaurant(restaurant)
                 .build();
         Booking savedBooking = Booking.builder()
                 .id(3L)
                 .bookingTime(request.getBookingTime())
                 .status(BookingStatus.CREATED)
+                .guestCount(2)
                 .customer(customer)
                 .table(table)
                 .build();
 
         when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
         when(restaurantTableRepository.findById(2L)).thenReturn(Optional.of(table));
-        when(bookingRepository.existsByTableIdAndBookingTimeAndStatusIn(
+        when(bookingRepository.sumGuestCountByTableIdAndBookingTimeAndStatusIn(
                 2L,
                 request.getBookingTime(),
                 List.of(BookingStatus.CREATED, BookingStatus.CONFIRMED)
-        )).thenReturn(false);
+        )).thenReturn(0L);
         when(bookingRepository.save(any(Booking.class))).thenReturn(savedBooking);
 
         assertThat(bookingService.create(request).getRestaurantName()).isEqualTo("Roma");
@@ -84,6 +87,7 @@ class BookingServiceImplTest {
                 .status(BookingStatus.CREATED)
                 .customerId(1L)
                 .tableId(2L)
+                .guestCount(1)
                 .build();
 
         when(customerRepository.findById(1L)).thenReturn(Optional.empty());
@@ -100,6 +104,7 @@ class BookingServiceImplTest {
                 .status(BookingStatus.CREATED)
                 .customerId(1L)
                 .tableId(2L)
+                .guestCount(1)
                 .build();
         Customer customer = Customer.builder().id(1L).fullName("Ivan").build();
 
@@ -118,26 +123,54 @@ class BookingServiceImplTest {
                 .status(BookingStatus.CREATED)
                 .customerId(1L)
                 .tableId(2L)
+                .guestCount(2)
                 .build();
         Customer customer = Customer.builder().id(1L).fullName("Ivan").build();
         Restaurant restaurant = Restaurant.builder().id(10L).name("Roma").build();
         RestaurantTable table = RestaurantTable.builder()
                 .id(2L)
                 .tableNumber(7)
+                .seats(2)
                 .restaurant(restaurant)
                 .build();
 
         when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
         when(restaurantTableRepository.findById(2L)).thenReturn(Optional.of(table));
-        when(bookingRepository.existsByTableIdAndBookingTimeAndStatusIn(
+        when(bookingRepository.sumGuestCountByTableIdAndBookingTimeAndStatusIn(
                 2L,
                 request.getBookingTime(),
                 List.of(BookingStatus.CREATED, BookingStatus.CONFIRMED)
-        )).thenReturn(true);
+        )).thenReturn(1L);
 
         assertThatThrownBy(() -> bookingService.create(request))
                 .isInstanceOf(ConflictOperationException.class)
-                .hasMessage("Table is already booked for the selected time");
+                .hasMessage("Not enough free seats for the selected table and time");
+    }
+
+    @Test
+    void createThrowsWhenRequestedSeatsExceedTableCapacity() {
+        BookingCreateRequest request = BookingCreateRequest.builder()
+                .bookingTime(LocalDateTime.now().plusDays(1))
+                .status(BookingStatus.CREATED)
+                .customerId(1L)
+                .tableId(2L)
+                .guestCount(3)
+                .build();
+        Customer customer = Customer.builder().id(1L).fullName("Ivan").build();
+        Restaurant restaurant = Restaurant.builder().id(10L).name("Roma").build();
+        RestaurantTable table = RestaurantTable.builder()
+                .id(2L)
+                .tableNumber(7)
+                .seats(2)
+                .restaurant(restaurant)
+                .build();
+
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+        when(restaurantTableRepository.findById(2L)).thenReturn(Optional.of(table));
+
+        assertThatThrownBy(() -> bookingService.create(request))
+                .isInstanceOf(ConflictOperationException.class)
+                .hasMessage("Requested seats exceed the table capacity");
     }
 
     @Test
@@ -195,12 +228,14 @@ class BookingServiceImplTest {
         RestaurantTable table = RestaurantTable.builder()
                 .id(2L)
                 .tableNumber(7)
+                .seats(2)
                 .restaurant(restaurant)
                 .build();
         return Booking.builder()
                 .id(3L)
                 .bookingTime(LocalDateTime.now().plusDays(1))
                 .status(BookingStatus.CREATED)
+                .guestCount(1)
                 .customer(customer)
                 .table(table)
                 .build();

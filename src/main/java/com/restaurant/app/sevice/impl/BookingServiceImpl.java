@@ -29,8 +29,11 @@ public class BookingServiceImpl implements BookingService {
 
     private static final String BOOKING_NOT_FOUND_PREFIX = "Booking with id=";
 
-    private static final String TABLE_ALREADY_BOOKED_MESSAGE =
-            "Table is already booked for the selected time";
+    private static final String TABLE_CAPACITY_EXCEEDED_MESSAGE =
+            "Not enough free seats for the selected table and time";
+
+    private static final String REQUESTED_SEATS_EXCEED_TABLE_CAPACITY_MESSAGE =
+            "Requested seats exceed the table capacity";
 
     private final BookingRepository bookingRepository;
 
@@ -55,18 +58,23 @@ public class BookingServiceImpl implements BookingService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         RESTAURANT_TABLE_NOT_FOUND_PREFIX + request.getTableId() + NOT_FOUND_SUFFIX));
 
-        boolean tableAlreadyBooked = bookingRepository.existsByTableIdAndBookingTimeAndStatusIn(
+        if (request.getGuestCount() > table.getSeats()) {
+            throw new ConflictOperationException(REQUESTED_SEATS_EXCEED_TABLE_CAPACITY_MESSAGE);
+        }
+
+        long reservedSeatsForTable = bookingRepository.sumGuestCountByTableIdAndBookingTimeAndStatusIn(
                 request.getTableId(),
                 request.getBookingTime(),
                 List.of(BookingStatus.CREATED, BookingStatus.CONFIRMED)
         );
-        if (tableAlreadyBooked) {
-            throw new ConflictOperationException(TABLE_ALREADY_BOOKED_MESSAGE);
+        if (reservedSeatsForTable + request.getGuestCount() > table.getSeats()) {
+            throw new ConflictOperationException(TABLE_CAPACITY_EXCEEDED_MESSAGE);
         }
 
         Booking booking = Booking.builder()
                 .bookingTime(request.getBookingTime())
                 .status(request.getStatus())
+                .guestCount(request.getGuestCount())
                 .customer(customer)
                 .table(table)
                 .build();
@@ -106,6 +114,7 @@ public class BookingServiceImpl implements BookingService {
                 .customerName(booking.getCustomer().getFullName())
                 .tableId(booking.getTable().getId())
                 .tableNumber(booking.getTable().getTableNumber())
+                .guestCount(booking.getGuestCount())
                 .restaurantId(booking.getTable().getRestaurant().getId())
                 .restaurantName(booking.getTable().getRestaurant().getName())
                 .build();

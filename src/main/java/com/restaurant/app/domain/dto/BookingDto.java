@@ -27,6 +27,8 @@ public class BookingDto {
 
     private Integer tableNumber;
 
+    private Integer guestCount;
+
     private Long restaurantId;
 
     private String restaurantName;

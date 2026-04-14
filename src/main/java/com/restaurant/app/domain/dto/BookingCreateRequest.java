@@ -36,4 +36,9 @@ public class BookingCreateRequest {
     @Positive
     @Schema(example = "1")
     private Long tableId;
+
+    @NotNull
+    @Positive
+    @Schema(example = "2")
+    private Integer guestCount;
 }

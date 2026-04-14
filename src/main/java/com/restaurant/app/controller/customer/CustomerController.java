@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,5 +76,12 @@ public class CustomerController {
     @Operation(summary = "Get customer by id")
     public ResponseEntity<CustomerDto> getById(@PathVariable @Positive Long id) {
         return ResponseEntity.ok(customerService.getById(id));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete customer by id")
+    public ResponseEntity<Void> delete(@PathVariable @Positive Long id) {
+        customerService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

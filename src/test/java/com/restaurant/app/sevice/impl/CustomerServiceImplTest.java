@@ -5,6 +5,7 @@ import com.restaurant.app.domain.dto.CustomerCreateRequest;
 import com.restaurant.app.domain.model.Customer;
 import com.restaurant.app.exception.ConflictOperationException;
 import com.restaurant.app.exception.ResourceNotFoundException;
+import com.restaurant.app.repository.BookingRepository;
 import com.restaurant.app.repository.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,9 @@ class CustomerServiceImplTest {
 
     @Mock
     private CustomerRepository customerRepository;
+
+    @Mock
+    private BookingRepository bookingRepository;
 
     @InjectMocks
     private CustomerServiceImpl customerService;
@@ -150,6 +154,39 @@ class CustomerServiceImplTest {
         when(customerRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> customerService.getById(1L))
+                .isInstanceOf(ResourceNotFoundException.class)
+                .hasMessageContaining("Customer with id=1");
+    }
+
+    @Test
+    void deleteRemovesCustomerWhenNoBookingsExist() {
+        Customer customer = Customer.builder().id(1L).fullName("Ivan").phone("+79990001122").build();
+
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+        when(bookingRepository.existsByCustomerId(1L)).thenReturn(false);
+
+        customerService.delete(1L);
+
+        verify(customerRepository).delete(customer);
+    }
+
+    @Test
+    void deleteThrowsConflictWhenCustomerHasBookings() {
+        Customer customer = Customer.builder().id(1L).fullName("Ivan").phone("+79990001122").build();
+
+        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+        when(bookingRepository.existsByCustomerId(1L)).thenReturn(true);
+
+        assertThatThrownBy(() -> customerService.delete(1L))
+                .isInstanceOf(ConflictOperationException.class)
+                .hasMessageContaining("bookings are linked");
+    }
+
+    @Test
+    void deleteThrowsWhenCustomerIsMissing() {
+        when(customerRepository.findById(1L)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> customerService.delete(1L))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageContaining("Customer with id=1");
     }

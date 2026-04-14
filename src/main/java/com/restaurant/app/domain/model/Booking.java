@@ -41,6 +41,8 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private BookingStatus status;
 
+    private Integer guestCount;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;

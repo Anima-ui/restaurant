@@ -1,6 +1,5 @@
 package com.restaurant.app.util;
 
-
 public class UnsafeCounter {
 
     private int value;

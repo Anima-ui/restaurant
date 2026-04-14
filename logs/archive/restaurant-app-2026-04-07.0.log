@@ -1,0 +1,702 @@
+2026-04-07 13:41:03.667 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-04-07 13:41:03.812 INFO  [main] com.restaurant.app.AppApplication - Starting AppApplication using Java 23.0.2 with PID 17400 (D:\javalabs\app\target\classes started by Colorful in D:\javalabs\app)
+2026-04-07 13:41:03.813 DEBUG [main] com.restaurant.app.AppApplication - Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-04-07 13:41:03.815 INFO  [main] com.restaurant.app.AppApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-07 13:41:05.509 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-07 13:41:05.613 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 89 ms. Found 6 JPA repository interfaces.
+2026-04-07 13:41:06.677 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-07 13:41:06.698 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-07 13:41:06.701 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-07 13:41:06.702 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-07 13:41:06.810 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2918 ms
+2026-04-07 13:41:07.084 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-07 13:41:07.186 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-04-07 13:41:07.967 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-07 13:41:08.047 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-07 13:41:08.388 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5b715ea
+2026-04-07 13:41:08.394 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-07 13:41:08.561 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/restaurant_lab]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.13
+	Default catalog/schema: restaurant_lab/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-07 13:41:10.415 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-07 13:41:10.662 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-07 13:41:11.022 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-07 13:41:13.725 INFO  [main] o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-04-07 13:41:15.491 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-07 13:41:15.540 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-04-07 13:41:15.560 INFO  [main] com.restaurant.app.AppApplication - Started AppApplication in 12.884 seconds (process running for 14.298)
+2026-04-07 13:42:32.619 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-07 13:42:32.620 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-07 13:42:32.623 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-04-07 13:42:33.081 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.createTask(..) in 2 ms
+2026-04-07 13:42:33.087 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markRunning(..) in 0 ms
+2026-04-07 13:42:33.087 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.startBulkCreate(..) in 10 ms
+2026-04-07 13:42:33.087 INFO  [customer-bulk-1] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 1 started
+2026-04-07 13:42:39.210 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 13:42:39.211 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 13:42:39.310 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:42:39.313 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001140]
+2026-04-07 13:42:39.435 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:42:39.478 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Pet]
+2026-04-07 13:42:39.479 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001140]
+2026-04-07 13:42:39.534 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 429 ms
+2026-04-07 13:42:39.584 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 1 ms
+2026-04-07 13:42:45.599 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:42:45.600 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001141]
+2026-04-07 13:42:45.605 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:42:45.606 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-04-07 13:42:45.606 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001141]
+2026-04-07 13:42:45.611 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 14 ms
+2026-04-07 13:42:45.616 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:42:49.055 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 13:42:49.056 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 13:42:51.627 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:42:51.628 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001142]
+2026-04-07 13:42:51.631 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:42:51.632 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-07 13:42:51.632 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001142]
+2026-04-07 13:42:51.635 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 9 ms
+2026-04-07 13:42:51.640 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:42:53.178 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 13:42:53.178 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 13:42:57.653 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:42:57.653 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001143]
+2026-04-07 13:42:57.657 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:42:57.657 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-07 13:42:57.658 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001143]
+2026-04-07 13:42:57.662 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 10 ms
+2026-04-07 13:42:57.670 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:42:57.673 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markCompleted(..) in 1 ms
+2026-04-07 13:42:57.673 INFO  [customer-bulk-1] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 1 completed
+2026-04-07 13:42:57.674 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskProcessor.processTask(..) in 24587 ms
+2026-04-07 13:43:00.434 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 13:43:00.435 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 13:43:48.423 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.createTask(..) in 0 ms
+2026-04-07 13:43:48.424 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.startBulkCreate(..) in 1 ms
+2026-04-07 13:43:48.425 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markRunning(..) in 0 ms
+2026-04-07 13:43:48.426 INFO  [customer-bulk-2] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 2 started
+2026-04-07 13:43:51.517 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.createTask(..) in 0 ms
+2026-04-07 13:43:51.519 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.startBulkCreate(..) in 1 ms
+2026-04-07 13:43:51.519 INFO  [customer-bulk-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markRunning(..) in 0 ms
+2026-04-07 13:43:51.520 INFO  [customer-bulk-3] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 3 started
+2026-04-07 13:43:54.439 DEBUG [customer-bulk-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:43:54.440 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001140]
+2026-04-07 13:43:54.450 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 12 ms
+2026-04-07 13:43:54.456 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markFailed(..) in 0 ms
+2026-04-07 13:43:54.456 WARN  [customer-bulk-2] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 2 failed: Customer with phone=+79990001140 already exists
+2026-04-07 13:43:54.457 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskProcessor.processTask(..) in 6031 ms
+2026-04-07 13:43:57.392 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 13:43:57.392 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 13:43:57.535 DEBUG [customer-bulk-3] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:43:57.535 TRACE [customer-bulk-3] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79995001150]
+2026-04-07 13:43:57.538 DEBUG [customer-bulk-3] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:43:57.538 TRACE [customer-bulk-3] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Pet]
+2026-04-07 13:43:57.538 TRACE [customer-bulk-3] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79995001150]
+2026-04-07 13:43:57.542 INFO  [customer-bulk-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 8 ms
+2026-04-07 13:43:57.546 INFO  [customer-bulk-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:44:03.566 DEBUG [customer-bulk-3] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:44:03.567 TRACE [customer-bulk-3] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001151]
+2026-04-07 13:44:03.572 DEBUG [customer-bulk-3] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:44:03.572 TRACE [customer-bulk-3] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-04-07 13:44:03.572 TRACE [customer-bulk-3] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001151]
+2026-04-07 13:44:03.576 INFO  [customer-bulk-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 11 ms
+2026-04-07 13:44:03.621 INFO  [customer-bulk-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:44:09.635 DEBUG [customer-bulk-3] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:44:09.636 TRACE [customer-bulk-3] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001152]
+2026-04-07 13:44:09.642 DEBUG [customer-bulk-3] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:44:09.642 TRACE [customer-bulk-3] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-07 13:44:09.642 TRACE [customer-bulk-3] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001152]
+2026-04-07 13:44:09.646 INFO  [customer-bulk-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 11 ms
+2026-04-07 13:44:09.692 INFO  [customer-bulk-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:44:09.692 INFO  [customer-bulk-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markCompleted(..) in 0 ms
+2026-04-07 13:44:09.693 INFO  [customer-bulk-3] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 3 completed
+2026-04-07 13:44:09.693 INFO  [customer-bulk-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskProcessor.processTask(..) in 18173 ms
+2026-04-07 13:44:35.803 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.createTask(..) in 0 ms
+2026-04-07 13:44:35.804 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.startBulkCreate(..) in 1 ms
+2026-04-07 13:44:35.806 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markRunning(..) in 0 ms
+2026-04-07 13:44:35.806 INFO  [customer-bulk-4] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 4 started
+2026-04-07 13:44:39.053 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.createTask(..) in 0 ms
+2026-04-07 13:44:39.053 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.startBulkCreate(..) in 0 ms
+2026-04-07 13:44:39.053 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markRunning(..) in 0 ms
+2026-04-07 13:44:39.053 INFO  [customer-bulk-1] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 5 started
+2026-04-07 13:44:41.820 DEBUG [customer-bulk-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:44:41.820 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001160]
+2026-04-07 13:44:41.826 DEBUG [customer-bulk-4] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:44:41.827 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Pet]
+2026-04-07 13:44:41.827 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001160]
+2026-04-07 13:44:41.831 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 13 ms
+2026-04-07 13:44:41.876 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:44:43.835 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 13:44:43.835 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 13:44:45.069 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:44:45.069 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79995001170]
+2026-04-07 13:44:45.073 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:44:45.074 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Pet]
+2026-04-07 13:44:45.074 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79995001170]
+2026-04-07 13:44:45.077 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 9 ms
+2026-04-07 13:44:45.083 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:44:46.298 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 13:44:46.298 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 13:44:47.896 DEBUG [customer-bulk-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:44:47.896 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001161]
+2026-04-07 13:44:47.900 DEBUG [customer-bulk-4] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:44:47.901 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-04-07 13:44:47.901 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001161]
+2026-04-07 13:44:47.905 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 10 ms
+2026-04-07 13:44:47.947 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:44:51.099 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:44:51.099 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001171]
+2026-04-07 13:44:51.105 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:44:51.105 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-04-07 13:44:51.105 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001171]
+2026-04-07 13:44:51.109 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 10 ms
+2026-04-07 13:44:51.152 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:44:53.955 DEBUG [customer-bulk-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:44:53.956 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001162]
+2026-04-07 13:44:53.960 DEBUG [customer-bulk-4] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:44:53.960 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-07 13:44:53.961 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001162]
+2026-04-07 13:44:53.963 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 8 ms
+2026-04-07 13:44:54.007 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:44:56.677 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 13:44:56.678 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 13:44:57.172 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:44:57.173 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001172]
+2026-04-07 13:44:57.177 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:44:57.177 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-07 13:44:57.178 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001172]
+2026-04-07 13:44:57.183 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 11 ms
+2026-04-07 13:44:57.193 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:44:57.193 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markCompleted(..) in 0 ms
+2026-04-07 13:44:57.193 INFO  [customer-bulk-1] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 5 completed
+2026-04-07 13:44:57.193 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskProcessor.processTask(..) in 18140 ms
+2026-04-07 13:44:57.984 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 13:44:57.984 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 13:45:00.020 DEBUG [customer-bulk-4] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 13:45:00.020 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001163]
+2026-04-07 13:45:00.024 DEBUG [customer-bulk-4] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 13:45:00.025 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-07 13:45:00.025 TRACE [customer-bulk-4] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001163]
+2026-04-07 13:45:00.029 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 10 ms
+2026-04-07 13:45:00.035 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 13:45:00.035 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markCompleted(..) in 0 ms
+2026-04-07 13:45:00.035 INFO  [customer-bulk-4] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 4 completed
+2026-04-07 13:45:00.036 INFO  [customer-bulk-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskProcessor.processTask(..) in 24229 ms
+2026-04-07 13:45:51.977 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed ConcurrencyDemoServiceImpl.runUnsafeCounterDemo(..) in 39 ms
+2026-04-07 13:46:02.344 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed ConcurrencyDemoServiceImpl.runAtomicCounterDemo(..) in 57 ms
+2026-04-07 14:27:05.865 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-07 14:27:06.469 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-07 14:27:06.520 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-07 14:27:06.541 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-07 14:27:06.551 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-07 14:27:12.214 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-04-07 14:27:12.274 INFO  [main] com.restaurant.app.AppApplication - Starting AppApplication using Java 23.0.2 with PID 18292 (D:\javalabs\app\target\classes started by Colorful in D:\javalabs\app)
+2026-04-07 14:27:12.274 DEBUG [main] com.restaurant.app.AppApplication - Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-04-07 14:27:12.274 INFO  [main] com.restaurant.app.AppApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-07 14:27:13.305 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-07 14:27:13.429 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 106 ms. Found 6 JPA repository interfaces.
+2026-04-07 14:27:14.383 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-07 14:27:14.399 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-07 14:27:14.401 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-07 14:27:14.402 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-07 14:27:14.478 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2133 ms
+2026-04-07 14:27:14.754 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-07 14:27:14.822 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-04-07 14:27:15.475 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-07 14:27:15.534 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-07 14:27:15.797 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3aeb267
+2026-04-07 14:27:15.802 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-07 14:27:15.906 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/restaurant_lab]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.13
+	Default catalog/schema: restaurant_lab/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-07 14:27:17.687 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-07 14:27:17.841 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-07 14:27:18.018 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-07 14:27:20.422 INFO  [main] o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-04-07 14:27:21.050 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-07 14:27:21.073 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-04-07 14:27:21.080 INFO  [main] com.restaurant.app.AppApplication - Started AppApplication in 9.476 seconds (process running for 10.279)
+2026-04-07 14:27:28.129 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-07 14:27:28.130 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-07 14:27:28.132 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-04-07 14:27:28.312 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed ConcurrencyDemoServiceImpl.runUnsafeCounterDemo(..) in 26 ms
+2026-04-07 14:27:33.350 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed ConcurrencyDemoServiceImpl.runAtomicCounterDemo(..) in 20 ms
+2026-04-07 14:57:17.465 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-07 14:57:18.051 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-07 14:57:18.061 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-07 14:57:18.065 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-07 14:57:18.079 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-07 17:44:38.112 INFO  [background-preinit] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 9.0.1.Final
+2026-04-07 17:44:38.161 INFO  [main] com.restaurant.app.AppApplication - Starting AppApplication using Java 23.0.2 with PID 19796 (D:\javalabs\app\target\classes started by Colorful in D:\javalabs\app)
+2026-04-07 17:44:38.161 DEBUG [main] com.restaurant.app.AppApplication - Running with Spring Boot v4.0.3, Spring v7.0.5
+2026-04-07 17:44:38.161 INFO  [main] com.restaurant.app.AppApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-07 17:44:38.979 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-07 17:44:39.035 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 49 ms. Found 6 JPA repository interfaces.
+2026-04-07 17:44:39.677 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-04-07 17:44:39.694 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2026-04-07 17:44:39.696 INFO  [main] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-04-07 17:44:39.696 INFO  [main] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-07 17:44:39.778 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1566 ms
+2026-04-07 17:44:40.029 INFO  [main] org.hibernate.orm.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-07 17:44:40.121 INFO  [main] org.hibernate.orm.core - HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-04-07 17:44:40.521 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-07 17:44:40.554 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-04-07 17:44:40.703 INFO  [main] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@68229a6
+2026-04-07 17:44:40.706 INFO  [main] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-07 17:44:40.814 INFO  [main] o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/restaurant_lab]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.13
+	Default catalog/schema: restaurant_lab/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-07 17:44:42.176 INFO  [main] org.hibernate.orm.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-07 17:44:42.279 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-07 17:44:42.455 INFO  [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-07 17:44:44.198 INFO  [main] o.s.b.w.a.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2026-04-07 17:44:44.622 INFO  [main] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2026-04-07 17:44:44.642 INFO  [main] o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-04-07 17:44:44.647 INFO  [main] com.restaurant.app.AppApplication - Started AppApplication in 7.011 seconds (process running for 10.932)
+2026-04-07 17:45:12.199 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-07 17:45:12.199 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-07 17:45:12.201 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-04-07 17:45:12.374 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.createTask(..) in 1 ms
+2026-04-07 17:45:12.376 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.startBulkCreate(..) in 4 ms
+2026-04-07 17:45:12.377 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markRunning(..) in 0 ms
+2026-04-07 17:45:12.377 INFO  [customer-bulk-1] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 1 started
+2026-04-07 17:45:14.445 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.createTask(..) in 0 ms
+2026-04-07 17:45:14.446 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.startBulkCreate(..) in 0 ms
+2026-04-07 17:45:14.446 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markRunning(..) in 0 ms
+2026-04-07 17:45:14.446 INFO  [customer-bulk-2] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 2 started
+2026-04-07 17:45:18.466 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 17:45:18.466 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001160]
+2026-04-07 17:45:18.527 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 17:45:18.531 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Pet]
+2026-04-07 17:45:18.531 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001160]
+2026-04-07 17:45:18.543 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 158 ms
+2026-04-07 17:45:18.562 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 17:45:20.451 DEBUG [customer-bulk-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 17:45:20.451 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79995001170]
+2026-04-07 17:45:20.453 DEBUG [customer-bulk-2] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 17:45:20.454 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Pet]
+2026-04-07 17:45:20.454 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79995001170]
+2026-04-07 17:45:20.455 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 5 ms
+2026-04-07 17:45:20.465 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 17:45:21.428 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:21.429 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:23.290 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:23.290 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:23.891 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:23.891 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:24.475 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:24.475 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:24.564 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 17:45:24.565 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001161]
+2026-04-07 17:45:24.568 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 17:45:24.568 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-04-07 17:45:24.568 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001161]
+2026-04-07 17:45:24.570 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 6 ms
+2026-04-07 17:45:24.574 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 17:45:25.002 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:25.003 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:25.455 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:25.455 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:25.955 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:25.955 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:26.331 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:26.331 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:26.470 DEBUG [customer-bulk-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 17:45:26.470 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001171]
+2026-04-07 17:45:26.473 DEBUG [customer-bulk-2] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 17:45:26.473 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Ivan Petrov]
+2026-04-07 17:45:26.473 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001171]
+2026-04-07 17:45:26.475 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 6 ms
+2026-04-07 17:45:26.479 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 17:45:26.713 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:26.714 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:27.106 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:27.106 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:27.434 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:27.434 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:27.788 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:27.788 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:28.457 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:28.457 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:28.959 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:28.959 INFO  [http-nio-8080-exec-7] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:29.437 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:29.438 INFO  [http-nio-8080-exec-9] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:29.884 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:29.885 INFO  [http-nio-8080-exec-8] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:30.330 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:30.330 INFO  [http-nio-8080-exec-10] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:30.577 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 17:45:30.577 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001162]
+2026-04-07 17:45:30.579 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 17:45:30.579 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-07 17:45:30.579 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001162]
+2026-04-07 17:45:30.581 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 5 ms
+2026-04-07 17:45:30.584 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 17:45:30.858 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:30.859 INFO  [http-nio-8080-exec-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:31.576 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:31.576 INFO  [http-nio-8080-exec-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:32.481 DEBUG [customer-bulk-2] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 17:45:32.481 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001172]
+2026-04-07 17:45:32.484 DEBUG [customer-bulk-2] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 17:45:32.484 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-07 17:45:32.484 TRACE [customer-bulk-2] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001172]
+2026-04-07 17:45:32.485 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 4 ms
+2026-04-07 17:45:32.487 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 17:45:32.489 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markCompleted(..) in 0 ms
+2026-04-07 17:45:32.489 INFO  [customer-bulk-2] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 2 completed
+2026-04-07 17:45:32.489 INFO  [customer-bulk-2] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskProcessor.processTask(..) in 18043 ms
+2026-04-07 17:45:35.125 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:35.125 INFO  [http-nio-8080-exec-3] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:35.128 WARN  [http-nio-8080-exec-3] c.r.a.e.GlobalExceptionHandler - Resource not found for request GET /api/v1/customers/bulk/tasks/3: Async task with id=3 was not found
+2026-04-07 17:45:36.272 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:36.272 INFO  [http-nio-8080-exec-5] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:36.588 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    select
+        c1_0.id,
+        c1_0.full_name,
+        c1_0.phone 
+    from
+        customers c1_0 
+    where
+        c1_0.phone=?
+2026-04-07 17:45:36.588 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [+79990001163]
+2026-04-07 17:45:36.590 DEBUG [customer-bulk-1] org.hibernate.SQL - 
+    insert 
+    into
+        customers
+        (full_name, phone) 
+    values
+        (?, ?)
+2026-04-07 17:45:36.590 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (1:VARCHAR) <- [Petr Ivanov]
+2026-04-07 17:45:36.590 TRACE [customer-bulk-1] org.hibernate.orm.jdbc.bind - binding parameter (2:VARCHAR) <- [+79990001163]
+2026-04-07 17:45:36.592 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed CustomerServiceImpl.create(..) in 5 ms
+2026-04-07 17:45:36.595 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.updateProgress(..) in 0 ms
+2026-04-07 17:45:36.595 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.markCompleted(..) in 0 ms
+2026-04-07 17:45:36.595 INFO  [customer-bulk-1] c.r.a.s.i.AsyncCustomerBulkTaskProcessor - Async customer bulk task 1 completed
+2026-04-07 17:45:36.595 INFO  [customer-bulk-1] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskProcessor.processTask(..) in 24218 ms
+2026-04-07 17:45:37.637 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:37.637 INFO  [http-nio-8080-exec-4] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:39.216 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskRegistry.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:39.216 INFO  [http-nio-8080-exec-6] c.r.a.a.ServiceExecutionLoggingAspect - Executed AsyncCustomerBulkTaskServiceImpl.getTaskStatus(..) in 0 ms
+2026-04-07 17:45:48.988 INFO  [SpringApplicationShutdownHook] o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-07 17:45:48.999 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-04-07 17:45:49.002 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-07 17:45:49.003 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-07 17:45:49.009 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

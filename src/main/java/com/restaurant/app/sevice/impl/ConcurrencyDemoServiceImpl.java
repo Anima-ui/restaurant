@@ -7,14 +7,11 @@ import com.restaurant.app.util.UnsafeCounter;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.function.IntSupplier;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ConcurrencyDemoServiceImpl implements ConcurrencyDemoService {
-
-    private static final long AWAIT_TIMEOUT_SECONDS = 30L;
 
     public RaceConditionDemoResult runUnsafeCounterDemo(int threads, int incrementsPerThread) {
         UnsafeCounter counter = new UnsafeCounter();
@@ -31,7 +28,7 @@ public class ConcurrencyDemoServiceImpl implements ConcurrencyDemoService {
     public RaceConditionDemoResult runAtomicCounterDemo(int threads, int incrementsPerThread) {
         SafeCounter counter = new SafeCounter();
         return runDemo(
-                "SAFE_COUNTER",
+                "ATOMIC_COUNTER",
                 threads,
                 incrementsPerThread,
                 counter::increment,
@@ -81,12 +78,6 @@ public class ConcurrencyDemoServiceImpl implements ConcurrencyDemoService {
                     .build();
         } finally {
             executorService.shutdownNow();
-            try {
-                executorService.awaitTermination(AWAIT_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-            } catch (InterruptedException exception) {
-                Thread.currentThread().interrupt();
-                throw new IllegalStateException("Thread execution was interrupted", exception);
-            }
         }
     }
 

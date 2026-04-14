@@ -7,6 +7,7 @@ import com.restaurant.app.domain.dto.CustomerDto;
 import com.restaurant.app.domain.model.Customer;
 import com.restaurant.app.exception.ConflictOperationException;
 import com.restaurant.app.exception.ResourceNotFoundException;
+import com.restaurant.app.repository.BookingRepository;
 import com.restaurant.app.repository.CustomerRepository;
 import com.restaurant.app.sevice.CustomerService;
 import org.springframework.stereotype.Service;
@@ -27,10 +28,17 @@ public class CustomerServiceImpl implements CustomerService {
 
     private static final String NOT_FOUND_SUFFIX = " was not found";
 
+    private static final String CUSTOMER_DELETE_CONFLICT_MESSAGE =
+            "Customer cannot be deleted because bookings are linked to this customer";
+
     private final CustomerRepository customerRepository;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    private final BookingRepository bookingRepository;
+
+    public CustomerServiceImpl(CustomerRepository customerRepository,
+                               BookingRepository bookingRepository) {
         this.customerRepository = customerRepository;
+        this.bookingRepository = bookingRepository;
     }
 
     @Transactional
@@ -87,6 +95,18 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto getById(Long id) {
         return toDto(customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(CUSTOMER_NOT_FOUND_PREFIX + id + NOT_FOUND_SUFFIX)));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(CUSTOMER_NOT_FOUND_PREFIX + id + NOT_FOUND_SUFFIX));
+
+        if (bookingRepository.existsByCustomerId(id)) {
+            throw new ConflictOperationException(CUSTOMER_DELETE_CONFLICT_MESSAGE);
+        }
+
+        customerRepository.delete(customer);
     }
 
     private CustomerDto toDto(Customer customer) {
