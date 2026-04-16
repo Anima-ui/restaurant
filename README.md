@@ -1,45 +1,139 @@
-# Restaurant Reservation System
+﻿# Restaurant Reservation System
 
-## Description
+Spring Boot проект для управления ресторанами, клиентами и бронированиями. В проекте есть REST API, простой React SPA-клиент, PostgreSQL, транзакционные сценарии, async-задачи, демонстрация race condition, тесты, Docker и CI/CD.
 
-Spring Boot REST application for managing restaurants.
+## Возможности
 
-The project is created as part of laboratory work and will be extended step by step.
+- CRUD для ресторанов, клиентов и бронирований
+- Связи `OneToMany` и `ManyToMany`: столы, блюда, удобства, брони
+- Фильтрация ресторанов в SPA-клиенте
+- JPQL и native SQL поиск
+- Кэширование результатов поиска
+- Демонстрация N+1 проблемы и оптимизации
+- Bulk-операции для клиентов
+- Async bulk-операция с `taskId` и проверкой статуса
+- Демонстрация race condition и решения через `AtomicInteger`
+- Глобальная обработка ошибок и логирование
+- JMeter-сценарий нагрузочного тестирования
+- Dockerfile и Docker Compose
+- GitHub Actions CI/CD
 
-## Features (Lab 1)
+## Стек
 
-* REST API for Restaurant entity
-* GET by id
-* GET by city
-* Create restaurant
-* DTO + Mapper
-* Layered architecture (Controller → Service → Repository)
-* Code style validation with Checkstyle
+- Java 21
+- Spring Boot 4
+- Spring Data JPA
+- PostgreSQL
+- H2 для тестов
+- Maven
+- JaCoCo
+- Docker / Docker Compose
+- React через CDN
+- JMeter
 
-## How to run
+## Быстрый запуск через Docker
 
-```bash
-mvn spring-boot:run
+Создать локальный `.env`:
+
+```powershell
+Copy-Item env.example .env
 ```
 
-## H2 Console
+Запустить приложение и БД:
 
-```
-http://localhost:8080/h2-console
-```
-
-## SonarCloud
-
-```azure
-https://sonarcloud.io/summary/overall?id=Anima-ui_restaurant&branch=main
+```powershell
+docker compose up -d --build
 ```
 
+Открыть приложение:
 
-## Future work
+```text
+http://localhost:8080
+```
 
-* Relationships
-* Booking system
-* Caching
-* Concurrency
-* Client
-* Docker deployment
+Swagger:
+
+```text
+http://localhost:8080/swagger-ui.html
+```
+
+Healthcheck:
+
+```text
+http://localhost:8080/actuator/health
+```
+
+Остановить:
+
+```powershell
+docker compose down
+```
+
+## Запуск без Docker
+
+Нужен локальный PostgreSQL с базой `restaurant_lab`.
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+## Тесты
+
+Запуск всех тестов:
+
+```powershell
+.\mvnw.cmd test
+```
+
+JaCoCo report:
+
+```text
+target/site/jacoco/index.html
+```
+
+## Нагрузочное тестирование
+
+JMeter запускается через отдельный Docker Compose profile:
+
+```powershell
+docker compose --profile load-test run --rm jmeter
+```
+
+## CI/CD
+
+Workflow находится здесь:
+
+```text
+.github/workflows/ci-cd.yml
+```
+
+Он выполняет:
+
+- Maven validate
+- тесты
+- Docker build
+- deploy через Render Deploy Hook
+- healthcheck после деплоя
+
+Для деплоя нужны GitHub Secrets:
+
+```text
+RENDER_DEPLOY_HOOK_URL
+APP_HEALTH_URL
+```
+
+## PaaS
+
+Для Render добавлен blueprint:
+
+```text
+render.yaml
+```
+
+Он описывает приложение, PostgreSQL и переменные окружения.
+
+## Документация
+
+Дополнительные локальные материалы лежат в `docs/` и `ci-cd/`.
+
+> Сейчас `docs/` добавлена в `.gitignore`, поэтому эти файлы не попадут в GitHub, если не убрать это правило.
