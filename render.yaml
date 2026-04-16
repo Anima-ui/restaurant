@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: restaurant-app
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SERVER_PORT
+        value: 8080
+      - key: DB_HOST
+        fromDatabase:
+          name: restaurant-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: restaurant-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: restaurant-db
+          property: database
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: restaurant-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: restaurant-db
+          property: password
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: SPRING_JPA_SHOW_SQL
+        value: false
+      - key: APP_ASYNC_BULK_PROCESSING_DELAY_MS
+        value: 6000
+      - key: APP_ASYNC_BULK_ENFORCE_MIN_DELAY
+        value: true
+
+databases:
+  - name: restaurant-db
+    plan: free
+    databaseName: restaurant_lab
+    user: restaurant_user

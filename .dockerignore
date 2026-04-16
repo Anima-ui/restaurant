@@ -1,0 +1,10 @@
+.git
+.github/java-upgrade
+.idea
+.vscode
+target
+logs
+docs/jmeter/results
+*.iml
+*.log
+HELP.md

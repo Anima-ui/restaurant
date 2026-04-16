@@ -1,4 +1,15 @@
 HELP.md
+.env
+docs/
+*.log
+logs/
+docs/jmeter/results/*
+!docs/jmeter/results/.gitkeep
+.github/java-upgrade/
+*.tmp
+*.bak
+*.pid
+docker-compose.override.yml
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

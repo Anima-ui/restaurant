@@ -1,28 +1,39 @@
 spring:
   application:
-    name: app
+    name: ${SPRING_APPLICATION_NAME:app}
   datasource:
-    url: jdbc:postgresql://localhost:5432/restaurant_lab
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:restaurant_lab}}
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: postgres
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: false
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    show-sql: ${SPRING_JPA_SHOW_SQL:false}
     open-in-view: false
     properties:
       hibernate:
         format_sql: true
         generate_statistics: true
         use_sql_comments: false
+server:
+  port: ${SERVER_PORT:8080}
 springdoc:
   api-docs:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
 app:
   async:
     bulk:
-      processing-delay-ms: 6000
-      enforce-min-delay: true
+      processing-delay-ms: ${APP_ASYNC_BULK_PROCESSING_DELAY_MS:6000}
+      enforce-min-delay: ${APP_ASYNC_BULK_ENFORCE_MIN_DELAY:true}
