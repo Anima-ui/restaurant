@@ -3,7 +3,7 @@ FROM eclipse-temurin:21-jdk-alpine AS build
 WORKDIR /workspace
 
 COPY .mvn .mvn
-COPY mvnw pom.xml ./
+COPY mvnw pom.xml checkstyle..xml ./
 RUN chmod +x mvnw && ./mvnw -q -DskipTests dependency:go-offline
 
 COPY src src
