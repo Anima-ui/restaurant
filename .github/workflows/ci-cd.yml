@@ -36,13 +36,6 @@ jobs:
       - name: Test
         run: ./mvnw -q test
 
-      - name: Upload JaCoCo report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: jacoco-report
-          path: target/site/jacoco
-
   docker-build:
     name: Docker build
     runs-on: ubuntu-latest
